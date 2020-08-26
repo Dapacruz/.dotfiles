@@ -1,0 +1,10 @@
+[user]
+        name = David Cruz
+        email = davidcruz72@gmail.com
+[alias]
+        last = log -1
+        glog = log --graph --oneline --decorate --all
+        visual = !gitk
+        stash-unapply = !git stash show -p | git apply -R
+        amend = commit --amend -C HEAD
+        alias = ! git config -l | grep ^alias
