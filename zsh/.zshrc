@@ -1,5 +1,3 @@
-source $HOME/.zshrc_private
-
 ### Unified settings
 
 # Added to workaround a fork issue with Ansible and macOS High Sierra
@@ -81,9 +79,6 @@ export EDITOR='code --wait'
 # Compilation flags
 # export ARCHFLAGS="-arch x86_64"
 
-# ssh
-# export SSH_KEY_PATH="~/.ssh/rsa_id"
-
 source $ZSH/oh-my-zsh.sh
 
 export DISPLAY=:0
@@ -109,43 +104,6 @@ alias python='python3.7'
 alias pip='pip3'
 alias get-panw-config='get-panw-config -K'
 alias run-panw-cmd='run-panw-cmd -K'
-# alias mtr='sudo mtr'
-
-
-### MacOS settings
-
-# Which plugins would you like to load? (plugins can be found in ~/.oh-my-zsh/plugins/*)
-# Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
-# Example format: plugins=(rails git textmate ruby lighthouse)
-# Add wisely, as too many plugins slow down shell startup.
-plugins=(git pip rsync pep8 nmap docker docker-compose ansible history-substring-search python pylint sudo)
-
-export PATH="$HOME/.local/bin:$PATH"
-
-# Python modules installed to user (--user)
-export PATH="$HOME/Library/Python/3.7/bin:$PATH"
-
-export PATH="/usr/local/bin:/usr/local/sbin:$PATH"
-
-# Set CLICOLOR if you want Ansi Colors in iTerm2
-export CLICOLOR=1
-
-#Set colors to match iTerm2 Terminal Colors
-export TERM=xterm-256color
-
-# Change directories efficiently
-# . /usr/local/etc/profile.d/z.sh
-
-# test -e "${HOME}/.iterm2_shell_integration.zsh" && source "${HOME}/.iterm2_shell_integration.zsh"
-
-#.# zsh-syntax-highlighting
-#
-# Fish shell like syntax highlighting for Zsh
-#
-# @link: http://github.com/zsh-users/zsh-syntax-highlighting
-# source ~/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
-# ZSH_HIGHLIGHT_HIGHLIGHTERS=(main brackets pattern cursor)
-# ZSH_HIGHLIGHT_PATTERNS=('rm -rf *' 'fg=white,bold,bg=red') # To have commands starting with `rm -rf` in red:
 
 export WORKON_HOME=$HOME/.virtualenvs
 export VIRTUALENVWRAPPER_PYTHON=/usr/local/bin/python3
@@ -168,4 +126,22 @@ slackit() {
     curl -X POST -H 'Content-type: application/json' --data "{'text':'$@'}" $webhook
 }
 
-intl='aubj|auch|aufo|auhp|aume|aupe|ausy|cndg|cnsg|cnsh|deca|gbku|gbtc|gbwf|idsu|idtr|ingg|inma|momr|prtg|puin|sgsi|tris|vnth'
+export intl='aubj|auch|aufo|auhp|aume|aupe|ausy|cndg|cnsg|cnsh|deca|gbku|gbtc|gbwf|idsu|idtr|ingg|inma|momr|prtg|puin|sgsi|tris|vnth'
+
+# Which plugins would you like to load? (plugins can be found in ~/.oh-my-zsh/plugins/*)
+# Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
+# Example format: plugins=(rails git textmate ruby lighthouse)
+# Add wisely, as too many plugins slow down shell startup.
+
+plugins=(git pip rsync pep8 nmap docker docker-compose ansible history-substring-search python pylint sudo)
+
+#.# zsh-syntax-highlighting
+#
+# Fish shell like syntax highlighting for Zsh
+#
+# @link: http://github.com/zsh-users/zsh-syntax-highlighting
+# source ~/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
+# ZSH_HIGHLIGHT_HIGHLIGHTERS=(main brackets pattern cursor)
+# ZSH_HIGHLIGHT_PATTERNS=('rm -rf *' 'fg=white,bold,bg=red') # To have commands starting with `rm -rf` in red:
+
+source $HOME/.zshrc_local
