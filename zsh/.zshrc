@@ -134,6 +134,8 @@ export intl='aubj|auch|aufo|auhp|aume|aupe|ausy|cndg|cnsg|cnsh|deca|gbku|gbtc|gb
 # Add wisely, as too many plugins slow down shell startup.
 
 plugins=(git pip rsync pep8 nmap docker docker-compose ansible history-substring-search python pylint sudo)
+source $ZSH_CUSTOM/plugins/zsh-autosuggestions/zsh-autosuggestions.zsh
+source $ZSH_CUSTOM/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
 
 #.# zsh-syntax-highlighting
 #
