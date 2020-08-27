@@ -15,7 +15,7 @@ export ZSH=$HOME/.oh-my-zsh
 # See https://github.com/robbyrussell/oh-my-zsh/wiki/Themes
 # ZSH_THEME="tjkirch"
 # ZSH_THEME="smt"
-ZSH_THEME="junkfood"
+ZSH_THEME="junkfood-custom"
 # ZSH_THEME="gnzh"
 # ZSH_THEME="bureau"
 # ZSH_THEME="rkj-repos"
