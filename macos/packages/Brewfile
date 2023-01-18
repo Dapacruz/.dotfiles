@@ -3,7 +3,6 @@ tap "homebrew/cask"
 tap "homebrew/core"
 tap "homebrew/services"
 tap "koekeishiya/formulae"
-tap "romkatv/powerlevel10k"
 # Clone of cat(1) with syntax highlighting and Git integration
 brew "bat"
 # Create and view interactive cheat sheets for *nix commands
@@ -106,14 +105,10 @@ brew "zoxide"
 brew "zsh"
 # Better and friendly vi(vim) mode plugin for ZSH
 brew "zsh-vi-mode"
-# Simple hotkey-daemon for macOS.
-brew "koekeishiya/formulae/skhd"
 # Open-source keystroke visualizer
 cask "keycastr"
 # Clipboard manager
 cask "maccy"
-# Neovim Client
-cask "neovide"
 # Knowledge base that works on top of a local folder of plain text Markdown files
 cask "obsidian"
 # Command-line shell and scripting language
