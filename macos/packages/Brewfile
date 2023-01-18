@@ -1,0 +1,124 @@
+tap "homebrew/bundle"
+tap "homebrew/cask"
+tap "homebrew/core"
+tap "homebrew/services"
+tap "koekeishiya/formulae"
+tap "romkatv/powerlevel10k"
+# Clone of cat(1) with syntax highlighting and Git integration
+brew "bat"
+# Create and view interactive cheat sheets for *nix commands
+brew "cheat"
+# Cross-platform make
+brew "cmake"
+# Console Matrix
+brew "cmatrix"
+# GNU File, Shell, and Text utilities
+brew "coreutils"
+# Programmatically minimize files to isolate features of interest
+brew "delta"
+# More intuitive version of du in rust
+brew "dust"
+# Run arbitrary commands when files change
+brew "entr"
+# Simple, fast and user-friendly alternative to find
+brew "fd"
+# OCR (Optical Character Recognition) engine
+brew "tesseract"
+# Create thumbnails for your video files
+brew "ffmpegthumbnailer"
+# Banner-like program prints strings as ASCII art
+brew "figlet"
+# Scriptable ping program for checking if multiple hosts are up
+brew "fping"
+# Alternative to top/htop
+brew "glances"
+# Ping, but with a graph
+brew "gping"
+# User-friendly cURL replacement (command-line HTTP client)
+brew "httpie"
+# Tools and libraries to manipulate images in many formats
+brew "imagemagick"
+# Calculate various network masks, etc. from a given IP address
+brew "ipcalc"
+# Lightweight and flexible command-line JSON processor
+brew "jq"
+# Rainbows and unicorns in your console!
+brew "lolcat"
+# Clone of ls with colorful output, file type icons, and more
+brew "lsd"
+# Just-In-Time Compiler (JIT) for the Lua programming language
+brew "luajit"
+# Package manager for the Lua programming language
+brew "luarocks"
+# 'traceroute' and 'ping' in a single tool
+brew "mtr"
+# Fast, highly customisable system info script
+brew "neofetch"
+# Ambitious Vim-fork focused on extensibility and agility
+brew "neovim"
+# Port scanning utility for large networks
+brew "nmap"
+# Cryptography and SSL/TLS Toolkit
+brew "openssl@3"
+# General-purpose scripting language
+brew "php"
+# Modern replacement for ps written by Rust
+brew "procs"
+# Alternative to backtracking PCRE-style regular expression engines
+brew "re2"
+# Search tool like grep and The Silver Searcher
+brew "ripgrep"
+# Intuitive find & replace CLI
+brew "sd"
+# Prints a steam locomotive if you type sl instead of ls
+brew "sl"
+# Cross-shell prompt for astronauts
+brew "starship"
+# Organize software neatly under a single directory tree (e.g. /usr/local)
+brew "stow"
+# Change macOS audio source from the command-line
+brew "switchaudio-osx"
+# Simplified and community-driven man pages
+brew "tldr"
+# Terminal multiplexer
+brew "tmux"
+# Program that allows you to count code, quickly
+brew "tokei"
+# CLI tool that moves files or folder to the trash
+brew "trash"
+# Tree command, improved
+brew "tre-command"
+# Pager/text based browser
+brew "w3m"
+# Executes a program periodically, showing output fullscreen
+brew "watch"
+# Internet file retriever
+brew "wget"
+# XML command-line utilities
+brew "xmlstarlet"
+# Command-line XML and HTML beautifier and content extractor
+brew "xq"
+# Process YAML, JSON, XML, CSV and properties documents from the CLI
+brew "yq"
+# Shell extension to navigate your filesystem faster
+brew "zoxide"
+# UNIX shell (command interpreter)
+brew "zsh"
+# Better and friendly vi(vim) mode plugin for ZSH
+brew "zsh-vi-mode"
+# Simple hotkey-daemon for macOS.
+brew "koekeishiya/formulae/skhd"
+# Open-source keystroke visualizer
+cask "keycastr"
+# Clipboard manager
+cask "maccy"
+# Neovim Client
+cask "neovide"
+# Knowledge base that works on top of a local folder of plain text Markdown files
+cask "obsidian"
+# Command-line shell and scripting language
+cask "powershell"
+# Control your tools with a few keystrokes
+cask "raycast"
+# App launcher/switcher
+cask "spacelauncher"
