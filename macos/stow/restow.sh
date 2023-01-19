@@ -5,17 +5,17 @@ source configs.sh
 for c in ${configs[*]}
 do
     target="$(dirname $c)"
-    config="$(basename $c)"
+    package="$(basename $c)"
 
-    if [[ ! $config = .* ]]
+    if [[ ! $package = .* ]]
     then
         # Remove trailing extension
-        config="${config%.*}"
+        package="${package%.*}"
     else
         # Remove leading dot and any trailing extensions
-        config=$(sed -E 's/\.([^.]+).*/\1/' <<< $config)
+        package=$(sed -E 's/\.([^.]+).*/\1/' <<< $package)
     fi
 
     # Restow
-    stow --dotfiles -vRt $target $config
+    stow --dotfiles -vRt $target $package
 done
