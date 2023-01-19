@@ -68,6 +68,7 @@ return packer.startup(function(use)
         end
     }
     use "mg979/vim-visual-multi"
+    use "github/copilot.vim"
 
     -- Treesitter
     use "nvim-treesitter/nvim-treesitter"
