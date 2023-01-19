@@ -1,33 +1,28 @@
 #!/usr/bin/env bash
 
-# ZSH
-stow --dotfiles -vDt $HOME zsh
+source configs.sh
 
-ZSHRC="$HOME/.zshrc"
-if [ -f ${ZSHRC}.stow ] && [ $? -eq 0 ]
-then
-    echo "Renaming ${ZSHRC}.stow to ${ZSHRC} ..."
-    mv ${ZSHRC}.stow ${ZSHRC}
-fi
+for c in ${configs[*]}
+do
+    target="$(dirname $c)"
+    config="$(basename $c)"
 
+    if [[ ! $config = .* ]]
+    then
+        # Remove trailing extension
+        config="${config%.*}"
+    else
+        # Remove leading dot and any trailing extensions
+        config=$(sed -E 's/\.([^.]+).*/\1/' <<< $config)
+    fi
 
-# Kitty Terminal
-stow --dotfiles -vDt $HOME/.config kitty
+    # Unstow
+    stow --dotfiles -vDt $target $config
 
-KITTY="$HOME/.config/kitty"
-if [ $? -eq 0 ] && [ -d ${KITTY}.stow ]
-then
-    echo "Renaming ${KITTY}.stow to ${KITTY} ..."
-    mv ${KITTY}.stow ${KITTY}
-fi
-
-
-# Neovim
-stow --dotfiles -vDt $HOME/.config nvim
-
-NVIM="$HOME/.config/nvim"
-if [ $? -eq 0 ] && [ -d ${NVIM}.stow ]
-then
-    echo "Renaming ${NVIM}.stow to ${NVIM} ..."
-    mv ${NVIM}.stow ${NVIM}
-fi
+    # Restore existing if present
+    if [ $? -eq 0 ] && ([ -d ${c}.stow ] || [ -f ${c}.stow ])
+    then
+        echo "Renaming existing ${c}.stow to ${c} ..."
+        mv ${c}.stow $c
+    fi
+done

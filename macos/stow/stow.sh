@@ -1,6 +1,5 @@
 #!/usr/bin/env bash
 
-# ZSH
 ZSHRC_LOCAL="$HOME/.zshrc.local"
 if [ ! -f $ZSHRC_LOCAL ]
 then
@@ -8,33 +7,29 @@ then
     cp dot-zshrc.local $ZSHRC_LOCAL
 fi
 
-ZSHRC="$HOME/.zshrc"
-if [ -f $ZSHRC ] && [ ! -L $ZSHRC ]
-then
-    echo "Renaming existing ${ZSHRC} to ${ZSHRC}.stow ..."
-    mv $ZSHRC ${ZSHRC}.stow
-fi
+source configs.sh
 
-stow --dotfiles -vt $HOME zsh
+for c in ${configs[*]}
+do
+    target="$(dirname $c)"
+    config="$(basename $c)"
 
+    if [[ ! $config = .* ]]
+    then
+        # Remove trailing extension
+        config="${config%.*}"
+    else
+        # Remove leading dot and any trailing extensions
+        config=$(sed -E 's/\.([^.]+).*/\1/' <<< $config)
+    fi
 
-# Kitty Terminal
-KITTY="$HOME/.config/kitty"
-if [ -d $KITTY ] && [ ! -L $KITTY ]
-then
-    echo "Renaming existing ${KITTY} to ${KITTY}.stow ..."
-    mv $KITTY ${KITTY}.stow
-fi
+    # Back up existing config
+    if ([ -d $c ] || [ -f $c ]) && [ ! -L $c ]
+    then
+        echo "Renaming existing ${c} to ${c}.stow ..."
+        mv $c ${c}.stow
+    fi
 
-stow --dotfiles -vt $HOME/.config kitty
-
-
-# Neovim
-NVIM="$HOME/.config/nvim"
-if [ -d $NVIM ] && [ ! -L $NVIM ]
-then
-    echo "Renaming existing ${NVIM} to ${NVIM}.stow ..."
-    mv $NVIM ${NVIM}.stow
-fi
-
-stow --dotfiles -vt $HOME/.config nvim
+    # Stow
+    stow --dotfiles -vt $target $config
+done

@@ -1,10 +1,21 @@
 #!/usr/bin/env bash
 
-# ZSH
-stow --dotfiles -vRt $HOME zsh
+source configs.sh
 
-# Kitty Terminal
-stow --dotfiles -vRt $HOME/.config kitty
+for c in ${configs[*]}
+do
+    target="$(dirname $c)"
+    config="$(basename $c)"
 
-# Neovim
-stow --dotfiles -vRt $HOME/.config nvim
+    if [[ ! $config = .* ]]
+    then
+        # Remove trailing extension
+        config="${config%.*}"
+    else
+        # Remove leading dot and any trailing extensions
+        config=$(sed -E 's/\.([^.]+).*/\1/' <<< $config)
+    fi
+
+    # Restow
+    stow --dotfiles -vRt $target $config
+done

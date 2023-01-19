@@ -1,0 +1,91 @@
+format = """
+$username\
+$hostname\
+$directory\
+$golang\
+$python\
+$git_branch\
+$git_state\
+$git_status\
+$git_metrics\
+$fill\
+$nodejs\
+$cmd_duration $jobs $time\
+$line_break\
+$character"""
+
+[nodejs]
+format = "[$symbol($version )]($style)"
+
+[fill]
+symbol = " "
+
+[directory]
+style = "bold blue"
+read_only = " "
+truncation_length = 4
+truncate_to_repo = false
+format = "[ ](bright-white)[$path]($style)[$read_only]($read_only_style) "
+
+[character]
+success_symbol = "[❯](purple)"
+error_symbol = "[❯](red)"
+vicmd_symbol = "[❮](green)"
+
+[git_branch]
+symbol = "[ ](bright-white)"
+format = "[$symbol$branch]($style) "
+style = "bright-purple"
+
+[jobs]
+symbol = ""
+style = "bold red"
+number_threshold = 1
+format = "[$symbol]($style)"
+
+[git_status]
+format = '([\[$all_status$ahead_behind\]]($style) )'
+style = "cyan"
+
+[git_state]
+format = '\([$state( $progress_current/$progress_total)]($style)\) '
+style = "bright-black"
+
+[git_metrics]
+disabled = false
+
+[cmd_duration]
+format = "[$duration]($style)"
+style = "yellow"
+
+[memory_usage]
+symbol = " "
+
+[rust]
+symbol = " "
+
+[time]
+disabled = false
+style = "bold white"
+format = "[$time]($style)"
+
+[username]
+style_user = "bright-purple"
+style_root = "red bold"
+format = " [$user]($style) "
+disabled = false
+show_always = true
+
+[hostname]
+ssh_only = false
+format = "  [$hostname](bold blue) "
+trim_at = ".***REMOVED***"
+disabled = false
+
+[golang]
+format = 'via [ $version](bold cyan) '
+
+[python]
+format = "via [  $version ](bold yellow)"
+python_binary = 'python3'
+detect_extensions = ['py']
