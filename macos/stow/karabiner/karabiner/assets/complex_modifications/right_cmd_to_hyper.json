@@ -1,0 +1,40 @@
+{
+    "title": "Right Command to Hyper When Held",
+    "rules": [
+        {
+            "description": "Map Right Command to Hyper when held",
+            "manipulators": [
+                {
+                    "type": "basic",
+                    "from": {
+                        "key_code": "right_command",
+                        "modifiers": {
+                            "optional": [
+                                "any"
+                            ]
+                        }
+                    },
+                    "parameters": {
+                        "basic.to_if_alone_timeout_milliseconds": 0,
+                        "basic.to_if_held_down_threshold_milliseconds": 0
+                    },
+                    "to_if_alone": [
+                        {
+                            "key_code": "right_command"
+                        }
+                    ],
+                    "to_if_held_down": [
+                        {
+                            "key_code": "left_shift",
+                            "modifiers": [
+                                "left_command",
+                                "left_control",
+                                "left_option"
+                            ]
+                        }
+                    ]
+                }
+            ]
+        }
+    ]
+}

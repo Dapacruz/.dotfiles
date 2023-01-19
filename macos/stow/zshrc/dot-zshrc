@@ -17,8 +17,7 @@ source $HOME/.zshrc.local
    #${PATH}
 #")
 
-
-export PATH="$$HOME/scripts:HOME/.local/bin:${PATH}"
+export PATH="$HOME/scripts:HOME/.local/bin:${PATH}"
 export PATH="/Library/Frameworks/Python.framework/Versions/3.10/bin:${PATH}"
 
 # GO
@@ -61,8 +60,8 @@ alias bfg='java -jar ~/bfg/bfg-1.13.1.jar'
 alias v=nvim
 alias vi=nvim
 alias vim=nvim
-alias ls='lsd --hyperlink=always'
-alias ll='lsd -l --hyperlink=always'
+alias ls='lsd --hyperlink=always --group-directories-first'
+alias ll='lsd -l --hyperlink=always --group-directories-first'
 alias rm=trash
 alias icat='kitty +kitten icat'
 alias lf=lfcd

@@ -2,3 +2,4 @@
 **/Brewfile.lock.json
 **/packer_compiled.lua
 macos/stow/tmux/tmux/plugins
+macos/stow/cheat/cheat/cheatsheets/community

@@ -1,0 +1,41 @@
+#!/usr/bin/env zsh
+
+if ! [ -f "$1" ]; then
+	exit 1
+fi
+
+cache="$HOME/.cache/vidthumb"
+index="$cache/index.json"
+movie="$(realpath "$1")"
+
+mkdir -p "$cache"
+
+# Check the cache for a thumbnail and return it if exists
+if [ -f "$index" ]; then
+	thumbnail="$(jq -r ". \"$movie\"" <"$index")"
+	if [[ "$thumbnail" != "null" ]]; then
+		if [[ ! -f "$cache/$thumbnail" ]]; then
+			exit 1
+		fi
+		echo "$cache/$thumbnail"
+		exit 0
+	fi
+fi
+
+# Create the thumbnail and exit if it fails
+thumbnail="$(uuidgen).jpg"
+if ! ffmpegthumbnailer -i "$movie" -o "$cache/$thumbnail" -s 0 2>/dev/null; then
+	exit 1
+fi
+
+# Create the index if it doesn't exist
+if [[ ! -f "$index" ]]; then
+	echo "{\"$movie\": \"$thumbnail\"}" > "$index"
+fi
+
+# Add the thumbnail to the index
+json="$(jq -r --arg "$movie" "$thumbnail" ". + {\"$movie\": \"$thumbnail\"}" <"$index")"
+echo "$json" > "$index"
+
+# Return the thumbnail
+echo "$cache/$thumbnail"
