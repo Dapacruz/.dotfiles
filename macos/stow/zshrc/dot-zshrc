@@ -80,6 +80,7 @@ alias fwweb="panos-cli panorama get firewalls --terse | fzf | xargs -I {} open h
 alias fwaweb="panos-cli panorama get firewalls -s active,standalone --terse | fzf | xargs -I {} open https://{}.${DOMAIN}"
 alias fwscrt="panos-cli panorama get firewalls --terse | fzf | xargs -I {} /Applications/SecureCRT.app/Contents/MacOS/SecureCRT /T /SSH2 {} /AUTH publickey /L ${ADMIN}"
 alias fwascrt="panos-cli panorama get firewalls -s active,standalone --terse | fzf | xargs -I {} /Applications/SecureCRT.app/Contents/MacOS/SecureCRT /T /SSH2 {} /AUTH publickey /L ${ADMIN}"
+alias digb='dig +noall +answer'
 
 # Initialize the Starship prompt
 eval "$(starship init zsh)"
