@@ -65,6 +65,9 @@ keymap('n', "<leader>bo", "<CMD>NERDTreeClose|%bd|e#|bd#<CR>", opts)
 keymap('n', "<leader>bO", "<CMD>NERDTreeClose|%bd!|e#|bd#<CR>", opts)
 keymap('n', "<leader>bl", "<CMD>b#<CR>", opts)
 
+-- Copilot
+keymap('n', "<leader>cp", "<CMD>Copilot panel<CR>", opts)
+
 --Nerdtree
 keymap("n", "<leader>e", "<CMD>silent! NERDTreeToggle<CR>", opts)
 keymap("n", "<S-f><S-f>", "<CMD>NERDTreeFind<CR>", opts)
