@@ -79,7 +79,7 @@ show_always = true
 [hostname]
 ssh_only = false
 format = "  [$hostname](bold blue) "
-trim_at = ".***REMOVED***"
+trim_at = "."
 disabled = false
 
 [golang]
