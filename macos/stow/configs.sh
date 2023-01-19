@@ -1,9 +1,5 @@
 #!/usr/bin/env bash
 
-# Make config directory, copy config to it, and add the path below
-#   mkdir $HOME/.dotfiles/macos/stow/<config>
-#   cp -r $HOME/.config/<config> $HOME/.dotfiles/macos/stow/<config>
-
 configs=(
     "$HOME/.zshrc"
     "$HOME/.config/kitty"
