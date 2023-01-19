@@ -40,38 +40,39 @@ keymap('n', '<leader>ft', '<cmd>TodoTelescope<CR>', opts)
 keymap('n', '<leader>fx', '<cmd>!chmod +x %<CR>', opts)
 
 --Navigate buffers
-keymap("n", "<S-l>", ":bnext<CR>", opts)
-keymap("n", "<S-h>", ":bprevious<CR>", opts)
+keymap("n", "<S-l>", "<CMD>bnext<CR>", opts)
+keymap("n", "<S-h>", "<CMD>bprevious<CR>", opts)
 
 -- window management
 keymap("n", "<leader>sv", "<C-w>v", opts) -- split window vertically
 keymap("n", "<leader>sh", "<C-w>s", opts) -- split window horizontally
 keymap("n", "<leader>se", "<C-w>=", opts) -- make split windows equal width & height
-keymap("n", "<leader>sx", ":close<CR>", opts) -- close current split window
-keymap("n", "<leader>sbd", ":bp|bd #<CR>", opts) -- delete current buffer and leave split window
-keymap("n", "<leader>so", ":only<CR>", opts) -- close other split windows
+keymap("n", "<leader>sx", "<CMD>close<CR>", opts) -- close current split window
+keymap("n", "<leader>sbd", "<CMD>bp|bd #<CR>", opts) -- delete current buffer and leave split window
+keymap("n", "<leader>so", "<CMD>only<CR>", opts) -- close other split windows
 
 --Resize with arrows
-keymap("n", "<M-k>", ":resize +2<CR>", opts)
-keymap("n", "<M-j>", ":resize -2<CR>", opts)
-keymap("n", "<M-h>", ":vertical resize -2<CR>", opts)
-keymap("n", "<M-l>", ":vertical resize +2<CR>", opts)
+keymap("n", "<M-k>", "<CMD>resize +2<CR>", opts)
+keymap("n", "<M-j>", "<CMD>resize -2<CR>", opts)
+keymap("n", "<M-h>", "<CMD>vertical resize -2<CR>", opts)
+keymap("n", "<M-l>", "<CMD>vertical resize +2<CR>", opts)
 
 --Delete buffer
-keymap('n', "<leader>bd", ":bd<CR>", opts)
-keymap('n', "<leader>bD", ":bd!<CR>", opts)
+keymap('n', "<leader>bd", "<CMD>bd<CR>", opts)
+keymap('n', "<leader>bD", "<CMD>bd!<CR>", opts)
 --Delete all buffers except the active one
-keymap('n', "<leader>bo", ":NERDTreeClose|%bd|e#|bd#<CR>", opts)
-keymap('n', "<leader>bO", ":NERDTreeClose|%bd!|e#|bd#<CR>", opts)
+keymap('n', "<leader>bo", "<CMD>NERDTreeClose|%bd|e#|bd#<CR>", opts)
+keymap('n', "<leader>bO", "<CMD>NERDTreeClose|%bd!|e#|bd#<CR>", opts)
+keymap('n', "<leader>bl", "<CMD>b#<CR>", opts)
 
 --Nerdtree
-keymap("n", "<leader>e", ":silent! NERDTreeToggle<CR>", opts)
-keymap("n", "<S-f><S-f>", ":NERDTreeFind<CR>", opts)
---keymap("n", "<leader>f", ":NERDTreeFocus<CR>", opts)
---keymap("n", "<C-n>", ":NERDTree<CR>", opts)
+keymap("n", "<leader>e", "<CMD>silent! NERDTreeToggle<CR>", opts)
+keymap("n", "<S-f><S-f>", "<CMD>NERDTreeFind<CR>", opts)
+--keymap("n", "<leader>f", "<CMD>NERDTreeFocus<CR>", opts)
+--keymap("n", "<C-n>", "<CMD>NERDTree<CR>", opts)
 
 --Symbols-Outline
-keymap("n", "<C-s>", ":SymbolsOutline<CR>", opts)
+keymap("n", "<C-s>", "<CMD>SymbolsOutline<CR>", opts)
 
 --ToggleTerm
 function _G.set_terminal_keymaps()
@@ -92,10 +93,10 @@ keymap("v", "<", "<gv", opts)
 keymap("v", ">", ">gv", opts)
 
 --Move text up and down
-keymap("v", "<A-j>", ":m .+1<CR>==", opts)
-keymap("v", "<A-k>", ":m .-2<CR>==", opts)
-keymap("x", "<A-j>", ":move '>+1<CR>gv-gv", opts)
-keymap("x", "<A-k>", ":move '<-2<CR>gv-gv", opts)
+keymap("v", "<A-j>", "<CMD>m .+1<CR>==", opts)
+keymap("v", "<A-k>", "<CMD>m .-2<CR>==", opts)
+keymap("x", "<A-j>", "<CMD>move '>+1<CR>gv-gv", opts)
+keymap("x", "<A-k>", "<CMD>move '<-2<CR>gv-gv", opts)
 
 --No clobber paste
 keymap("v", "p", '"_dP', opts)
