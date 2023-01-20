@@ -38,8 +38,8 @@ vim.cmd([[
 ]])
 
 return packer.startup(function(use)
-    use "ThePrimeagen/vim-be-good"
     use "wbthomason/packer.nvim"
+    use "ThePrimeagen/vim-be-good"
     use "windwp/nvim-autopairs"
     use "tmhedberg/SimpylFold"
     use "xolox/vim-misc"
@@ -128,9 +128,6 @@ return packer.startup(function(use)
     use "tiagofumo/vim-nerdtree-syntax-highlight"
     use "PhilRunninger/nerdtree-buffer-ops"
     use "PhilRunninger/nerdtree-visual-selection"
-
-    -- Doesn't work
-    --use "scrooloose/nerdtree-project-plugin"
 
     -- Automatically set up your configuration after cloning packer.nvim
     if PACKER_BOOTSTRAP then

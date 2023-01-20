@@ -13,11 +13,10 @@ source $HOME/.zshrc.local
    #/usr/local/bin:
    #/usr/local/sbin:
    #/usr/local/opt/openjdk/bin:
-   #$HOME/scripts:
    #${PATH}
 #")
 
-export PATH="$HOME/scripts:HOME/.local/bin:${PATH}"
+export PATH="$HOME/.local/bin:${PATH}"
 export PATH="/Library/Frameworks/Python.framework/Versions/3.10/bin:${PATH}"
 
 # GO

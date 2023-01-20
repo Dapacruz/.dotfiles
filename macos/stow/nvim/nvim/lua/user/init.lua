@@ -15,9 +15,6 @@ require "user.plugin-configs.toggleterm"
 require "user.plugin-configs.dashboard"
 require "user.plugin-configs.debugging"
 
--- Source a .vim config
--- vim.cmd("source " .. "~/.config/nvim/lua/user/test.vim")
-
 vim.g.netrw_browse_split = 0
 vim.g.netrw_banner = 0
 vim.g.netrw_winsize = 25
@@ -41,17 +38,6 @@ autocmd('TextYankPost', {
         })
     end,
 })
-
--- Bash LSP
---vim.api.nvim_create_autocmd('FileType', {
-  --pattern = 'sh',
-  --callback = function()
-    --vim.lsp.start({
-      --name = 'bash-language-server',
-      --cmd = { 'bash-language-server', 'start' },
-    --})
-  --end,
---})
 
 -- Format Go files
 autocmd({ "InsertLeave" }, {
@@ -81,40 +67,3 @@ autocmd({ "BufRead" }, {
     pattern = "*",
     command = [[call setpos(".", getpos("'\""))]],
 })
-
---vim.cmd([[
-    --augroup mb_filetype
-        --autocmd!
-        --if !exists("g:vscode")
-            --autocmd FileType python nnoremap <buffer> <cr> :silent w<bar>only<bar>vsp<bar>term ipython3 -i %<cr>
-            --autocmd InsertLeave *.py call Black()
-        --endif
-    --augroup end
---]])
-
---Testing global spelling for comments only; no feature in .8
---autocmd FileType markdown setlocal spell
---autocmd FileType gitcommit setlocal spell
-
--- autocommands
-
- --local autocmds = {
-     --restore_cursor = {
-         --{ 'BufRead', '*', [[call setpos(".", getpos("'\""))]] };
-     --};
- --}
-
- --local function nvim_create_augroups(definitions)
-     --for group_name, definition in pairs(definitions) do
-         --vim.api.nvim_command('augroup ' .. group_name)
-         --vim.api.nvim_command('autocmd!')
-         --for _, def in ipairs(definition) do
-             --local command = table.concat(vim.tbl_flatten { 'autocmd', def }, ' ')
-             --vim.api.nvim_command(command)
-         --end
-         --vim.api.nvim_command('augroup END')
-     --end
- --end
-
- --nvim_create_augroups(autocmds)
- --autocommands END
