@@ -1,7 +1,6 @@
 source $HOME/.zshrc.local
 
 # Path
-
 #export PATH=$(tr -d $'\n ' <<< "
    #/Library/Frameworks/Python.framework/Versions/3.10/bin:
    #$GOPATH/bin:
@@ -43,6 +42,7 @@ export GOARCH=arm64
 export EDITOR=/opt/homebrew/bin/nvim
 export VISUAL=/opt/homebrew/bin/nvim
 
+
 # Aliases
 alias ssh="ssh -l ${ADMIN}"
 alias rg=hg
@@ -81,10 +81,14 @@ alias fwscrt="panos-cli panorama get firewalls --terse | fzf | xargs -I {} /Appl
 alias fwascrt="panos-cli panorama get firewalls -s active,standalone --terse | fzf | xargs -I {} /Applications/SecureCRT.app/Contents/MacOS/SecureCRT /T /SSH2 {} /AUTH publickey /L ${ADMIN}"
 alias digb='dig +noall +answer'
 
+
 # Initialize the Starship prompt
 eval "$(starship init zsh)"
 
+
+# Execute neofetch
 neofetch
+
 
 # Oh-My-Zsh settings
 export ZSH=$HOME/.oh-my-zsh
@@ -108,10 +112,13 @@ plugins=(
 )
 source $ZSH/oh-my-zsh.sh
 
+
+# Load custom Zsh functions
 fpath=( ~/.zshfuncs "${fpath[@]}" )
 autoload -Uz _fzf_comprun
 autoload -Uz lfcd
 autoload -Uz t
+
 
 # Kitty terminal settings
 if test -n "$KITTY_INSTALLATION_DIR"; then
@@ -127,8 +134,10 @@ bindkey "^[[1;3B" end-of-history    # alt+down
 bindkey "^P" up-line-or-beginning-search
 bindkey "^N" down-line-or-beginning-search
 
+
 # Homebrew
 eval "$(/opt/homebrew/bin/brew shellenv)"
+
 
 # fzf settings
 export FZF_DEFAULT_COMMAND="\rg -uu --files --hidden -H --glob='!**/.git/' 2> /dev/null"
@@ -186,24 +195,30 @@ if [[ -z "$DISPLAY" ]]; then
 fi
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 
+
 # Disable Cowsay in Ansible
 export ANSIBLE_NOCOWS=1
+
 
 # Slack webhook for notifications
 slackit() {
     http -q $WEBHOOK_WORK <<< '{"text":"Test"}'
 }
 
+
 # Change directories efficiently
 eval "$(zoxide init zsh)"
 
+
 # Rust package manager (Cargo)
 . "$HOME/.cargo/env"
+
 
 # Node Version Manager
 export NVM_DIR="$HOME/.nvm"
 [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"
 [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"
+
 
 # Needed to trust Ansible Galaxy API certificate
 # https://stackoverflow.com/a/57795811
@@ -211,5 +226,6 @@ CERT_PATH=$(python -m certifi)
 export SSL_CERT_FILE=${CERT_PATH}
 export REQUESTS_CA_BUNDLE=${CERT_PATH}
 
-# I don't think this is being used
-#compdef _rg hg
+
+# Integrate Kitty hyperlinked_grep and ripgrep
+compdef _rg hg
