@@ -1,4 +1,5 @@
 local opts = { noremap = true, silent = true }
+local expr_opts = { noremap = true, silent = true, expr = true }
 
 --Shorten function name
 local keymap = vim.api.nvim_set_keymap
@@ -88,6 +89,9 @@ keymap("v", "<S-j>", ":m '>+1<CR>gv=gv", opts)
 
 --No clobber paste
 keymap("v", "p", '"_dP', opts)
+
+-- Quickfix window toggle
+keymap("n", "<F2>", "empty(filter(getwininfo(), 'v:val.quickfix')) ? ':copen<CR>' : ':cclose<CR>'", expr_opts)
 
 --ToggleTerm
 function _G.set_terminal_keymaps()
