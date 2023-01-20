@@ -75,6 +75,20 @@ keymap("n", "<S-f><S-f>", "<CMD>NERDTreeFind<CR>", opts)
 --Symbols-Outline
 keymap("n", "<C-s>", "<CMD>SymbolsOutline<CR>", opts)
 
+--If you only want these mappings for toggle term use term://*toggleterm#* instead
+vim.cmd("autocmd! TermOpen term://*toggleterm#* lua set_terminal_keymaps()")
+
+--Stay in indent mode
+keymap("v", "<", "<gv", opts)
+keymap("v", ">", ">gv", opts)
+
+--Move text up and down
+keymap("v", "<S-k>", ":m '<-2<CR>gv=gv", opts)
+keymap("v", "<S-j>", ":m '>+1<CR>gv=gv", opts)
+
+--No clobber paste
+keymap("v", "p", '"_dP', opts)
+
 --ToggleTerm
 function _G.set_terminal_keymaps()
   local opts = {buffer = 0}
@@ -85,17 +99,3 @@ function _G.set_terminal_keymaps()
   vim.keymap.set("t", "<C-k>", [[<CMD>wincmd k<CR>]], opts)
   vim.keymap.set("t", "<C-l>", [[<CMD>wincmd l<CR>]], opts)
 end
-
---If you only want these mappings for toggle term use term://*toggleterm#* instead
-vim.cmd("autocmd! TermOpen term://*toggleterm#* lua set_terminal_keymaps()")
-
---Stay in indent mode
-keymap("v", "<", "<gv", opts)
-keymap("v", ">", ">gv", opts)
-
---Move text up and down
-keymap("v", "<M-j>", "<CMD>m '>+1<CR>gv=gv", opts)
-keymap("v", "<M-k>", "<CMD>m '<-2<CR>gv=gv", opts)
-
---No clobber paste
-keymap("v", "p", '"_dP', opts)
