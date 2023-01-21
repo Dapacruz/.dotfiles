@@ -33,54 +33,54 @@ export PATH="/usr/local/bin:/usr/local/sbin:/usr/local/opt/openjdk/bin:$PATH"
 
 # Environment variables
 export DISPLAY=:0
-export WORDCHARS='*?_-.[]~=&;!#$%^(){}<>|'
-export WORKON_HOME=$HOME/.virtualenvs
+export EDITOR=/opt/homebrew/bin/nvim
+export GOARCH=arm64
+export GOOGLE_APPLICATION_CREDENTIALS=~/PyPi-42f44041fd99.json
+export GOOS=darwin
+export GOPATH="$HOME/go:$HOME/repos/go"
 export VIRTUALENVWRAPPER_PYTHON=/usr/local/bin/python3
 export VIRTUALENVWRAPPER_VIRTUALENV=/usr/local/bin/virtualenv
 export VIRTUALENVWRAPPER_WORKON_CD=False
-export GOOGLE_APPLICATION_CREDENTIALS=~/PyPi-42f44041fd99.json
-export GOPATH="$HOME/go:$HOME/repos/go"
-export GOOS=darwin
-export GOARCH=arm64
-export EDITOR=/opt/homebrew/bin/nvim
 export VISUAL=/opt/homebrew/bin/nvim
+export WORDCHARS='*?_-.[]~=&;!#$%^(){}<>|'
+export WORKON_HOME=$HOME/.virtualenvs
 
 # Aliases
-alias ssh="ssh -l ${ADMIN}"
-alias rg=hg
-alias grep='egrep --color'
-alias getip='ifconfig | egrep -A3 "^(en0|en8)"; echo ---; ifconfig | egrep -A2 "^(gpd0)"; echo ---; echo -n "Internet: "; curl ipecho.net/plain; echo'
-alias dotfiles='/usr/bin/git --git-dir=$HOME/.dotfiles/ --work-tree=$HOME'
-alias python='/usr/local/bin/python3.10'
-alias pip='/usr/local/bin/pip3.10'
-alias get-panw-config='get-panw-config -K'
-alias run-panw-cmd='run-panw-cmd -K'
-alias mtr='sudo mtr'
-alias dc='docker-compose'
 alias bfg='java -jar ~/bfg/bfg-1.13.1.jar'
+alias cmatrix='cmatrix -ab'
+alias dc='docker-compose'
+alias dig='dig +search'
+alias dotfiles='/usr/bin/git --git-dir=$HOME/.dotfiles/ --work-tree=$HOME'
+alias fw='panos-cli panorama get firewalls --terse | fzf'
+alias fwa='panos-cli panorama get firewalls -s active,standalone --terse | fzf'
+alias fwascrt="panos-cli panorama get firewalls -s active,standalone --terse | fzf | xargs -I {} /Applications/SecureCRT.app/Contents/MacOS/SecureCRT /T /SSH2 {} /AUTH publickey /L ${ADMIN}"
+alias fwassh="panos-cli panorama get firewalls -s active,standalone --terse | fzf | xargs -I {} tmux neww -n {} ssh ${ADMIN}@{}"
+alias fwaweb="panos-cli panorama get firewalls -s active,standalone --terse | fzf | xargs -I {} open https://{}.${DOMAIN}"
+alias fwscrt="panos-cli panorama get firewalls --terse | fzf | xargs -I {} /Applications/SecureCRT.app/Contents/MacOS/SecureCRT /T /SSH2 {} /AUTH publickey /L ${ADMIN}"
+alias fwssh="panos-cli panorama get firewalls --terse | fzf | xargs -I {} tmux neww -n {} ssh ${ADMIN}@{}"
+alias fwweb="panos-cli panorama get firewalls --terse | fzf | xargs -I {} open https://{}.${DOMAIN}"
+alias get-panw-config='get-panw-config -K'
+alias getip='ifconfig | egrep -A3 "^(en0|en8)"; echo ---; ifconfig | egrep -A2 "^(gpd0)"; echo ---; echo -n "Internet: "; curl ipecho.net/plain; echo'
+alias grep='egrep --color'
+alias icat='kitty +kitten icat'
+alias lf=lfcd
+alias ll='lsd --group-directories-first --hyperlink=always -l'
+alias ls='lsd --group-directories-first --hyperlink=always'
+alias mtr='sudo mtr'
+alias pan-os-php='php -r "require_once '\''$HOME/pan-configurator/utils/pan-os-php.php'\'';" $@'
+alias pip='/usr/local/bin/pip3.10'
+alias pp='curl http://parrot.live'
+alias python='/usr/local/bin/python3.10'
+alias rg=hg
+alias rm=trash
+alias run-panw-cmd='run-panw-cmd -K'
+alias ssh="ssh -l ${ADMIN}"
+alias tn='tmux new -s $(pwd | sed -E '\''s/.*\/\.?//g'\'') || tmux a -t $(pwd | sed -E '\''s/.*\/\.?//g'\'')'
+alias tree='tre --color=always'
+alias ts='tmux a -t $(tmux list-sessions | fzf | sed -E '\''s/([^:]+).*/\1/'\'')'
 alias v=nvim
 alias vi=nvim
 alias vim=nvim
-alias ls='lsd --hyperlink=always'
-alias ll='lsd -l --hyperlink=always'
-alias rm=trash
-alias icat='kitty +kitten icat'
-alias lf=lfcd
-alias pp='curl http://parrot.live'
-alias tree='tre --color=always'
-alias cmatrix='cmatrix -ab'
-alias pan-os-php='php -r "require_once '\''$HOME/pan-configurator/utils/pan-os-php.php'\'';" $@'
-alias dig='dig +search'
-alias tn='tmux new -s $(pwd | sed -E '\''s/.*\/\.?//g'\'') || tmux a -t $(pwd | sed -E '\''s/.*\/\.?//g'\'')'
-alias ts='tmux a -t $(tmux list-sessions | fzf | sed -E '\''s/([^:]+).*/\1/'\'')'
-alias fw='panos-cli panorama get firewalls --terse | fzf'
-alias fwa='panos-cli panorama get firewalls -s active,standalone --terse | fzf'
-alias fwssh="panos-cli panorama get firewalls --terse | fzf | xargs -I {} tmux neww -n {} ssh ${ADMIN}@{}"
-alias fwassh="panos-cli panorama get firewalls -s active,standalone --terse | fzf | xargs -I {} tmux neww -n {} ssh ${ADMIN}@{}"
-alias fwweb="panos-cli panorama get firewalls --terse | fzf | xargs -I {} open https://{}.${DOMAIN}"
-alias fwaweb="panos-cli panorama get firewalls -s active,standalone --terse | fzf | xargs -I {} open https://{}.${DOMAIN}"
-alias fwscrt="panos-cli panorama get firewalls --terse | fzf | xargs -I {} /Applications/SecureCRT.app/Contents/MacOS/SecureCRT /T /SSH2 {} /AUTH publickey /L ${ADMIN}"
-alias fwascrt="panos-cli panorama get firewalls -s active,standalone --terse | fzf | xargs -I {} /Applications/SecureCRT.app/Contents/MacOS/SecureCRT /T /SSH2 {} /AUTH publickey /L ${ADMIN}"
 
 # Initialize the Starship prompt
 eval "$(starship init zsh)"
@@ -114,6 +114,9 @@ autoload -Uz compinit && compinit
 autoload -Uz _fzf_comprun
 autoload -Uz lfcd
 autoload -Uz t
+
+# Integrate Kitty hyperlinked_grep with ripgrep
+compdef _rg hg
 
 # Kitty terminal settings
 if test -n "$KITTY_INSTALLATION_DIR"; then
@@ -212,6 +215,3 @@ export NVM_DIR="$HOME/.nvm"
 CERT_PATH=$(python -m certifi)
 export SSL_CERT_FILE=${CERT_PATH}
 export REQUESTS_CA_BUNDLE=${CERT_PATH}
-
-# I don't think this is being used
-#compdef _rg hg
