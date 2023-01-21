@@ -87,6 +87,9 @@ keymap("v", ">", ">gv", opts)
 keymap("v", "<S-k>", ":m '<-2<CR>gv=gv", opts)
 keymap("v", "<S-j>", ":m '>+1<CR>gv=gv", opts)
 
+-- vim-maximizer
+keymap("n", "<leader>sm", "<CMD>MaximizerToggle<CR>", opts)
+
 --No clobber paste
 keymap("v", "p", '"_dP', opts)
 

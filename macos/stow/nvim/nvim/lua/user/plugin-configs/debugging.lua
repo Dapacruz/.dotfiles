@@ -15,6 +15,7 @@ vim.keymap.set("n", "<leader>dt", ":lua require'dap-go'.debug_test()<CR>")
 require("nvim-dap-virtual-text").setup()
 require('dap-go').setup()
 require("dapui").setup()
+require('dap-python').setup('/usr/local/bin/python3.10')
 
 local dap, dapui = require("dap"), require("dapui")
 dap.listeners.after.event_initialized["dapui_config"] = function()

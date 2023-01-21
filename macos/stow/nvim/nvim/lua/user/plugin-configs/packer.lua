@@ -69,6 +69,7 @@ return packer.startup(function(use)
     }
     use "mg979/vim-visual-multi"
     use "github/copilot.vim"
+    use "szw/vim-maximizer"
 
     -- Treesitter
     use "nvim-treesitter/nvim-treesitter"
@@ -113,6 +114,7 @@ return packer.startup(function(use)
     --Debugging
     use 'mfussenegger/nvim-dap'
     use 'leoluz/nvim-dap-go'
+    use 'mfussenegger/nvim-dap-python'
     use 'rcarriga/nvim-dap-ui'
     use 'theHamsta/nvim-dap-virtual-text'
     use 'nvim-telescope/telescope-dap.nvim'
