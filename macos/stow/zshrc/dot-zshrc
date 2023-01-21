@@ -109,7 +109,8 @@ plugins=(
 )
 source $ZSH/oh-my-zsh.sh
 
-fpath=( ~/.zshfuncs "${fpath[@]}" )
+fpath=( ~/.zsh.d ~/.zsh.funcs "${fpath[@]}" )
+autoload -Uz compinit && compinit
 autoload -Uz _fzf_comprun
 autoload -Uz lfcd
 autoload -Uz t
