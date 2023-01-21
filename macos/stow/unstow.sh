@@ -7,13 +7,10 @@ do
     target="$(dirname $c)"
     package="$(basename $c)"
 
-    if [[ ! $package = .* ]]
+    # Remove leading dot if one exists
+    if [[ $package = .* ]]
     then
-        # Remove trailing extension
-        package="${package%.*}"
-    else
-        # Remove leading dot and any trailing extensions
-        package=$(sed -E 's/\.([^.]+).*/\1/' <<< $package)
+        package=$(sed -E 's/^\.(.*)/\1/' <<< $package)
     fi
 
     # Unstow

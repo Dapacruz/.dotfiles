@@ -12,15 +12,13 @@ source configs.sh
 for c in ${configs[*]}
 do
     target="$(dirname $c)"
-    package="$(basename $c)"
+    config_name="$(basename $c)"
+    package=$config_name
 
-    if [[ ! $package = .* ]]
+    # Remove package leading dot if one exists
+    if [[ $package = .* ]]
     then
-        # Remove trailing extension
-        package="${package%.*}"
-    else
-        # Remove leading dot and any trailing extensions
-        package=$(sed -E 's/\.([^.]+).*/\1/' <<< $package)
+        package=$(sed -E 's/^\.(.*)/\1/' <<< $package)
     fi
 
     # Create Stow package directory if it does not exist
@@ -29,6 +27,13 @@ do
         echo "Creating Stow package ${package}"
         mkdir $package
         cp -r $c $package
+
+        # If config_name name has a leading dot, rename config directory to package name
+        if [[ $config_name = .* ]]
+        then
+            # Rename config directory leading dot to 'dot-'
+            mv $package/$config_name $package/dot-${package}
+        fi
     fi
 
     # Back up existing config

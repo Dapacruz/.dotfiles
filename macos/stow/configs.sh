@@ -11,5 +11,7 @@ configs=(
     "$HOME/.config/karabiner"
     "$HOME/.config/lf"
     "$HOME/.config/neofetch"
+    "$HOME/.zsh.funcs"
+    "$HOME/.zsh.d"
     "$HOME/.local/bin"
 )
