@@ -51,6 +51,8 @@ keymap("n", "<leader>se", "<C-w>=", opts) -- make split windows equal width & he
 keymap("n", "<leader>sx", "<CMD>close<CR>", opts) -- close current split window
 keymap("n", "<leader>sbd", "<CMD>bp|bd #<CR>", opts) -- delete current buffer and leave split window
 keymap("n", "<leader>so", "<CMD>only<CR>", opts) -- close other split windows
+keymap("n", "<leader>sm", "<CMD>MaximizerToggle<CR>", opts) -- maximize/restore current split (vim-maximizer)
+
 
 --Resize with arrows
 keymap("n", "<M-k>", "<CMD>resize +2<CR>", opts)
@@ -86,9 +88,6 @@ keymap("v", ">", ">gv", opts)
 --Move text up and down
 keymap("v", "<S-k>", ":m '<-2<CR>gv=gv", opts)
 keymap("v", "<S-j>", ":m '>+1<CR>gv=gv", opts)
-
--- vim-maximizer
-keymap("n", "<leader>sm", "<CMD>MaximizerToggle<CR>", opts)
 
 --No clobber paste
 keymap("v", "p", '"_dP', opts)
