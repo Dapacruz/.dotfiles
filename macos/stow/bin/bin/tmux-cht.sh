@@ -9,7 +9,7 @@ read -p "Enter Query: " query
 query=`echo $query | tr ' ' '+'`
 
 if grep -qs "$selected" ~/.local/bin/tmux-cht-languages.txt; then
-    bash -c "http -p b https://cht.sh/$selected/$query | bat --paging always"
+    bash -c "http -p b https://cht.sh/$selected/$query | bat --style=plain --paging=always"
 else
-    bash -c "http -p b https://cht.sh/$selected~$query | bat --paging always"
+    bash -c "http -p b https://cht.sh/$selected~$query | bat --style=plain --paging=always"
 fi
