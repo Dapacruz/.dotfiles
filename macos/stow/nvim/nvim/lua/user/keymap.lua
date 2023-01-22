@@ -93,7 +93,7 @@ keymap("v", "<S-j>", ":m '>+1<CR>gv=gv", opts)
 keymap("v", "p", '"_dP', opts)
 
 -- Quickfix window toggle
-keymap("n", "<F2>", "empty(filter(getwininfo(), 'v:val.quickfix')) ? ':copen<CR>' : ':cclose<CR>'", expr_opts)
+keymap("n", "<leader>ct", "empty(filter(getwininfo(), 'v:val.quickfix')) ? ':copen<CR>' : ':cclose<CR>'", expr_opts)
 
 --ToggleTerm
 function _G.set_terminal_keymaps()
