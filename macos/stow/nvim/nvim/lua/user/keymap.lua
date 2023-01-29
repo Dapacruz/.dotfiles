@@ -51,7 +51,7 @@ keymap("n", "<leader>se", "<C-w>=", opts) -- make split windows equal width & he
 keymap("n", "<leader>sx", "<CMD>close<CR>", opts) -- close current split window
 keymap("n", "<leader>sbd", "<CMD>bp|bd #<CR>", opts) -- delete current buffer and leave split window
 keymap("n", "<leader>so", "<CMD>only<CR>", opts) -- close other split windows
-keymap("n", "<leader>sm", "<CMD>MaximizerToggle<CR>", opts) -- maximize/restore current split (vim-maximizer)
+keymap("n", "<leader>sz", "<CMD>MaximizerToggle<CR>", opts) -- maximize/restore current split (vim-maximizer)
 
 
 --Resize with arrows

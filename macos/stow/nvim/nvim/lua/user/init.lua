@@ -46,6 +46,12 @@ autocmd({ "InsertLeave" }, {
     command = "Format",
 })
 
+autocmd({ "BufWritePost" }, {
+    group = user_group,
+    pattern = "*.go",
+    command = "silent! !goimports -w %",
+})
+
 autocmd({ "BufEnter", "BufWinEnter", "TabEnter" }, {
     group = user_group,
     pattern = "*.rs",

@@ -81,6 +81,7 @@ alias ts='tmux a -t $(tmux list-sessions | fzf | sed -E '\''s/([^:]+).*/\1/'\'')
 alias v=nvim
 alias vi=nvim
 alias vim=nvim
+alias vdiff='nvim -d'
 
 # Initialize the Starship prompt
 eval "$(starship init zsh)"
