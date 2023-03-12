@@ -59,3 +59,4 @@ vim.g.vimwiki_list = {{path = "~/vimwiki/", syntax =  "markdown", ext =  ".md"}}
 
 -- Enable vim-visual-multi mouse mappings
 vim.g.VM_mouse_mappings = 1
+vim.g.VM_theme = "codedark"
