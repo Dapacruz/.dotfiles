@@ -79,13 +79,13 @@ alias dotfiles='/usr/bin/git --git-dir=$HOME/.dotfiles/ --work-tree=$HOME'
 alias fw='panos-cli panorama get firewalls --terse | fzf'
 alias fwa='panos-cli panorama get firewalls -s active,standalone --terse | fzf'
 alias fwascrt="panos-cli panorama get firewalls -s active,standalone --terse | fzf | xargs -I {} /Applications/SecureCRT.app/Contents/MacOS/SecureCRT /T /SSH2 {} /AUTH publickey /L ${ADMIN}"
-alias fwassh="panos-cli panorama get firewalls -s active,standalone --terse | fzf | xargs -I {} tmux neww -n {} ssh -o HostKeyAlgorithms=+ssh-rsa ${ADMIN}@{}"
+alias fwassh="panos-cli panorama get firewalls -s active,standalone --terse | fzf | xargs -I {} tmux neww -n {} ssh -o HostKeyAlgorithms=+ssh-rsa -o PubkeyAcceptedAlgorithms=+ssh-rsa ${ADMIN}@{}"
 alias fwaweb="panos-cli panorama get firewalls -s active,standalone --terse | fzf | xargs -I {} open https://{}.${DOMAIN}"
 alias fwscrt="panos-cli panorama get firewalls --terse | fzf | xargs -I {} /Applications/SecureCRT.app/Contents/MacOS/SecureCRT /T /SSH2 {} /AUTH publickey /L ${ADMIN}"
-alias fwssh="panos-cli panorama get firewalls --terse | fzf | xargs -I {} tmux neww -n {} ssh -o HostKeyAlgorithms=+ssh-rsa ${ADMIN}@{}"
+alias fwssh="panos-cli panorama get firewalls --terse | fzf | xargs -I {} tmux neww -n {} ssh -o HostKeyAlgorithms=+ssh-rsa -o PubkeyAcceptedAlgorithms=+ssh-rsa ${ADMIN}@{}"
 alias fwweb="panos-cli panorama get firewalls --terse | fzf | xargs -I {} open https://{}.${DOMAIN}"
 alias get-panw-config='get-panw-config -K'
-alias getip='ifconfig | egrep -A3 "^(en0|en8)"; echo ---; ifconfig | egrep -A2 "^(gpd0)"; echo ---; echo -n "Internet: "; curl ipecho.net/plain; echo'
+alias getip='ifconfig | egrep -A4 "^(en0|en10)"; ifconfig | egrep -A2 "^(gpd0)"; echo ---; echo -n "Internet IP Address: "; curl ipecho.net/plain; echo'
 alias grep='egrep --color'
 alias icat='kitty +kitten icat'
 alias lf=lfcd
@@ -99,16 +99,16 @@ alias python='/usr/local/bin/python3.10'
 alias rg=hg
 alias rm=trash
 alias run-panw-cmd='run-panw-cmd -K'
-alias ssh="ssh -o HostKeyAlgorithms=+ssh-rsa -l ${ADMIN}"
+alias ssh="ssh -o HostKeyAlgorithms=+ssh-rsa -o PubkeyAcceptedAlgorithms=+ssh-rsa -l ${ADMIN}"
 alias t=t.sh
 alias tn='tmux new -s $(pwd | sed -E '\''s/.*\/\.?//g'\'') || tmux a -t $(pwd | sed -E '\''s/.*\/\.?//g'\'')'
 alias tree='tre --color=always'
 alias ts='tmux a -t $(tmux list-sessions | fzf | sed -E '\''s/([^:]+).*/\1/'\'')'
+alias unlock-openpgp='echo "\nOpenPGP unlocked." | gpg -ear David | gpg -d'
 alias v=nvim
+alias vdiff='nvim -d'
 alias vi=nvim
 alias vim=nvim
-alias vdiff='nvim -d'
-
 
 # Initialize the Starship prompt
 eval "$(starship init zsh)"
@@ -125,6 +125,7 @@ autoload -Uz _fzf_comprun
 autoload -Uz lfcd
 autoload -Uz encrypt
 autoload -Uz decrypt
+autoload -Uz pass_func
 
 
 # Integrate Kitty hyperlinked_grep with ripgrep
