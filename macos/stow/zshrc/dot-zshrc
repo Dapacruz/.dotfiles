@@ -111,11 +111,11 @@ alias vi=nvim
 alias vim=nvim
 
 # Initialize the Starship prompt
-eval "$(starship init zsh)"
+eval "$(/opt/homebrew/bin/starship init zsh)"
 
 
 # Execute neofetch
-neofetch
+/opt/homebrew/bin/neofetch
 
 
 # Load custom Zsh functions
