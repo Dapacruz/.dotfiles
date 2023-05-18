@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/bin/sh
 
 if [ "$1" = "-h" ]; then
     echo ""
@@ -13,9 +13,9 @@ if [ "$1" = "-h" ]; then
     echo ""
 elif [ $# -eq 0 ]; then
     if [ -z "$TMUX" ]; then
-        ZOXIDE_RESULT=$(zoxide query -l | fzf)
+        ZOXIDE_RESULT=$(echo "$HOME\n$(zoxide query -l)" | fzf)
     else
-        ZOXIDE_RESULT=$(zoxide query -l | fzf-tmux -p --reverse)
+        ZOXIDE_RESULT=$(echo "$HOME\n$(zoxide query -l)" | fzf-tmux -p --reverse)
     fi
 else
     ZOXIDE_RESULT=$(zoxide query $1)

@@ -104,7 +104,7 @@ alias t=t.sh
 alias tn='tmux new -s $(pwd | sed -E '\''s/.*\/\.?//g'\'') || tmux a -t $(pwd | sed -E '\''s/.*\/\.?//g'\'')'
 alias tree='tre --color=always'
 alias ts='tmux a -t $(tmux list-sessions | fzf | sed -E '\''s/([^:]+).*/\1/'\'')'
-alias unlock-openpgp='echo "\nOpenPGP unlocked." | gpg -ear David | gpg -d'
+alias unlock-openpgp='echo "\nOpenPGP unlocked." | gpg -ear David | gpg -dr David'
 alias v=nvim
 alias vdiff='nvim -d'
 alias vi=nvim
