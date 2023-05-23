@@ -3,8 +3,22 @@ tap "homebrew/cask"
 tap "homebrew/core"
 tap "homebrew/services"
 tap "koekeishiya/formulae"
+# Color management engine supporting ICC profiles
+brew "little-cms2"
+# Image format providing lossless and lossy compression for web images
+brew "webp"
+# New file format for still image compression
+brew "jpeg-xl"
+# Codec library for encoding and decoding AV1 video streams
+brew "aom"
 # Clone of cat(1) with syntax highlighting and Git integration
 brew "bat"
+# OpenType text shaping engine
+brew "harfbuzz"
+# Development kit for the Java programming language
+brew "openjdk"
+# Remove large files or passwords from Git history like git-filter-branch
+brew "bfg"
 # Create and view interactive cheat sheets for *nix commands
 brew "cheat"
 # Cross-platform make
@@ -13,8 +27,14 @@ brew "cmake"
 brew "cmatrix"
 # GNU File, Shell, and Text utilities
 brew "coreutils"
+# Get a file from an HTTP, HTTPS or FTP server
+brew "curl"
 # Programmatically minimize files to isolate features of interest
 brew "delta"
+# Pack, ship and run any application as a lightweight container
+brew "docker"
+# Isolated development environments using Docker
+brew "docker-compose"
 # More intuitive version of du in rust
 brew "dust"
 # Run arbitrary commands when files change
@@ -23,18 +43,28 @@ brew "entr"
 brew "fd"
 # OCR (Optical Character Recognition) engine
 brew "tesseract"
+# Play, record, convert, and stream audio and video
+brew "ffmpeg@4"
 # Create thumbnails for your video files
 brew "ffmpegthumbnailer"
 # Banner-like program prints strings as ASCII art
 brew "figlet"
 # Scriptable ping program for checking if multiple hosts are up
 brew "fping"
+# Interpreted, interactive, object-oriented programming language
+brew "python@3.11"
 # Alternative to top/htop
 brew "glances"
+# GNU Pretty Good Privacy (PGP) package
+brew "gnupg"
 # Ping, but with a graph
 brew "gping"
+# Command-line tools for OpenPGP-related operations
+brew "hopenpgp-tools"
 # User-friendly cURL replacement (command-line HTTP client)
 brew "httpie"
+# ISO/IEC 23008-12:2017 HEIF file format decoder and encoder
+brew "libheif"
 # Tools and libraries to manipulate images in many formats
 brew "imagemagick"
 # Calculate various network masks, etc. from a given IP address
@@ -49,20 +79,30 @@ brew "lsd"
 brew "luajit"
 # Package manager for the Lua programming language
 brew "luarocks"
+# Run a Kubernetes cluster locally
+brew "minikube"
 # 'traceroute' and 'ping' in a single tool
 brew "mtr"
 # Fast, highly customisable system info script
 brew "neofetch"
 # Ambitious Vim-fork focused on extensibility and agility
-brew "neovim"
+brew "neovim", args: ["HEAD"]
 # Port scanning utility for large networks
 brew "nmap"
 # Cryptography and SSL/TLS Toolkit
 brew "openssl@3"
+# Password manager
+brew "pass"
 # General-purpose scripting language
 brew "php"
+# Pinentry for GPG on Mac
+brew "pinentry-mac"
 # Modern replacement for ps written by Rust
 brew "procs"
+# Interpreted, interactive, object-oriented programming language
+brew "python@3.10"
+# Emulator for x86 and PowerPC
+brew "qemu"
 # Alternative to backtracking PCRE-style regular expression engines
 brew "re2"
 # Search tool like grep and The Silver Searcher
@@ -97,6 +137,10 @@ brew "wget"
 brew "xmlstarlet"
 # Command-line XML and HTML beautifier and content extractor
 brew "xq"
+# Tool for managing your YubiKey configuration
+brew "ykman"
+# YubiKey personalization library and tool
+brew "ykpers"
 # Process YAML, JSON, XML, CSV and properties documents from the CLI
 brew "yq"
 # Shell extension to navigate your filesystem faster
@@ -109,6 +153,8 @@ brew "zsh-vi-mode"
 cask "keycastr"
 # Clipboard manager
 cask "maccy"
+# Neovim Client
+cask "neovide"
 # Knowledge base that works on top of a local folder of plain text Markdown files
 cask "obsidian"
 # Command-line shell and scripting language
