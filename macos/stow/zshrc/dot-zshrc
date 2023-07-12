@@ -76,8 +76,8 @@ alias dc='docker-compose'
 alias dig='dig +search'
 alias digb='dig +noall +answer'
 alias dotfiles='/usr/bin/git --git-dir=$HOME/.dotfiles/ --work-tree=$HOME'
-alias fw='panos-cli panorama get firewalls --terse | fzf'
-alias fwa='panos-cli panorama get firewalls -s active,standalone --terse | fzf'
+alias fw='panos-cli panorama get firewalls --terse | grep -v "^scno|^dbst|^bopa|as9|remlb" | fzf'
+alias fwa='panos-cli panorama get firewalls -s active,standalone --terse | grep -v "^scno|^dbst|^bopa|as9|remlb" | fzf'
 alias fwascrt="panos-cli panorama get firewalls -s active,standalone --terse | fzf | xargs -I {} /Applications/SecureCRT.app/Contents/MacOS/SecureCRT /T /SSH2 {} /AUTH publickey /L ${ADMIN}"
 alias fwassh="panos-cli panorama get firewalls -s active,standalone --terse | fzf | xargs -I {} tmux neww -n {} ssh -o HostKeyAlgorithms=+ssh-rsa -o PubkeyAcceptedAlgorithms=+ssh-rsa ${ADMIN}@{}"
 alias fwaweb="panos-cli panorama get firewalls -s active,standalone --terse | fzf | xargs -I {} open https://{}.${DOMAIN}"
@@ -85,7 +85,7 @@ alias fwscrt="panos-cli panorama get firewalls --terse | fzf | xargs -I {} /Appl
 alias fwssh="panos-cli panorama get firewalls --terse | fzf | xargs -I {} tmux neww -n {} ssh -o HostKeyAlgorithms=+ssh-rsa -o PubkeyAcceptedAlgorithms=+ssh-rsa ${ADMIN}@{}"
 alias fwweb="panos-cli panorama get firewalls --terse | fzf | xargs -I {} open https://{}.${DOMAIN}"
 alias get-panw-config='get-panw-config -K'
-alias getip='ifconfig | egrep -A4 "^(en0|en10)"; ifconfig | egrep -A2 "^(gpd0)"; echo ---; echo -n "Internet IP Address: "; curl ipecho.net/plain; echo'
+alias getip='ifconfig | egrep -v "\s+(options|ether|inet6)" | egrep -A1 "^(en0|en10)"; echo --; ifconfig | egrep -A1 "^(utun3)"; echo --; echo -n "Internet IP Address: "; curl ipecho.net/plain; echo'
 alias grep='egrep --color'
 alias icat='kitty +kitten icat'
 alias lf=lfcd
