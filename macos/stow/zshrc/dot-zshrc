@@ -19,7 +19,7 @@ export PATH="$HOME/.local/bin:${PATH}"
 export PATH="/Library/Frameworks/Python.framework/Versions/3.10/bin:${PATH}"
 
 # GO
-export PATH="$GOPATH/bin:$HOME/repos/go/bin:$GOPATH/bin/darwin_amd64:$GOPATH/bin/darwin_arm64:${PATH}"
+export PATH="$GOPATH:$HOME/go/bin:$HOME/repos/go/bin:$HOME/go/bin/darwin_amd64:$HOME/go/bin/darwin_arm64:${PATH}"
 
 # Rust modules install to user
 export PATH="$HOME/.cargo/bin:${PATH}"
@@ -96,9 +96,9 @@ alias mkstart='minikube start --driver=qemu && eval $(minikube -p minikube docke
 alias mkstop='minikube stop'
 alias mtr='sudo mtr'
 alias pan-os-php='php -r "require_once '\''$HOME/pan-configurator/utils/pan-os-php.php'\'';" $@'
-alias pip='/usr/local/bin/pip3.10'
+alias pip='/opt/homebrew/bin/pip3.11'
 alias pp='curl http://parrot.live'
-alias python='/usr/local/bin/python3.10'
+alias python='/opt/homebrew/bin/python3.11'
 alias rg=hg
 alias rm=trash
 alias run-panw-cmd='run-panw-cmd -K'

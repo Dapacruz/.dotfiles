@@ -86,6 +86,6 @@ disabled = false
 format = 'via [ $version](bold cyan) '
 
 [python]
-format = "via [  $version ](bold yellow)"
+format = "via [  $version $virtualenv](bold yellow)"
 python_binary = 'python3'
 detect_extensions = ['py']
