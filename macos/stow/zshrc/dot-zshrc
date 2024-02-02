@@ -35,6 +35,7 @@ export GOARCH=arm64
 export GOOGLE_APPLICATION_CREDENTIALS=~/PyPi-42f44041fd99.json
 export GOOS=darwin
 export GOPATH="$HOME/go:$HOME/repos/go"
+export HISTCONTROL=ignorespace
 export VIRTUALENVWRAPPER_PYTHON=/usr/local/bin/python3
 export VIRTUALENVWRAPPER_VIRTUALENV=/usr/local/bin/virtualenv
 export VIRTUALENVWRAPPER_WORKON_CD=False
