@@ -26,6 +26,12 @@ keymap("n", "<leader>Q", "<CMD>q!<CR>", opts) --Force quit all windows, opts
 --Quick reload LUA config
 --keymap("n", "<leader>rc", "<CMD>:lua require(user.plugin-configs.telescope).reload()<CR>", opts)
 
+--NeoGit
+keymap("n", "<leader>gg", "<CMD>Neogit<CR>", opts)
+keymap("n", "<leader>gp", "<CMD>Neogit push<CR>", opts)
+keymap("n", "<leader>gll", "<CMD>Neogit pull<CR>", opts)
+keymap("n", "<leader>glg", "<CMD>Neogit log<CR>", opts)
+
 --Telescope
 keymap("n", "<leader>ff", "<CMD>lua require('telescope.builtin').find_files()<CR>", opts)
 keymap("n", "<leader>fg", "<CMD>lua require('telescope.builtin').live_grep()<CR>", opts)
