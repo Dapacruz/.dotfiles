@@ -16,15 +16,15 @@ keymap("", "<Space>", "<Nop>", opts)
 vim.g.mapleader = " "
 vim.g.maplocalleader = " "
 
---Turn of search highlights
+--Turn off search highlights
 keymap("n", "<leader>nh", "<CMD>nohlsearch<CR>", opts)
 
 --Quick quit command
-keymap("n", "<leader>q", "<CMD>q<CR>", opts) --Quit all window, opts
-keymap("n", "<leader>Q", "<CMD>q!<CR>", opts) --Quit all window, opts
+keymap("n", "<leader>q", "<CMD>q<CR>", opts) --Quit all windows, opts
+keymap("n", "<leader>Q", "<CMD>q!<CR>", opts) --Force quit all windows, opts
 
 --Quick reload LUA config
-keymap("n", "<leader>rc", "<CMD>:lua require(user.plugin-configs.telescope).reload()<CR>", opts)
+--keymap("n", "<leader>rc", "<CMD>:lua require(user.plugin-configs.telescope).reload()<CR>", opts)
 
 --Telescope
 keymap("n", "<leader>ff", "<CMD>lua require('telescope.builtin').find_files()<CR>", opts)

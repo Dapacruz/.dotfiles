@@ -12,7 +12,7 @@ require "user.plugin-configs.gitsigns"
 require "user.plugin-configs.lualine"
 require "user.plugin-configs.symbols_outline"
 require "user.plugin-configs.toggleterm"
-require "user.plugin-configs.dashboard"
+--require "user.plugin-configs.dashboard"
 require "user.plugin-configs.debugging"
 
 vim.g.netrw_browse_split = 0
@@ -39,11 +39,23 @@ autocmd('TextYankPost', {
     end,
 })
 
+vim.filetype.add({
+    pattern = {
+        [".*/playbooks/.*.yml"] = "yaml.ansible"
+    }
+})
+
 -- Format Go files
 autocmd({ "InsertLeave" }, {
     group = user_group,
     pattern = "*.go",
-    command = "Format",
+    command = "silent lua vim.lsp.buf.format({async=true})",
+})
+
+autocmd({ "BufWritePost" }, {
+    group = user_group,
+    pattern = "*.py",
+    command = "silent !black --quiet %",
 })
 
 autocmd({ "BufWritePost" }, {

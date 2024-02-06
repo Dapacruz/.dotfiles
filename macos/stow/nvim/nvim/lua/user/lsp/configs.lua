@@ -5,7 +5,7 @@ end
 
 local lspconfig = require("lspconfig")
 
-local servers = { "gopls", "jsonls", "yamlls", "lua_ls", "jedi_language_server", "vimls", "bashls" }
+local servers = { "gopls", "jsonls", "yamlls", "lua_ls", "jedi_language_server", "vimls", "bashls", "ansiblels" }
 
 lsp_installer.setup({
     ui = {

@@ -53,7 +53,43 @@ return packer.startup(function(use)
     use "nvim-lua/plenary.nvim"
     use "simrat39/symbols-outline.nvim"
     use {"akinsho/toggleterm.nvim", tag = "*"}
-    use "glepnir/dashboard-nvim"
+    --use {
+        --'nvimdev/dashboard-nvim',
+        --event = 'VimEnter',
+        --config = function()
+            --require('dashboard').setup {
+                --preview = {
+                    --command = 'cat | lolcat -F 0.3',
+                    --file_path = '~/.config/nvim/static/neovim.cat',
+                    --file_height = 6,
+                    --file_width = 54,
+                --},
+                --custom_center = {
+                    --{icon = '  ',
+                        --desc = 'Recently Latest Session                          ',
+                        --shortcut = 'SPC s l',
+                        --action ='SessionLoad'},
+                    --{icon = '  ',
+                        --desc = 'Recently Opened Files                            ',
+                        --action =  'Telescope oldfiles',
+                        --shortcut = 'SPC f h'},
+                    --{icon = '  ',
+                        --desc = 'Find File                                        ',
+                        --action = 'Telescope find_files find_command=rg,--hidden,--files',
+                        --shortcut = 'SPC f f'},
+                    --{icon = '  ',
+                        --desc ='File Browser                                         ',
+                        --action =  'NERDTreeToggle',
+                        --shortcut = 'C f'},
+                    --{icon = '  ',
+                        --desc = 'Find Word                                        ',
+                        --action = 'Telescope live_grep',
+                        --shortcut = 'SPC f g'},
+                --}
+            --}
+        --end,
+        --requires = {'nvim-tree/nvim-web-devicons'}
+    --}
     use "justinmk/vim-sneak"
     use "stefandtw/quickfix-reflector.vim"
     use "wellle/targets.vim"
@@ -68,7 +104,7 @@ return packer.startup(function(use)
         end
     }
     use "mg979/vim-visual-multi"
-    use "github/copilot.vim"
+    --use "github/copilot.vim"
     use "szw/vim-maximizer"
 
     -- Treesitter
@@ -109,7 +145,7 @@ return packer.startup(function(use)
     -- LSP
     use "neovim/nvim-lspconfig" -- enable native LSP
     use "williamboman/mason.nvim"  -- language server installer
-    use "averms/black-nvim"
+    use "Glench/Vim-Jinja2-Syntax"
 
     --Debugging
     use 'mfussenegger/nvim-dap'
