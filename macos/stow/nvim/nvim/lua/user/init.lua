@@ -11,8 +11,6 @@ require "user.plugin-configs.autopairs"
 require "user.plugin-configs.gitsigns"
 require "user.plugin-configs.lualine"
 require "user.plugin-configs.symbols_outline"
-require "user.plugin-configs.toggleterm"
---require "user.plugin-configs.dashboard"
 require "user.plugin-configs.debugging"
 
 vim.g.netrw_browse_split = 0
