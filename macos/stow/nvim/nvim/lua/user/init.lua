@@ -12,12 +12,20 @@ require "user.plugin-configs.gitsigns"
 require "user.plugin-configs.lualine"
 require "user.plugin-configs.symbols_outline"
 require "user.plugin-configs.debugging"
+require "user.plugin-configs.fugitive"
+require "user.plugin-configs.cloak"
+require "user.plugin-configs.harpoon"
+require "user.plugin-configs.refactoring"
+require "user.plugin-configs.trouble"
+require "user.plugin-configs.undotree"
+require "user.plugin-configs.zenmode"
+require "user.plugin-configs.cellular_automation"
 
 vim.g.netrw_browse_split = 0
 vim.g.netrw_banner = 0
 vim.g.netrw_winsize = 25
 
---Trim leading and trailing whitespace
+-- Trim leading and trailing whitespace
 vim.cmd([[ command! -range=% TrimWhitespace <line1>,<line2>s/^\s\+//e | <line1>,<line2>s/\s\+$//e ]])
 vim.cmd([[ command! -range=% TrimWhitespaceTrailing <line1>,<line2>s/\s\+$//e ]])
 

@@ -39,8 +39,18 @@ keymap("n", "<leader>fG", "<CMD>lua require('telescope.builtin').git_files()<CR>
 keymap("n", "<leader>fb", "<CMD>lua require('telescope.builtin').buffers()<CR>", opts)
 keymap("n", "<leader>fh", "<CMD>lua require('telescope.builtin').help_tags()<CR>", opts)
 keymap("n", "<leader>fk", "<CMD>lua require('telescope.builtin').keymaps()<CR>", opts)
-keymap("n", "<leader>fd", "<CMD>lua require('telescope.builtin').diagnostics()<CR>", opts)
-keymap("n", "<leader>fs", "<CMD>lua require('telescope.builtin').lsp_document_symbols()<CR>", opts)
+keymap("n", "<leader>fD", "<CMD>lua require('telescope.builtin').diagnostics()<CR>", opts)
+keymap("n", "<leader>fcc", "<CMD>lua require('telescope.builtin').commands()<CR>", opts)
+keymap("n", "<leader>fch", "<CMD>lua require('telescope.builtin').command_history()<CR>", opts)
+keymap("n", "<leader>fcs", "<CMD>lua require('telescope.builtin').colorscheme()<CR>", opts)
+keymap("n", "<leader>fm", "<CMD>lua require('telescope.builtin').marks()<CR>", opts)
+keymap("n", "<leader>fM", "<CMD>lua require('telescope.builtin').man_pages()<CR>", opts)
+keymap("n", "<leader>fd", "<CMD>lua require('telescope.builtin').lsp_definitions()<CR>", opts)
+keymap("n", "<leader>fss", "<CMD>lua require('telescope.builtin').lsp_document_symbols()<CR>", opts)
+keymap("n", "<leader>fsh", "<CMD>lua require('telescope.builtin').search_history()<CR>", opts)
+keymap("n", "<leader>fS", "<CMD>lua require('telescope.builtin').lsp_workspace_symbols()<CR>", opts)
+keymap("n", "<leader>fr", "<CMD>lua require('telescope.builtin').lsp_references()<CR>", opts)
+keymap("n", "<leader>fi", "<CMD>lua require('telescope.builtin').lsp_implementations()<CR>", opts)
 keymap("n", "<leader>ft", "<CMD>TodoTelescope<CR>", opts)
 
 -- Make file executable
@@ -81,11 +91,20 @@ keymap("n", "<leader>bl", "<CMD>b#<CR>", opts)
 keymap("n", "<leader>e", "<CMD>silent! NERDTreeToggle<CR>", opts)
 keymap("n", "<S-f><S-f>", "<CMD>NERDTreeFind<CR>", opts)
 
+--Obsidian
+keymap("n", "<leader>oq", "<CMD>ObsidianQuickSwitch<CR>", opts)
+keymap("n", "<leader>ot", "<CMD>ObsidianTags<CR>", opts)
+keymap("n", "<leader>on", ":ObsidianNew ", { noremap = true, silent = false })
+keymap("n", "<leader>or", ":ObsidianRename ", { noremap = true, silent = false })
+keymap("n", "<leader>off", "<CMD>ObsidianFollowLink<CR>", opts)
+keymap("n", "<leader>ofv", "<CMD>ObsidianFollowLink vsplit<CR>", opts)
+keymap("n", "<leader>ofh", "<CMD>ObsidianFollowLink hsplit<CR>", opts)
+keymap("n", "<leader>ob", "<CMD>ObsidianBacklinks<CR>", opts)
+keymap("n", "<leader>os", "<CMD>ObsidianSearch<CR>", opts)
+keymap("n", "<leader>oo", "<CMD>ObsidianOpen<CR>", opts)
+
 --Symbols-Outline
 keymap("n", "<C-s>", "<CMD>SymbolsOutline<CR>", opts)
-
---If you only want these mappings for toggle term use term://*toggleterm#* instead
-vim.cmd("autocmd! TermOpen term://*toggleterm#* lua set_terminal_keymaps()")
 
 --Stay in indent mode
 keymap("v", "<", "<gv", opts)
@@ -101,13 +120,16 @@ keymap("v", "p", '"_dP', opts)
 -- Quickfix window toggle
 keymap("n", "<leader>ct", "empty(filter(getwininfo(), 'v:val.quickfix')) ? ':copen<CR>' : ':cclose<CR>'", expr_opts)
 
+--If you only want these mappings for toggle term use term://*toggleterm#* instead
+vim.cmd("autocmd! TermOpen term://*toggleterm#* lua set_terminal_keymaps()")
+
 --ToggleTerm
-function _G.set_terminal_keymaps()
-  local opts = {buffer = 0}
-  vim.keymap.set("t", "<esc>", [[<C-\><C-n>]], opts)
-  vim.keymap.set("t", "jk", [[<C-\><C-n>]], opts)
-  vim.keymap.set("t", "<C-h>", [[<CMD>wincmd h<CR>]], opts)
-  vim.keymap.set("t", "<C-j>", [[<CMD>wincmd j<CR>]], opts)
-  vim.keymap.set("t", "<C-k>", [[<CMD>wincmd k<CR>]], opts)
-  vim.keymap.set("t", "<C-l>", [[<CMD>wincmd l<CR>]], opts)
-end
+--function _G.set_terminal_keymaps()
+  --local opts = {buffer = 0}
+  --vim.keymap.set("t", "<esc>", [[<C-\><C-n>]], opts)
+  --vim.keymap.set("t", "jk", [[<C-\><C-n>]], opts)
+  --vim.keymap.set("t", "<C-h>", [[<CMD>wincmd h<CR>]], opts)
+  --vim.keymap.set("t", "<C-j>", [[<CMD>wincmd j<CR>]], opts)
+  --vim.keymap.set("t", "<C-k>", [[<CMD>wincmd k<CR>]], opts)
+  --vim.keymap.set("t", "<C-l>", [[<CMD>wincmd l<CR>]], opts)
+--end

@@ -11,7 +11,7 @@ require('nightfox').setup({
       conditionals = "NONE",
       constants = "NONE",
       functions = "NONE",
-      keywords = "bold",
+      keywords = "italic",
       numbers = "NONE",
       operators = "NONE",
       strings = "NONE",
@@ -31,7 +31,8 @@ require('nightfox').setup({
 })
 
 -- setup must be called before loading
-vim.cmd("colorscheme nordfox")
+--vim.cmd("colorscheme nordfox")
+vim.cmd("colorscheme nightfox")
 
 
 --function ColorMyPencils()

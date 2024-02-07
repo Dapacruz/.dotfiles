@@ -66,11 +66,49 @@ return packer.startup(function(use)
         end
     }
     use "mg979/vim-visual-multi"
-    --use "github/copilot.vim"
     use "szw/vim-maximizer"
+    use {
+        "ThePrimeagen/harpoon",
+        branch = "harpoon2",
+        requires = { {"nvim-lua/plenary.nvim"} }
+    }
+    use "theprimeagen/refactoring.nvim"
+    use "mbbill/undotree"
+    use "nvim-treesitter/nvim-treesitter-context"
+    use "folke/zen-mode.nvim"
+    use "eandrju/cellular-automaton.nvim"
+    use "laytan/cloak.nvim"
+    use {
+        "folke/trouble.nvim",
+        dependencies = { "nvim-tree/nvim-web-devicons" },
+        config = function()
+            require("trouble").setup {
+                icons = false,
+            }
+        end
+    }
+    use {
+        "epwalsh/obsidian.nvim",
+        tag = "*",  -- recommended, use latest release instead of latest commit
+        requires = {
+            -- Required.
+            "nvim-lua/plenary.nvim",
+        },
+        config = function()
+            require("obsidian").setup {
+                workspaces = {
+                    {
+                        name = "WSI",
+                        path = "~/Obsidian/WSI",
+                    },
+                },
+            }
+        end,
+    }
+    --use "github/copilot.vim"
 
     -- Treesitter
-    use "nvim-treesitter/nvim-treesitter"
+    use {"nvim-treesitter/nvim-treesitter", run = ":TSUpdate"}
     use "p00f/nvim-ts-rainbow"
 
     -- Telescope
