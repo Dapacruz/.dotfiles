@@ -2,9 +2,9 @@ local options = {
     backup = false,
     bs = "2", -- Make backspace behave like normal again
     cmdheight = 1, --  Give more space for displaying messages
-    colorcolumn = "120",
+ -- colorcolumn = "120",
     cursorcolumn = false,
-    --cursorline = true, -- Cursor highlighting
+    cursorline = false, -- Cursor highlighting
     encoding = "utf-8",
     errorbells = false,
     expandtab = true,
@@ -60,3 +60,6 @@ vim.g.vimwiki_list = {{path = "~/vimwiki/", syntax =  "markdown", ext =  ".md"}}
 -- Enable vim-visual-multi mouse mappings
 vim.g.VM_mouse_mappings = 1
 vim.g.VM_theme = "codedark"
+
+-- nerd-commenter
+vim.g.NERDSpaceDelims = 1

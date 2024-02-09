@@ -1,7 +1,6 @@
 require "user.plugin-configs.packer"
 require "user.options"
 require "user.keymap"
-require "user.plugin-configs.neogit"
 require "user.plugin-configs.colorscheme"
 require "user.plugin-configs.cmp"
 require "user.lsp"
@@ -60,14 +59,14 @@ autocmd({ "InsertLeave" }, {
 
 autocmd({ "BufWritePost" }, {
     group = user_group,
-    pattern = "*.py",
-    command = "silent !black --quiet %",
+    pattern = "*.go",
+    command = "silent! !goimports -w %",
 })
 
 autocmd({ "BufWritePost" }, {
     group = user_group,
-    pattern = "*.go",
-    command = "silent! !goimports -w %",
+    pattern = "*.py",
+    command = "silent !black --quiet %",
 })
 
 autocmd({ "BufEnter", "BufWinEnter", "TabEnter" }, {

@@ -31,54 +31,54 @@ require('nightfox').setup({
 })
 
 -- setup must be called before loading
---vim.cmd("colorscheme nordfox")
+-- vim.cmd("colorscheme nordfox")
 vim.cmd("colorscheme nightfox")
 
 
---function ColorMyPencils()
-  --vim.g.gruvbox_contrast_dark = 'hard'
-  --vim.g.tokyonight_transparent_sidebar = true
-  --vim.g.tokyonight_transparent = true
-  --vim.g.gruvbox_invert_selection = '0'
-  --vim.opt.background = "dark"
+-- function ColorMyPencils()
+ -- vim.g.gruvbox_contrast_dark = 'hard'
+ -- vim.g.tokyonight_transparent_sidebar = true
+ -- vim.g.tokyonight_transparent = true
+ -- vim.g.gruvbox_invert_selection = '0'
+ -- vim.opt.background = "dark"
 
-  --local hl = function(thing, opts)
-    --vim.api.nvim_set_hl(0, thing, opts)
-  --end
+ -- local hl = function(thing, opts)
+ -- vim.api.nvim_set_hl(0, thing, opts)
+ -- end
 
-  --hl("SignColumn", {
-    --bg = "none",
-  --})
+ -- hl("SignColumn", {
+ -- bg = "none",
+ -- })
 
-  --hl("ColorColumn", {
-    --ctermbg = 0,
-    --bg = "#555555",
-  --})
+ -- hl("ColorColumn", {
+ -- ctermbg = 0,
+ -- bg = "#555555",
+ -- })
 
-  --hl("CursorLineNR", {
-    --bg = "None"
-  --})
+ -- hl("CursorLineNR", {
+ -- bg = "None"
+ -- })
 
-  --hl("Normal", {
-    --bg = "none"
-  --})
+ -- hl("Normal", {
+ -- bg = "none"
+ -- })
 
-  --hl("LineNr", {
-    --fg = "#5eacd3"
-  --})
+ -- hl("LineNr", {
+ -- fg = "#5eacd3"
+ -- })
 
-  --hl("netrwDir", {
-    --fg = "#5eacd3"
-  --})
+ -- hl("netrwDir", {
+ -- fg = "#5eacd3"
+ -- })
 
---end
+-- end
 
---vim.cmd [[
-  --try
-    --colorscheme tokyonight
-    --lua ColorMyPencils()
-  --catch /^Vim\%((\a\+)\)\=:E185/
-    --colorscheme default
-    --set background=dark
-  --endtry
---]]
+-- vim.cmd [[
+ -- try
+ -- colorscheme tokyonight
+ -- lua ColorMyPencils()
+ -- catch /^Vim\%((\a\+)\)\=:E185/
+ -- colorscheme default
+ -- set background=dark
+ -- endtry
+-- ]]

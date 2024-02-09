@@ -1,38 +1,42 @@
 local opts = { noremap = true, silent = true }
 local expr_opts = { noremap = true, silent = true, expr = true }
 
---Shorten function name
+-- Shorten function name
 local keymap = vim.api.nvim_set_keymap
 
---Set very magic mode (egrep syntax)
+-- Set very magic mode (egrep syntax)
 vim.cmd([[
     cnoremap s/ s/\v
     cnoremap g/ g/\v
     nnoremap / /\v
 ]])
 
---Remap space as leader key
+-- Remap space as leader key
 keymap("", "<Space>", "<Nop>", opts)
 vim.g.mapleader = " "
 vim.g.maplocalleader = " "
 
---Turn off search highlights
+-- Turn off search highlights
 keymap("n", "<leader>nh", "<CMD>nohlsearch<CR>", opts)
 
---Quick quit command
+-- Quick quit command
 keymap("n", "<leader>q", "<CMD>q<CR>", opts) --Quit all windows, opts
 keymap("n", "<leader>Q", "<CMD>q!<CR>", opts) --Force quit all windows, opts
 
---Quick reload LUA config
---keymap("n", "<leader>rc", "<CMD>:lua require(user.plugin-configs.telescope).reload()<CR>", opts)
+-- TODO: Remove
+-- Quick reload LUA config
+-- keymap("n", "<leader>rc", "<CMD>:lua require(user.plugin-configs.telescope).reload()<CR>", opts)
 
---NeoGit
-keymap("n", "<leader>gg", "<CMD>Neogit<CR>", opts)
-keymap("n", "<leader>gp", "<CMD>Neogit push<CR>", opts)
-keymap("n", "<leader>gll", "<CMD>Neogit pull<CR>", opts)
-keymap("n", "<leader>glg", "<CMD>Neogit log<CR>", opts)
+-- Fugitive
+keymap("n", "<leader>gg", "<CMD>G<CR>", opts)
+keymap("n", "<leader>gs", "<CMD>Git status<CR>", opts)
+keymap("n", "<leader>glg", "<CMD>Git log --stat<CR>", opts)
+keymap("n", "<leader>gP", "<CMD>Git push<CR>", opts)
+keymap("n", "<leader>gL", "<CMD>Git pull<CR>", opts)
+keymap("n", "<leader>gd", "<CMD>Gdiffsplit | normal <C-w>h<CR>", opts)
+keymap("n", "<leader>gD", "<CMD>Git difftool<CR>", opts)
 
---Telescope
+-- Telescope
 keymap("n", "<leader>ff", "<CMD>lua require('telescope.builtin').find_files()<CR>", opts)
 keymap("n", "<leader>fg", "<CMD>lua require('telescope.builtin').live_grep()<CR>", opts)
 keymap("n", "<leader>fG", "<CMD>lua require('telescope.builtin').git_files()<CR>", opts)
@@ -56,7 +60,7 @@ keymap("n", "<leader>ft", "<CMD>TodoTelescope<CR>", opts)
 -- Make file executable
 keymap("n", "<leader>fx", "<CMD>!chmod +x %<CR>", opts)
 
---Navigate buffers
+-- Navigate buffers
 keymap("n", "<S-l>", "<CMD>bnext<CR>", opts)
 keymap("n", "<S-h>", "<CMD>bprevious<CR>", opts)
 
@@ -70,28 +74,28 @@ keymap("n", "<leader>so", "<CMD>only<CR>", opts) -- close other split windows
 keymap("n", "<leader>sz", "<CMD>MaximizerToggle<CR>", opts) -- maximize/restore current split (vim-maximizer)
 
 
---Resize with arrows
+-- Resize with arrows
 keymap("n", "<M-k>", "<CMD>resize +2<CR>", opts)
 keymap("n", "<M-j>", "<CMD>resize -2<CR>", opts)
 keymap("n", "<M-h>", "<CMD>vertical resize -2<CR>", opts)
 keymap("n", "<M-l>", "<CMD>vertical resize +2<CR>", opts)
 
---Delete buffer
+-- Delete buffer
 keymap("n", "<leader>bd", "<CMD>bd<CR>", opts)
 keymap("n", "<leader>bD", "<CMD>bd!<CR>", opts)
---Delete all buffers except the active one
+-- Delete all buffers except the active one
 keymap("n", "<leader>bo", "<CMD>NERDTreeClose|%bd|e#|bd#<CR>", opts)
 keymap("n", "<leader>bO", "<CMD>NERDTreeClose|%bd!|e#|bd#<CR>", opts)
-keymap("n", "<leader>bl", "<CMD>b#<CR>", opts)
+keymap("n", "<leader>bm", "<CMD>b#<CR>", opts)
 
 -- Copilot
---keymap("n", "<leader>cp", "<CMD>Copilot panel<CR>", opts)
+-- keymap("n", "<leader>cp", "<CMD>Copilot panel<CR>", opts)
 
---Nerdtree
+-- Nerdtree
 keymap("n", "<leader>e", "<CMD>silent! NERDTreeToggle<CR>", opts)
 keymap("n", "<S-f><S-f>", "<CMD>NERDTreeFind<CR>", opts)
 
---Obsidian
+-- Obsidian
 keymap("n", "<leader>oq", "<CMD>ObsidianQuickSwitch<CR>", opts)
 keymap("n", "<leader>ot", "<CMD>ObsidianTags<CR>", opts)
 keymap("n", "<leader>on", ":ObsidianNew ", { noremap = true, silent = false })
@@ -103,33 +107,34 @@ keymap("n", "<leader>ob", "<CMD>ObsidianBacklinks<CR>", opts)
 keymap("n", "<leader>os", "<CMD>ObsidianSearch<CR>", opts)
 keymap("n", "<leader>oo", "<CMD>ObsidianOpen<CR>", opts)
 
---Symbols-Outline
+-- Symbols-Outline
 keymap("n", "<C-s>", "<CMD>SymbolsOutline<CR>", opts)
 
---Stay in indent mode
+-- Stay in indent mode
 keymap("v", "<", "<gv", opts)
 keymap("v", ">", ">gv", opts)
 
---Move text up and down
+-- Move text up and down
 keymap("v", "<S-k>", ":m '<-2<CR>gv=gv", opts)
 keymap("v", "<S-j>", ":m '>+1<CR>gv=gv", opts)
 
---No clobber paste
+-- No clobber paste
 keymap("v", "p", '"_dP', opts)
 
 -- Quickfix window toggle
-keymap("n", "<leader>ct", "empty(filter(getwininfo(), 'v:val.quickfix')) ? ':copen<CR>' : ':cclose<CR>'", expr_opts)
+keymap("n", "<leader>qt", "empty(filter(getwininfo(), 'v:val.quickfix')) ? ':copen<CR>' : ':cclose<CR>'", expr_opts)
+keymap("n", "<leader>lt", "empty(filter(getwininfo(), 'v:val.loclist')) ? ':lopen<CR>' : ':lclose<CR>'", expr_opts)
 
---If you only want these mappings for toggle term use term://*toggleterm#* instead
+-- If you only want these mappings for toggle term use term://*toggleterm#* instead
 vim.cmd("autocmd! TermOpen term://*toggleterm#* lua set_terminal_keymaps()")
 
---ToggleTerm
---function _G.set_terminal_keymaps()
-  --local opts = {buffer = 0}
-  --vim.keymap.set("t", "<esc>", [[<C-\><C-n>]], opts)
-  --vim.keymap.set("t", "jk", [[<C-\><C-n>]], opts)
-  --vim.keymap.set("t", "<C-h>", [[<CMD>wincmd h<CR>]], opts)
-  --vim.keymap.set("t", "<C-j>", [[<CMD>wincmd j<CR>]], opts)
-  --vim.keymap.set("t", "<C-k>", [[<CMD>wincmd k<CR>]], opts)
-  --vim.keymap.set("t", "<C-l>", [[<CMD>wincmd l<CR>]], opts)
---end
+-- ToggleTerm
+-- function _G.set_terminal_keymaps()
+ -- local opts = {buffer = 0}
+ -- vim.keymap.set("t", "<esc>", [[<C-\><C-n>]], opts)
+ -- vim.keymap.set("t", "jk", [[<C-\><C-n>]], opts)
+ -- vim.keymap.set("t", "<C-h>", [[<CMD>wincmd h<CR>]], opts)
+ -- vim.keymap.set("t", "<C-j>", [[<CMD>wincmd j<CR>]], opts)
+ -- vim.keymap.set("t", "<C-k>", [[<CMD>wincmd k<CR>]], opts)
+ -- vim.keymap.set("t", "<C-l>", [[<CMD>wincmd l<CR>]], opts)
+-- end

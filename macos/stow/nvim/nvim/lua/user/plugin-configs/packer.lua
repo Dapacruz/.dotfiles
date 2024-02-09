@@ -29,13 +29,14 @@ packer.init({
     },
 })
 
+-- TODO: Remove
 -- Reloads neovim whenever you save the packer.lua file
-vim.cmd([[
-    augroup packer_user_config
-        autocmd!
-        autocmd BufWritePost packer.lua source <afile> | PackerSync
-    augroup end
-]])
+-- vim.cmd([[
+    -- augroup packer_user_config
+        -- autocmd!
+        -- autocmd BufWritePost packer.lua source <afile> | PackerSync
+    -- augroup end
+-- ]])
 
 return packer.startup(function(use)
     use "wbthomason/packer.nvim"
@@ -58,12 +59,17 @@ return packer.startup(function(use)
     use "jremmen/vim-ripgrep"
     use "vimwiki/vimwiki"
     use "christoomey/vim-tmux-navigator"
+    -- use "github/copilot.vim"
     use {
         "folke/todo-comments.nvim",
         requires = "nvim-lua/plenary.nvim",
         config = function()
-            require("todo-comments").setup {}
-        end
+            require("todo-comments").setup {
+                highlight = {
+                    multiline = false,
+                }
+            }
+        end,
     }
     use "mg979/vim-visual-multi"
     use "szw/vim-maximizer"
@@ -74,7 +80,6 @@ return packer.startup(function(use)
     }
     use "theprimeagen/refactoring.nvim"
     use "mbbill/undotree"
-    use "nvim-treesitter/nvim-treesitter-context"
     use "folke/zen-mode.nvim"
     use "eandrju/cellular-automaton.nvim"
     use "laytan/cloak.nvim"
@@ -105,11 +110,10 @@ return packer.startup(function(use)
             }
         end,
     }
-    --use "github/copilot.vim"
 
     -- Treesitter
     use {"nvim-treesitter/nvim-treesitter", run = ":TSUpdate"}
-    use "p00f/nvim-ts-rainbow"
+    use "nvim-treesitter/nvim-treesitter-context"
 
     -- Telescope
     use "nvim-telescope/telescope.nvim"
@@ -147,7 +151,7 @@ return packer.startup(function(use)
     use "williamboman/mason.nvim"  -- language server installer
     use "Glench/Vim-Jinja2-Syntax"
 
-    --Debugging
+ -- Debugging
     use 'mfussenegger/nvim-dap'
     use 'leoluz/nvim-dap-go'
     use 'mfussenegger/nvim-dap-python'
@@ -158,9 +162,8 @@ return packer.startup(function(use)
     -- Git
     use "tpope/vim-fugitive"
     use "lewis6991/gitsigns.nvim"
-    use "NeogitOrg/neogit"
 
-    --Nerdtree
+ -- Nerdtree
     use "preservim/nerdtree"
     use "Xuyuanp/nerdtree-git-plugin"
     use "ryanoasis/vim-devicons"
