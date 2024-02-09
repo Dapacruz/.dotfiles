@@ -29,8 +29,9 @@ keymap("n", "<leader>Q", "<CMD>q!<CR>", opts) --Force quit all windows, opts
 
 -- Fugitive
 keymap("n", "<leader>gg", "<CMD>G<CR>", opts)
-keymap("n", "<leader>gs", "<CMD>Git status<CR>", opts)
-keymap("n", "<leader>glg", "<CMD>Git log --stat<CR>", opts)
+keymap("n", "<leader>gst", "<CMD>Git status<CR>", opts)
+keymap("n", "<leader>glgg", "<CMD>Git log --stat<CR>", opts)
+keymap("n", "<leader>glgp", "<CMD>Git log --stat -p<CR>", opts)
 keymap("n", "<leader>gP", "<CMD>Git push<CR>", opts)
 keymap("n", "<leader>gL", "<CMD>Git pull<CR>", opts)
 keymap("n", "<leader>gd", "<CMD>Gdiffsplit | normal <C-w>h<CR>", opts)
