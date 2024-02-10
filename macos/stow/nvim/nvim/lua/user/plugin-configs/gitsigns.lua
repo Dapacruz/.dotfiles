@@ -62,7 +62,10 @@ gitsigns.setup {
             vim.schedule(function() gs.prev_hunk() end)
             return '<Ignore>'
         end, {expr=true})
-        map('n', '<leader>gh', gs.preview_hunk)
+        map('n', '<leader>ghp', gs.preview_hunk)
+        map('n', '<leader>ghs', gs.stage_hunk)
+        map('n', '<leader>ghu', gs.undo_stage_hunk)
+        map('n', '<leader>ghr', gs.reset_hunk)
         map('n', '<leader>gb', function() gs.blame_line{full=true} end)
         map('n', '<leader>gB', gs.toggle_current_line_blame)
     end

@@ -151,7 +151,7 @@ return packer.startup(function(use)
     use "williamboman/mason.nvim"  -- language server installer
     use "Glench/Vim-Jinja2-Syntax"
 
- -- Debugging
+    -- Debugging
     use 'mfussenegger/nvim-dap'
     use 'leoluz/nvim-dap-go'
     use 'mfussenegger/nvim-dap-python'
@@ -163,7 +163,7 @@ return packer.startup(function(use)
     use "tpope/vim-fugitive"
     use "lewis6991/gitsigns.nvim"
 
- -- Nerdtree
+    -- Nerdtree
     use "preservim/nerdtree"
     use "Xuyuanp/nerdtree-git-plugin"
     use "ryanoasis/vim-devicons"
