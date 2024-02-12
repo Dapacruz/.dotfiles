@@ -55,7 +55,7 @@ vim.opt.fo:remove "t" -- Don't automatically wrap text when typing
 vim.opt.shortmess:append "c" --  Don't pass messages to |ins-completion-menu|
 vim.opt.isfname:append "@-@"
 vim.opt.clipboard:append "unnamedplus"
-vim.g.vimwiki_list = {{path = "~/vimwiki/", syntax =  "markdown", ext =  ".md"}}
+-- vim.g.vimwiki_list = {{path = "~/vimwiki/", syntax =  "markdown", ext =  ".md"}}
 
 -- Enable vim-visual-multi mouse mappings
 vim.g.VM_mouse_mappings = 1

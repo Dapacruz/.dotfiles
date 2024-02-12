@@ -12,4 +12,4 @@
 # @raycast.description Open kitty maximized.
 # @raycast.author David Cruz
 
-(/Applications/kitty.app/Contents/MacOS/kitty --working-directory=$HOME --start-as=maximized --single-instance > /dev/null 2>&1 &)
+(/Applications/kitty.app/Contents/MacOS/kitty --working-directory=$HOME --start-as=fullscreen --single-instance > /dev/null 2>&1 &)

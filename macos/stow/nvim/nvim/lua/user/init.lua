@@ -60,7 +60,7 @@ autocmd({ "InsertLeave" }, {
 autocmd({ "BufWritePost" }, {
     group = user_group,
     pattern = "*.go",
-    command = "silent! !goimports -w %",
+    command = "silent !goimports -w %",
 })
 
 autocmd({ "BufWritePost" }, {
@@ -89,4 +89,14 @@ autocmd({ "BufRead" }, {
     group = user_group,
     pattern = "*",
     command = [[call setpos(".", getpos("'\""))]],
+})
+
+-- Open Telescope Find Files, on start, when a file is not opened
+autocmd({ "VimEnter" }, {
+    group = user_group,
+    callback = function()
+        if vim.fn.argv(0) == "" then
+            require("telescope.builtin").find_files()
+        end
+    end,
 })

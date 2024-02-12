@@ -57,8 +57,8 @@ return packer.startup(function(use)
     use "stefandtw/quickfix-reflector.vim"
     use "wellle/targets.vim"
     use "jremmen/vim-ripgrep"
-    use "vimwiki/vimwiki"
     use "christoomey/vim-tmux-navigator"
+    -- use "vimwiki/vimwiki"
     -- use "github/copilot.vim"
     use {
         "folke/todo-comments.nvim",
@@ -119,7 +119,7 @@ return packer.startup(function(use)
     use "nvim-telescope/telescope.nvim"
     use "nvim-telescope/telescope-symbols.nvim"
     use "nvim-lua/popup.nvim"
-    use {"nvim-telescope/telescope-fzf-native.nvim", run = "make" }
+    use {"nvim-telescope/telescope-fzf-native.nvim", run = "cmake -S. -Bbuild -DCMAKE_BUILD_TYPE=Release && cmake --build build --config Release && cmake --install build --prefix build" }
 
     -- Colorscheme
     use "gruvbox-community/gruvbox"
