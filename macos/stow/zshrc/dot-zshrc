@@ -77,7 +77,7 @@ alias dc='docker-compose'
 alias dig='dig +search'
 alias digb='dig +search +noall +answer'
 alias dotfiles='/usr/bin/git --git-dir=$HOME/.dotfiles/ --work-tree=$HOME'
-alias find='fd'
+alias ta='tmux attach || tmux'
 alias fw='panos-cli panorama get firewalls --terse | grep -v "^scno|^dbst|^bopa|as9|remlb" | fzf'
 alias fwa='panos-cli panorama get firewalls -s active,standalone --terse | grep -v "^scno|^dbst|^bopa|as9|remlb" | fzf'
 alias fwascrt="panos-cli panorama get firewalls -s active,standalone --terse | fzf | xargs -I {} /Applications/SecureCRT.app/Contents/MacOS/SecureCRT /T /SSH2 {} /AUTH publickey /L ${ADMIN}"
