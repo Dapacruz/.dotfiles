@@ -1,21 +1,6 @@
-local status_ok, lsp_installer = pcall(require, "mason")
-if not status_ok then
-	return
-end
-
 local lspconfig = require("lspconfig")
 
 local servers = { "gopls", "jsonls", "yamlls", "lua_ls", "jedi_language_server", "vimls", "bashls", "ansiblels" }
-
-lsp_installer.setup({
-    ui = {
-        icons = {
-            package_installed = "✓",
-            package_pending = "➜",
-            package_uninstalled = "✗"
-        }
-    }
-})
 
 for _, server in pairs(servers) do
 	local opts = {

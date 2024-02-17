@@ -92,10 +92,6 @@ keymap("n", "<leader>bm", "<cmd>b#<cr>", opts)
 -- Copilot
 -- keymap("n", "<leader>cp", "<cmd>Copilot panel<cr>", opts)
 
--- Nerdtree
-keymap("n", "<leader>e", "<cmd>silent! NERDTreeToggle<cr>", opts)
-keymap("n", "<S-f><S-f>", "<cmd>NERDTreeFind<cr>", opts)
-
 -- Obsidian
 keymap("n", "<leader>of", "<cmd>ObsidianQuickSwitch<cr>", opts)
 keymap("n", "<leader>ot", "<cmd>ObsidianTags<cr>", opts)

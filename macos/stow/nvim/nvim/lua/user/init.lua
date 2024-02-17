@@ -1,25 +1,26 @@
-require "user.plugin-configs.packer"
 require "user.options"
 require "user.keymap"
-require "user.plugin-configs.colorscheme"
-require "user.plugin-configs.cmp"
-require "user.lsp"
-require "user.plugin-configs.telescope"
-require "user.plugin-configs.treesitter"
-require "user.plugin-configs.autopairs"
-require "user.plugin-configs.gitsigns"
-require "user.plugin-configs.lualine"
-require "user.plugin-configs.symbols_outline"
-require "user.plugin-configs.debugging"
-require "user.plugin-configs.fugitive"
-require "user.plugin-configs.cloak"
-require "user.plugin-configs.harpoon"
-require "user.plugin-configs.refactoring"
-require "user.plugin-configs.trouble"
-require "user.plugin-configs.undotree"
-require "user.plugin-configs.zenmode"
-require "user.plugin-configs.cellular_automation"
-require "user.plugin-configs.obsidian"
+
+local lazypath = vim.fn.stdpath("data") .. "/lazy/lazy.nvim"
+if not vim.loop.fs_stat(lazypath) then
+    vim.fn.system({
+        "git",
+        "clone",
+        "--filter=blob:none",
+        "https://github.com/folke/lazy.nvim.git",
+        "--branch=stable", -- latest stable release
+        lazypath,
+    })
+end
+vim.opt.rtp:prepend(lazypath)
+
+require("lazy").setup("user.plugins", {
+    change_detection = {
+        -- automatically check for config file changes and reload the ui
+        enabled = true,
+        notify = false, -- get a notification when changes are found
+    },
+})
 
 vim.g.netrw_browse_split = 0
 vim.g.netrw_banner = 0
@@ -101,3 +102,4 @@ autocmd({ "VimEnter" }, {
         end
     end,
 })
+
