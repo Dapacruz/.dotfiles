@@ -25,7 +25,7 @@ telescope.setup {
                 ["<Down>"] = actions.move_selection_next,
                 ["<Up>"] = actions.move_selection_previous,
 
-                ["<CR>"] = actions.select_default,
+                ["<cr>"] = actions.select_default,
                 ["<C-x>"] = actions.select_horizontal,
                 ["<C-v>"] = actions.select_vertical,
                 ["<C-t>"] = actions.select_tab,
@@ -46,7 +46,7 @@ telescope.setup {
 
             n = {
                 ["<esc>"] = actions.close,
-                ["<CR>"] = actions.select_default,
+                ["<cr>"] = actions.select_default,
                 ["<C-x>"] = actions.select_horizontal,
                 ["<C-v>"] = actions.select_vertical,
                 ["<C-t>"] = actions.select_tab,
@@ -121,7 +121,7 @@ function M.reload()
         cwd = path,
         attach_mappings = function(_, map)
             -- Adds a new map to ctrl+e.
-            map("i", "<CR>", function(_)
+            map("i", "<cr>", function(_)
                 local entry = require("telescope.actions.state").get_selected_entry()
                 local name = get_module_name(entry.value)
                 require("plenary.reload").reload_module(name)

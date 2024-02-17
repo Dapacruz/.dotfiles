@@ -1,20 +1,9 @@
 -- local ok, dap = pcall(require, "dap")
 -- if not ok then return end
 
-vim.keymap.set("n", "<F5>", ":lua require'dap'.continue()<CR>")
-vim.keymap.set("n", "<F3>", ":lua require'dap'.step_over()<CR>")
-vim.keymap.set("n", "<F2>", ":lua require'dap'.step_into()<CR>")
-vim.keymap.set("n", "<F12>", ":lua require'dap'.step_out()<CR>")
-vim.keymap.set("n", "<leader>bb", ":lua require'dap'.toggle_breakpoint()<CR>")
-vim.keymap.set("n", "<leader>B", ":lua require'dap'.set_breakpoint(vim.fn.input('Breakpoint condition: '))<CR>")
-vim.keymap.set("n", "<leader>lp", ":lua require'dap'.set_breakpoint(nil, nil, vim.fn.input('Log point message: '))<CR>")
-vim.keymap.set("n", "<leader>dr", ":lua require'dap'.repl.toggle()<CR>")
-vim.keymap.set("n", "<leader>du", ":lua require'dapui'.toggle()<CR>")
-vim.keymap.set("n", "<leader>dt", ":lua require'dap-go'.debug_test()<CR>")
-
+require("dapui").setup()
 require("nvim-dap-virtual-text").setup()
 require('dap-go').setup()
-require("dapui").setup()
 require('dap-python').setup('/usr/local/bin/python3.10')
 
 local dap, dapui = require("dap"), require("dapui")
@@ -30,3 +19,19 @@ end
 
 -- Enable the use of VS Code style launch.json files
 require('dap.ext.vscode').load_launchjs('.nvim/launch.json', {})
+
+vim.fn.sign_define('DapBreakpoint',{ text ='🔴', texthl ='', linehl ='', numhl =''})
+vim.fn.sign_define('DapStopped',{ text ='⇨', texthl ='', linehl ='', numhl =''})
+
+vim.keymap.set("n", "<leader>dc", "<cmd>lua require('dap').continue()<cr>")
+vim.keymap.set("n", "<leader>dt", "<cmd>lua require('dap').terminate()<cr>")
+vim.keymap.set("n", "<leader>dso", "<cmd>lua require('dap').step_over()<cr>")
+vim.keymap.set("n", "<leader>dsi", "<cmd>lua require('dap').step_into()<cr>")
+vim.keymap.set("n", "<leader>dsO", "<cmd>lua require('dap').step_out()<cr>")
+vim.keymap.set("n", "<leader>db", "<cmd>lua require('dap').toggle_breakpoint()<cr>")
+vim.keymap.set("n", "<leader>dB", "<cmd>lua require('dap').set_breakpoint(vim.fn.input('Breakpoint condition: '))<cr>")
+vim.keymap.set("n", "<leader>dlp", "<cmd>lua require('dap').set_breakpoint(nil, nil, vim.fn.input('Log point message: '))<cr>")
+vim.keymap.set("n", "<leader>dr", "<cmd>lua require('dap').repl.toggle()<cr>")
+vim.keymap.set("n", "<leader>du", "<cmd>lua require('dapui').toggle()<cr>")
+vim.keymap.set("n", "<leader>dT", "<cmd>lua require('dap-go').debug_test()<cr>")
+

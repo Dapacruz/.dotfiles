@@ -81,6 +81,7 @@ return packer.startup(function(use)
     use "theprimeagen/refactoring.nvim"
     use "mbbill/undotree"
     use "folke/zen-mode.nvim"
+    use "folke/twilight.nvim"
     use "eandrju/cellular-automaton.nvim"
     use "laytan/cloak.nvim"
     use {
@@ -99,16 +100,6 @@ return packer.startup(function(use)
             -- Required.
             "nvim-lua/plenary.nvim",
         },
-        config = function()
-            require("obsidian").setup {
-                workspaces = {
-                    {
-                        name = "WSI",
-                        path = "~/Obsidian/WSI",
-                    },
-                },
-            }
-        end,
     }
 
     -- Treesitter

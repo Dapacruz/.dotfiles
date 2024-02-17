@@ -19,6 +19,7 @@ require "user.plugin-configs.trouble"
 require "user.plugin-configs.undotree"
 require "user.plugin-configs.zenmode"
 require "user.plugin-configs.cellular_automation"
+require "user.plugin-configs.obsidian"
 
 vim.g.netrw_browse_split = 0
 vim.g.netrw_banner = 0
