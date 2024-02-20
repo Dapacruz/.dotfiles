@@ -10,7 +10,17 @@ return {
     },
     config = function()
         local nightfox = require('nightfox')
+        local C = require("nightfox.lib.color")
+        local palette = require('nightfox.palette').load('nightfox')
+
         nightfox.setup({
+            specs = {
+                all = {
+                    diff = {
+                        text = C(palette.bg1):blend(C(palette.cyan.dim), 0.4):to_css(),
+                    },
+                },
+            },
             options = {
                 -- Compiled file's destination location
                 compile_path = vim.fn.stdpath("cache") .. "/nightfox",
@@ -35,11 +45,7 @@ return {
                     visual = false,
                     search = false,
                 },
-                modules = {},             -- List of various plugins and additional options
-                palettes = {},
-                specs = {},
-                groups = {},
-            }
+            },
         })
 
         -- setup must be called before loading

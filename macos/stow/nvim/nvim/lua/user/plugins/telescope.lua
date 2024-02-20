@@ -19,11 +19,12 @@ return {
 
         telescope.setup {
             defaults = {
-
                 prompt_prefix = " ",
                 selection_caret = " ",
                 path_display = { "smart" },
-
+                file_ignore_patterns = {
+                    ".git/",
+                },
                 mappings = {
                     i = {
                         ["<C-n>"] = actions.cycle_history_next,
@@ -97,6 +98,9 @@ return {
                 -- }
                 -- Now the picker_config_key will be applied every time you call this
                 -- builtin picker
+                find_files = {
+                    hidden = true,
+                },
             },
             extensions = {
                 fzf = {

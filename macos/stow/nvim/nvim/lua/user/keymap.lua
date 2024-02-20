@@ -23,6 +23,9 @@ keymap("n", "<leader>nh", "<cmd>nohlsearch<cr>", opts)
 keymap("n", "<leader>qq", "<cmd>q<cr>", opts) --Quit all windows, opts
 keymap("n", "<leader>Q", "<cmd>q!<cr>", opts) --Force quit all windows, opts
 
+-- Preview unsaved changes
+keymap("n", "<leader>U", "<cmd>UnsavedChanges<cr>", opts)
+
 -- TODO: Remove
 -- Quick reload LUA config
 -- keymap("n", "<leader>rc", "<cmd>:lua require(user.plugin-configs.telescope).reload()<cr>", opts)
@@ -121,6 +124,9 @@ keymap("v", "p", '"_dP', opts)
 -- Quickfix window toggle
 keymap("n", "<leader>qt", "empty(filter(getwininfo(), 'v:val.quickfix')) ? ':copen<cr>' : ':cclose<CR>'", expr_opts)
 keymap("n", "<leader>lt", "empty(filter(getwininfo(), 'v:val.loclist')) ? ':lopen<cr>' : ':lclose<CR>'", expr_opts)
+
+-- Save and source file
+keymap("n", "<leader><leader>w", "<cmd>write | source<cr>", opts)
 
 -- If you only want these mappings for toggle term use term://*toggleterm#* instead
 vim.cmd("autocmd! TermOpen term://*toggleterm#* lua set_terminal_keymaps()")

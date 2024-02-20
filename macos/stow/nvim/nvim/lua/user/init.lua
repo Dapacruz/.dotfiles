@@ -2,6 +2,7 @@ require "user.options"
 require "user.keymap"
 
 local lazypath = vim.fn.stdpath("data") .. "/lazy/lazy.nvim"
+---@diagnostic disable-next-line: undefined-field
 if not vim.loop.fs_stat(lazypath) then
     vim.fn.system({
         "git",
@@ -29,6 +30,9 @@ vim.g.netrw_winsize = 25
 -- Trim leading and trailing whitespace
 vim.cmd([[ command! -range=% TrimWhitespace <line1>,<line2>s/^\s\+//e | <line1>,<line2>s/\s\+$//e ]])
 vim.cmd([[ command! -range=% TrimWhitespaceTrailing <line1>,<line2>s/\s\+$//e ]])
+
+-- Preview unsaved changes
+vim.cmd([[ command UnsavedChanges execute "w !git diff --no-index % -" ]])
 
 local autocmd = vim.api.nvim_create_autocmd
 local augroup = vim.api.nvim_create_augroup
