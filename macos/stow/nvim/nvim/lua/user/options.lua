@@ -10,7 +10,7 @@ local options = {
     expandtab = true,
     foldlevel = 99,
     foldmethod = "indent", -- Enable folding
-    guicursor = "",
+    guicursor = "a:ver1-blinkon100,n:block-blinkon100",
     hidden = true, -- When on a buffer becomes hidden when it is abandoned
     history = 700, -- Useful settings
     hlsearch = false,
@@ -47,7 +47,7 @@ for k, v in pairs(options) do
     vim.opt[k] = v
 end
 
-vim.opt.guifont = { "VictorMono Nerd Font", "h13" }
+vim.opt.guifont = { "VictorMono Nerd Font:h13" }
 vim.o.shell = "/opt/homebrew/bin/zsh"
 vim.opt.diffopt:append "vertical" -- Always use vertical windows for diffsplit
 vim.opt.matchpairs:append "<:>"
@@ -63,3 +63,8 @@ vim.g.VM_theme = "codedark"
 
 -- nerd-commenter
 vim.g.NERDSpaceDelims = 1
+
+-- Disable netrw
+vim.g.loaded_netrw = 1
+vim.g.loaded_netrwPlugin = 1
+

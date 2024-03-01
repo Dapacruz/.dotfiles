@@ -23,16 +23,12 @@ require("lazy").setup("user.plugins", {
     },
 })
 
-vim.g.netrw_browse_split = 0
-vim.g.netrw_banner = 0
-vim.g.netrw_winsize = 25
-
 -- Trim leading and trailing whitespace
 vim.cmd([[ command! -range=% TrimWhitespace <line1>,<line2>s/^\s\+//e | <line1>,<line2>s/\s\+$//e ]])
 vim.cmd([[ command! -range=% TrimWhitespaceTrailing <line1>,<line2>s/\s\+$//e ]])
 
 -- Preview unsaved changes
-vim.cmd([[ command UnsavedChanges execute "w !git diff --no-index % -" ]])
+vim.cmd([[ command UnsavedChanges execute "write !git diff --no-index % -" ]])
 
 local autocmd = vim.api.nvim_create_autocmd
 local augroup = vim.api.nvim_create_augroup
@@ -51,8 +47,11 @@ autocmd('TextYankPost', {
 })
 
 vim.filetype.add({
+    extension = {
+        tmpl = "html",
+    },
     pattern = {
-        [".*/playbooks/.*.yml"] = "yaml.ansible"
+        [".+/playbooks/.+%.ya*ml"] = "yaml.ansible",
     }
 })
 
@@ -69,6 +68,7 @@ autocmd({ "BufWritePost" }, {
     command = "silent !goimports -w %",
 })
 
+-- Format Python files
 autocmd({ "BufWritePost" }, {
     group = user_group,
     pattern = "*.py",

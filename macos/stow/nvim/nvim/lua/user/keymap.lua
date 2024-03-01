@@ -59,6 +59,8 @@ keymap("n", "<leader>fsh", "<cmd>lua require('telescope.builtin').search_history
 keymap("n", "<leader>fS", "<cmd>lua require('telescope.builtin').lsp_workspace_symbols()<cr>", opts)
 keymap("n", "<leader>fr", "<cmd>lua require('telescope.builtin').lsp_references()<cr>", opts)
 keymap("n", "<leader>fi", "<cmd>lua require('telescope.builtin').lsp_implementations()<cr>", opts)
+keymap("n", "<leader>fn", "<cmd>Telescope notify<cr>", opts)
+keymap("n", "<leader>fN", "<cmd>Noice telescope<cr>", opts)
 keymap("n", "<leader>ft", "<cmd>TodoTelescope<cr>", opts)
 
 -- Make file executable

@@ -1,7 +1,12 @@
 return {
     "nvim-treesitter/nvim-treesitter",
     build = ":TSUpdate",
-    dependencies = "nvim-treesitter/nvim-treesitter-context",
+    dependencies = {
+        "nvim-treesitter/nvim-treesitter-context",
+        "nvim-treesitter/nvim-treesitter-textobjects",
+    },
+    lazy = true,
+    event = { "BufReadPre", "BufNewFile" },
     config = function()
         local configs = require("nvim-treesitter.configs")
 
@@ -10,7 +15,16 @@ return {
             ignore_install = { "phpdoc" }, -- List of parsers to ignore installing
             highlight = {
                 enable = true, -- false will disable the whole extension
-                disable = { "css" }, -- list of language that will be disabled
+                -- disable = { "css" }, -- list of language that will be disabled
+            },
+            incremental_selection = {
+                enable = true,
+                keymaps = {
+                    init_selection = "<M-space>",
+                    node_incremental = "<M-space>",
+                    scope_incremental = false,
+                    node_decremental = "<bs>",
+                },
             },
             autopairs = {
                 enable = true,
