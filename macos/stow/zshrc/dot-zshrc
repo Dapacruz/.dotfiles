@@ -1,20 +1,5 @@
 source $HOME/.zshrc.local
 
-# Path
-#export PATH=$(tr -d $'\n ' <<< "
-   #/Library/Frameworks/Python.framework/Versions/3.10/bin:
-   #$GOPATH/bin:
-   #$GOPATH/bin/darwin_amd64:
-   #$GOPATH/bin/darwin_arm64:
-   #$HOME/repos/go/bin:
-   #$HOME/.local/bin:
-   #$HOME/.cargo/bin:
-   #/usr/local/bin:
-   #/usr/local/sbin:
-   #/usr/local/opt/openjdk/bin:
-   #${PATH}
-#")
-
 export PATH="$HOME/.local/bin:${PATH}"
 export PATH="/Library/Frameworks/Python.framework/Versions/3.10/bin:${PATH}"
 
@@ -25,23 +10,24 @@ export PATH="$GOPATH:$HOME/go/bin:$HOME/repos/go/bin:$HOME/go/bin/darwin_amd64:$
 export PATH="$HOME/.cargo/bin:${PATH}"
 
 # Homebrew
-export PATH="/usr/local/bin:/usr/local/sbin:/usr/local/opt/openjdk/bin:$PATH"
+eval "$(/opt/homebrew/bin/brew shellenv)"
+
+
+# Python
+export PATH="$HOME/.venv/3.12/bin:${PATH}"
 
 
 # Environment variables
 export DISPLAY=:0
 export EDITOR=/opt/homebrew/bin/nvim
+export VISUAL=/opt/homebrew/bin/nvim
 export GOARCH=arm64
-export GOOGLE_APPLICATION_CREDENTIALS=~/PyPi-42f44041fd99.json
 export GOOS=darwin
 export GOPATH="$HOME/go:$HOME/repos/go"
+export GOOGLE_APPLICATION_CREDENTIALS=~/PyPi-42f44041fd99.json
 export HISTCONTROL=ignorespace
-export VIRTUALENVWRAPPER_PYTHON=/usr/local/bin/python3
-export VIRTUALENVWRAPPER_VIRTUALENV=/usr/local/bin/virtualenv
-export VIRTUALENVWRAPPER_WORKON_CD=False
-export VISUAL=/opt/homebrew/bin/nvim
 export WORDCHARS='*?_-.[]~=&;!#$%^(){}<>|'
-export WORKON_HOME=$HOME/.virtualenvs
+
 
 # GPG
 export GPG_TTY=$(tty)
@@ -98,9 +84,9 @@ alias mkstart='minikube start --driver=qemu && eval $(minikube -p minikube docke
 alias mkstop='minikube stop'
 alias mtr='sudo mtr'
 alias pan-os-php='php -r "require_once '\''$HOME/pan-configurator/utils/pan-os-php.php'\'';" $@'
-alias pip='/opt/homebrew/bin/pip3.11'
+alias python='python3'
+alias pip='pip3'
 alias pp='curl http://parrot.live'
-alias python='/opt/homebrew/bin/python3.11'
 alias rg=hg
 alias rm=trash
 alias run-panw-cmd='run-panw-cmd -K'
@@ -150,10 +136,6 @@ bindkey "^[[1;3A" beginning-of-history  # alt+up
 bindkey "^[[1;3B" end-of-history    # alt+down
 bindkey "^P" up-line-or-beginning-search
 bindkey "^N" down-line-or-beginning-search
-
-
-# Homebrew
-eval "$(/opt/homebrew/bin/brew shellenv)"
 
 
 # fzf settings
@@ -239,6 +221,6 @@ export NVM_DIR="$HOME/.nvm"
 
 # Needed to trust Ansible Galaxy API certificate
 # https://stackoverflow.com/a/57795811
-CERT_PATH=$(python -m certifi)
+CERT_PATH=$(python3 -m certifi)
 export SSL_CERT_FILE=${CERT_PATH}
 export REQUESTS_CA_BUNDLE=${CERT_PATH}
