@@ -13,6 +13,10 @@ return {
                 name = "WSI",
                 path = "~/Obsidian/WSI",
             },
+            {
+                name = "Personal",
+                path = "~/Obsidian/Personal",
+            },
         },
         disable_frontmatter = true,
     }
