@@ -1,0 +1,16 @@
+---
+- name: Deploy .dotfiles on macOS
+  hosts: localhost
+  gather_facts: true
+
+  tasks:
+    - name: Print all available facts
+      ansible.builtin.debug:
+        var: ansible_facts
+
+    - name: Clone .dotfiles repository
+      ansible.builtin.git:
+        repo: https://github.com/Dapacruz/.dotfiles.git
+        dest: ~/.dotfiles
+        clone: yes
+        update: no

@@ -1,9 +1,0 @@
----
-- name: Install .dotfiles
-  hosts: localhost
-  gather_facts: true
-
-  tasks:
-    - name: Include macOS tasks
-      ansible.builtin.include_tasks: tasks/macos.yml
-      when: ansible_facts.system == "Darwin"
