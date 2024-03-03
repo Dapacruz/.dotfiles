@@ -4,6 +4,7 @@ return {
         "williamboman/mason.nvim",  -- language server installer
         config = function()
             require("mason").setup({
+                automatic_installation = true,
                 ui = {
                     icons = {
                         package_installed = "✓",

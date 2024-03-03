@@ -52,7 +52,8 @@ vim.filetype.add({
     },
     pattern = {
         [".+/playbooks/.+%.ya*ml"] = "yaml.ansible",
-    }
+        [".+/playbooks/tasks/.+%.ya*ml"] = "yaml.ansible",
+    },
 })
 
 -- Format Go files

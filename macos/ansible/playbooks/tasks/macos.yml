@@ -1,0 +1,8 @@
+- name: Print all available facts
+  ansible.builtin.debug:
+    var: ansible_facts
+
+- name: Clone .dotfiles repository
+  ansible.builtin.git:
+    repo: https://github.com/Dapacruz/.dotfiles.git
+    dest: ~/.dotfiles_2

@@ -1,18 +1,15 @@
 source $HOME/.zshrc.local
 
+
+# Path
 export PATH="$HOME/.local/bin:${PATH}"
 export PATH="/Library/Frameworks/Python.framework/Versions/3.10/bin:${PATH}"
-
 # GO
-export PATH="$GOPATH:$HOME/go/bin:$HOME/repos/go/bin:$HOME/go/bin/darwin_amd64:$HOME/go/bin/darwin_arm64:${PATH}"
-
+# export PATH="$GOPATH:$HOME/go/bin:$HOME/repos/go/bin:$HOME/go/bin/darwin_amd64:$HOME/go/bin/darwin_arm64:${PATH}"
 # Rust modules install to user
 export PATH="$HOME/.cargo/bin:${PATH}"
-
 # Homebrew
 eval "$(/opt/homebrew/bin/brew shellenv)"
-
-
 # Python
 export PATH="$HOME/.venv/3.12/bin:${PATH}"
 
@@ -21,9 +18,8 @@ export PATH="$HOME/.venv/3.12/bin:${PATH}"
 export DISPLAY=:0
 export EDITOR=/opt/homebrew/bin/nvim
 export VISUAL=/opt/homebrew/bin/nvim
-export GOARCH=arm64
 export GOOS=darwin
-export GOPATH="$HOME/go:$HOME/repos/go"
+# export GOPATH="$HOME/go:$HOME/repos/go"
 export GOOGLE_APPLICATION_CREDENTIALS=~/PyPi-42f44041fd99.json
 export HISTCONTROL=ignorespace
 export WORDCHARS='*?_-.[]~=&;!#$%^(){}<>|'
@@ -49,7 +45,6 @@ plugins=(
     python
     rsync
     sudo
-    virtualenvwrapper
     vscode
     zsh-syntax-highlighting
 )
@@ -62,8 +57,6 @@ alias cmatrix='cmatrix -ab'
 alias dc='docker-compose'
 alias dig='dig +search'
 alias digb='dig +search +noall +answer'
-alias dotfiles='/usr/bin/git --git-dir=$HOME/.dotfiles/ --work-tree=$HOME'
-alias ta='tmux attach || tmux'
 alias fw='panos-cli panorama get firewalls --terse | grep -v "^scno|^dbst|^bopa|as9|remlb" | fzf'
 alias fwa='panos-cli panorama get firewalls -s active,standalone --terse | grep -v "^scno|^dbst|^bopa|as9|remlb" | fzf'
 alias fwascrt="panos-cli panorama get firewalls -s active,standalone --terse | fzf | xargs -I {} /Applications/SecureCRT.app/Contents/MacOS/SecureCRT /T /SSH2 {} /AUTH publickey /L ${ADMIN}"
@@ -72,7 +65,6 @@ alias fwaweb="panos-cli panorama get firewalls -s active,standalone --terse | fz
 alias fwscrt="panos-cli panorama get firewalls --terse | fzf | xargs -I {} /Applications/SecureCRT.app/Contents/MacOS/SecureCRT /T /SSH2 {} /AUTH publickey /L ${ADMIN}"
 alias fwssh="panos-cli panorama get firewalls --terse | fzf | xargs -I {} tmux neww -n {} ssh -o HostKeyAlgorithms=+ssh-rsa -o PubkeyAcceptedAlgorithms=+ssh-rsa ${ADMIN}@{}"
 alias fwweb="panos-cli panorama get firewalls --terse | fzf | xargs -I {} open https://{}.${DOMAIN}"
-alias get-panw-config='get-panw-config -K'
 alias getip='ifconfig | egrep -v "\s+(options|ether|inet6)" | egrep -A1 "^(en0|en10)"; echo --; ifconfig | egrep -A1 "^(utun3)"; echo --; echo -n "Internet IP Address: "; curl ipecho.net/plain; echo'
 alias grep='egrep --color'
 alias icat='kitty +kitten icat'
@@ -84,14 +76,14 @@ alias mkstart='minikube start --driver=qemu && eval $(minikube -p minikube docke
 alias mkstop='minikube stop'
 alias mtr='sudo mtr'
 alias pan-os-php='php -r "require_once '\''$HOME/pan-configurator/utils/pan-os-php.php'\'';" $@'
-alias python='python3'
 alias pip='pip3'
 alias pp='curl http://parrot.live'
+alias python='python3'
 alias rg=hg
 alias rm=trash
-alias run-panw-cmd='run-panw-cmd -K'
 alias ssh="ssh -o HostKeyAlgorithms=+ssh-rsa -o PubkeyAcceptedAlgorithms=+ssh-rsa -l ${ADMIN}"
 alias t=t.sh
+alias ta='tmux attach || tmux'
 alias tn='tmux new -s $(pwd | sed -E '\''s/.*\/\.?//g'\'') || tmux a -t $(pwd | sed -E '\''s/.*\/\.?//g'\'')'
 alias tree='tre --color=always'
 alias ts='tmux a -t $(tmux list-sessions | fzf | sed -E '\''s/([^:]+).*/\1/'\'')'
@@ -100,6 +92,7 @@ alias v=nvim
 alias vdiff='nvim -d'
 alias vi=nvim
 alias vim=nvim
+
 
 # Initialize the Starship prompt
 eval "$(/opt/homebrew/bin/starship init zsh)"
