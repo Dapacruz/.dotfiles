@@ -4,9 +4,10 @@
   gather_facts: true
 
   tasks:
-    - name: Print all available facts
-      ansible.builtin.debug:
-        var: ansible_facts
+    - name: Install Ansible Galaxy community.general collection
+      command: ansible-galaxy collection install community.general
+      register: result
+      changed_when: "'Nothing to do.' not in result.stdout"
 
     - name: Clone .dotfiles repository
       ansible.builtin.git:
@@ -14,3 +15,230 @@
         dest: ~/.dotfiles
         clone: yes
         update: no
+
+    - name: Check if Oh My Zsh is Installed
+      ansible.builtin.stat:
+        path: ~/.oh-my-zsh
+      register: ohmyzsh
+
+    - name: Install Oh My Zsh
+      ansible.builtin.shell:
+        cmd: ~/.dotfiles/macos/packages/ohmyzsh-install.sh
+      when: not ohmyzsh.stat.exists
+
+    - name: Check if Hombrew is Installed
+      ansible.builtin.stat:
+        path: /opt/homebrew/bin/brew
+      register: homebrew
+
+    - name: Install Homebrew
+      ansible.builtin.shell: ~/.dotfiles/macos/packages/homebrew-install.sh
+      when: not homebrew.stat.exists
+
+    - name: Blend Mac CPU architectures for compatibility
+      block:
+        - name: Create Homebrew ARM64 directory
+          ansible.builtin.file:
+            path: /opt/homebrew
+            state: directory
+
+        - name: Create Homebrew ARM64 symlink
+          ansible.builtin.file:
+            src: /usr/local/bin
+            dest: /opt/homebrew/bin
+            state: link
+      when: ansible_facts.processor.startswith("Intel")
+
+    - name: Update Homebrew
+      community.general.homebrew:
+        update_homebrew: true
+        upgrade_all: true
+
+    - name: Install Homebrew packages
+      community.general.homebrew:
+        state: present
+        name:
+          - ack
+          - aha
+          - ansible
+          - aom
+          - awk
+          - bat
+          - bfg
+          - boost
+          - cheat
+          - cmake
+          - cmatrix
+          - coreutils
+          - cowsay
+          - cscope
+          - curl
+          - dfu-util
+          - dust
+          - enscript
+          - entr
+          - fd
+          - ffmpeg
+          - ffmpeg@4
+          - ffmpegthumbnailer
+          - figlet
+          - fping
+          - fzf
+          - gcc
+          - gdk-pixbuf
+          - git
+          - glances
+          - gmp
+          - gnu-sed
+          - gnupg
+          - gnuradio
+          - go
+          - gobject-introspection
+          - gping
+          - graphviz
+          - gtk+3
+          - guile
+          - hackrf
+          - highlight
+          - hopenpgp-tools
+          - htop
+          - httpie
+          - iftop
+          - imagemagick
+          - ipcalc
+          - iperf
+          - iperf3
+          - jack
+          - jpeg
+          - jpeg-xl
+          - jq
+          - json-c
+          - libarchive
+          - libass
+          - libcaca
+          - libevent
+          - libheif
+          - libraw
+          - libtiff
+          - libtool
+          - llvm
+          - lolcat
+          - lsd
+          - luarocks
+          - lynx
+          - massren
+          - minikube
+          - mtr
+          - multitail
+          - neofetch
+          - netpbm
+          - nload
+          - nmap
+          - node
+          - nuttcp
+          - open-mpi
+          - openblas
+          - openjdk
+          - pango
+          - pass
+          - php
+          - pinentry-mac
+          - prettier
+          - procs
+          - pygobject3
+          - pyqt
+          - python@3.10
+          - python@3.11
+          - python@3.8
+          - python@3.9
+          - qemu
+          - qpdf
+          - qt
+          - qt@5
+          - re2
+          - ripgrep
+          - rlwrap
+          - rust
+          - sd
+          - sip
+          - sl
+          - sphinx-doc
+          - srt
+          - ssh-copy-id
+          - starship
+          - stow
+          - stylua
+          - swaks
+          - switchaudio-osx
+          - teamookla/speedtest/speedtest
+          - telnet
+          - tesseract
+          - the_silver_searcher
+          - tmux
+          - toilet
+          - tokei
+          - trash
+          - tre-command
+          - tree
+          - uhd
+          - unbound
+          - utf8proc
+          - volk
+          - w3m
+          - watch
+          - wget
+          - xmlstarlet
+          - xq
+          - yarn
+          - ykman
+          - ykpers
+          - youtube-dl
+          - yq
+          - z
+          - zoxide
+          - zsh
+          - zsh-vi-mode
+          - zstd
+
+    - name: Install Homebrew package Neovim
+      community.general.homebrew:
+        state: head
+        name: neovim
+
+    - name: Install Homebrew casks
+      community.general.homebrew_cask:
+        state: present
+        name:
+          - amethyst
+          - chromedriver
+          - intel-haxm
+          - karabiner-elements
+          - keepassxc
+          - keycastr
+          - kitty
+          - maccy
+          - neovide
+          - powershell
+          - rar
+          - raycast
+          - spacelauncher
+          - vagrant
+          - vagrant-manager
+          - xquartz
+
+    - name: Install Homebrew taps
+      community.general.homebrew_tap:
+        state: present
+        name:
+          - homebrew/bundle
+          - homebrew/cask
+          - homebrew/core
+          - homebrew/services
+          - koekeishiya/formulae
+          - teamookla/speedtest
+
+    - name: Stow dotfiles
+      ansible.builtin.shell:
+        cmd: ~/.dotfiles/macos/stow/stow.sh
+        chdir: ~/.dotfiles/macos/stow
+

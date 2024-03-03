@@ -14,7 +14,7 @@ do
     fi
 
     # Unstow
-    stow --dotfiles -vDt $target $package
+    stow --dotfiles -vDt $target $package 2>&1 | grep -v "BUG in find_stowed_path"
 
     # Restore existing if present
     if [ $? -eq 0 ] && ([ -d ${c}.stow ] || [ -f ${c}.stow ])
