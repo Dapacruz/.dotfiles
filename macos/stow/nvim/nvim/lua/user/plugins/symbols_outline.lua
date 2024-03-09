@@ -21,7 +21,7 @@ return {
             wrap = false,
             keymaps = { -- These keymaps can be a string or a table for multiple keys
                 close = {"<Esc>", "q"},
-                goto_location = "<Cr>",
+                goto_location = "<CR>",
                 focus_location = "o",
                 hover_symbol = "<C-space>",
                 toggle_preview = "K",

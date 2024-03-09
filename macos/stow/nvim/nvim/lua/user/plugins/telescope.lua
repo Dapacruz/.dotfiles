@@ -38,7 +38,7 @@ return {
                         ["<Down>"] = actions.move_selection_next,
                         ["<Up>"] = actions.move_selection_previous,
 
-                        ["<cr>"] = actions.select_default,
+                        ["<CR>"] = actions.select_default,
                         ["<C-x>"] = actions.select_horizontal,
                         ["<C-v>"] = actions.select_vertical,
                         ["<C-t>"] = actions.select_tab,
@@ -59,7 +59,7 @@ return {
 
                     n = {
                         ["<esc>"] = actions.close,
-                        ["<cr>"] = actions.select_default,
+                        ["<CR>"] = actions.select_default,
                         ["<C-x>"] = actions.select_horizontal,
                         ["<C-v>"] = actions.select_vertical,
                         ["<C-t>"] = actions.select_tab,
@@ -115,5 +115,24 @@ return {
 
 
         require('telescope').load_extension('fzf')
+
+        local builtin = require "telescope.builtin"
+        vim.keymap.set("n", "<leader>/", function()
+            builtin.current_buffer_fuzzy_find(require("telescope.themes").get_dropdown {
+                winblend = 10,
+                previewer = false,
+            })
+        end, { desc = "[/] Fuzzy search current buffer" })
+
+        vim.keymap.set("n", "<leader>s/", function()
+            builtin.live_grep {
+                grep_open_files = true,
+                prompt_title = "Live Grep in Open Files",
+            }
+        end, { desc = "[S]earch [/] in Open Files" })
+
+        vim.keymap.set("n", "<leader>sn", function()
+            builtin.find_files { cwd = vim.fn.stdpath "config" }
+        end, { desc = "Search Neovim files" })
     end,
 }

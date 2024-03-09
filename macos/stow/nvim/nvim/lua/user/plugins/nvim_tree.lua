@@ -11,6 +11,6 @@ return {
                 enable = true,
             }
         })
-        vim.keymap.set("n", "<leader>e", "<cmd>NvimTreeToggle<cr>")
+        vim.keymap.set("n", "<leader>e", "<Cmd>NvimTreeToggle<CR>")
     end,
 }

@@ -47,6 +47,8 @@ for k, v in pairs(options) do
     vim.opt[k] = v
 end
 
+vim.opt.hlsearch = true
+vim.keymap.set('n', '<Esc>', '<Cmd>nohlsearch<CR>')
 vim.opt.guifont = { "VictorMono Nerd Font:h13" }
 vim.o.shell = "/opt/homebrew/bin/zsh"
 vim.opt.diffopt:append "vertical" -- Always use vertical windows for diffsplit
