@@ -94,6 +94,7 @@ return {
                     n = colors.red,
                     i = colors.green,
                     v = colors.blue,
+                    Mr = colors.orange,
                     ---@diagnostic disable-next-line: duplicate-index
                     [''] = colors.blue,
                     V = colors.blue,
@@ -117,6 +118,16 @@ return {
                 return { fg = mode_color[vim.fn.mode()] }
             end,
             padding = { right = 1 },
+        }
+
+        ins_left {
+            -- macro recording
+            function()
+                local reg = vim.fn.reg_recording()
+                if reg == "" then return "" end -- not recording
+                return "recording @" .. reg
+            end,
+            color = { fg = "#ff9e64" },
         }
 
         ins_left {
