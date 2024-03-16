@@ -38,7 +38,7 @@ if [ -z "$TMUX" ]; then
     if [ -z "$SESSION" ]; then
         # session does not exist
         # create session
-        tmux new-session -c $ZOXIDE_RESULT -s $SESSION_NAME
+        tmux new-session -c "$ZOXIDE_RESULT" -s $SESSION_NAME
     else
         # session exists
         # attach to session
@@ -49,7 +49,7 @@ else
     if [ -z "$SESSION" ]; then
         # session does not exist
         # create session
-        tmux new-session -d -c $ZOXIDE_RESULT -s $SESSION_NAME
+        tmux new-session -d -c "$ZOXIDE_RESULT" -s $SESSION_NAME
         # attach to session
         tmux switch-client -t $SESSION_NAME
     else

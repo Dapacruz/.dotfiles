@@ -11,7 +11,7 @@ return {
             ---Whether the cursor should stay at its position
             sticky = true,
             ---Lines to be ignored while (un)comment
-            ignore = nil,
+            ignore = '^$',
             ---LHS of toggle mappings in NORMAL mode
             toggler = {
                 ---Line-comment toggle keymap

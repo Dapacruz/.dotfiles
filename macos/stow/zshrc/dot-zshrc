@@ -2,16 +2,18 @@ source $HOME/.zshrc.local
 
 
 # Path
-export PATH="$HOME/.local/bin:${PATH}"
-export PATH="/Library/Frameworks/Python.framework/Versions/3.10/bin:${PATH}"
+PATH="$HOME/.local/bin:${PATH}"
+PATH="/Library/Frameworks/Python.framework/Versions/3.10/bin:${PATH}"
 # GO
 # export PATH="$GOPATH:$HOME/go/bin:$HOME/repos/go/bin:$HOME/go/bin/darwin_amd64:$HOME/go/bin/darwin_arm64:${PATH}"
+PATH="$HOME/go/bin:${PATH}"
 # Rust modules install to user
-export PATH="$HOME/.cargo/bin:${PATH}"
+PATH="$HOME/.cargo/bin:${PATH}"
 # Homebrew
 eval "$(/opt/homebrew/bin/brew shellenv)"
 # Python
-export PATH="$HOME/.venv/3.12/bin:${PATH}"
+PATH="$HOME/.venv/3.12/bin:${PATH}"
+export PATH
 
 
 # Environment variables
