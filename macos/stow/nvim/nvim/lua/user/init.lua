@@ -98,13 +98,3 @@ autocmd({ "BufRead" }, {
     command = [[call setpos(".", getpos("'\""))]],
 })
 
--- Open Telescope Find Files, on start, when a file is not opened
-autocmd({ "VimEnter" }, {
-    group = user_group,
-    callback = function()
-        if vim.fn.argv(0) == "" then
-            require("telescope.builtin").find_files()
-        end
-    end,
-})
-
