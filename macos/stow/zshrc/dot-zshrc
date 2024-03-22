@@ -55,6 +55,7 @@ source $ZSH/oh-my-zsh.sh
 
 # Aliases
 alias bfg='/opt/homebrew/bin/bfg'
+alias cat='bat'
 alias cmatrix='cmatrix -ab'
 alias dc='docker-compose'
 alias dig='dig +search'

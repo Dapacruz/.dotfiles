@@ -16,9 +16,6 @@ keymap("", "<Space>", "<Nop>", opts)
 vim.g.mapleader = " "
 vim.g.maplocalleader = " "
 
--- Turn off search highlights
-keymap("n", "<leader>nh", "<Cmd>nohlsearch<CR>", opts)
-
 -- Quick quit command
 keymap("n", "<leader>qq", "<Cmd>q<CR>", opts) --Quit all windows, opts
 keymap("n", "<leader>Q", "<Cmd>q!<CR>", opts) --Force quit all windows, opts
