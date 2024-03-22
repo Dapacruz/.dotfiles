@@ -1,70 +1,56 @@
-local options = {
-    backup = false,
-    bs = "2", -- Make backspace behave like normal again
-    cmdheight = 1, --  Give more space for displaying messages
- -- colorcolumn = "120",
-    cursorcolumn = false,
-    cursorline = false, -- Cursor highlighting
-    encoding = "utf-8",
-    errorbells = false,
-    expandtab = true,
-    foldlevel = 99,
-    foldmethod = "indent", -- Enable folding
-    guicursor = "a:ver1-blinkon100,n:block-blinkon100",
-    hidden = true, -- When on a buffer becomes hidden when it is abandoned
-    history = 700, -- Useful settings
-    hlsearch = false,
-    ignorecase = true, -- Make search case insensitive
-    incsearch = true,
-    list = true, -- Displays a hypen where there is whitespace
-    mouse = "a", -- On OSX press ALT and click mouse and backspace
-    number = true, -- Show line numbers
-    relativenumber = true,
-    scrolloff = 15,
-    shiftround = true,
-    shiftwidth = 4,
-    signcolumn = "yes",
-    smartcase = true,
-    smartindent = true,
-    softtabstop = 4,
-    splitbelow = true,
-    splitright = true,
-    swapfile = false,
-    tabstop = 4,
-    termguicolors = true,
-    tw = 79, -- Width of document (used by gd)
-    undodir = os.getenv("HOME") .. "/.vim/undodir",
-    undofile = true,
-    undolevels = 700,
-    updatetime = 50, -- Having longer updatetime (default is 4000 ms = 4 s) leads to noticeable delays and poor user experience
-    wrap = false,
-    spell = true,
-    spelllang = { "en_us" },
-    wildmode = "longest:full,full"
-}
-
-for k, v in pairs(options) do
-    vim.opt[k] = v
-end
-
-vim.opt.hlsearch = true
-vim.keymap.set('n', '<Esc>', '<Cmd>nohlsearch<CR>')
+vim.opt.backup = false
+vim.opt.bs = "2" -- Make backspace behave like normal again
+vim.opt.clipboard:append("unnamedplus")
+vim.opt.cmdheight = 1 --  Give more space for displaying messages
+vim.opt.cursorcolumn = false
+vim.opt.cursorline = false -- Cursor highlighting
+vim.opt.diffopt:append("vertical") -- Always use vertical windows for diffsplit,
+vim.opt.encoding = "utf-8"
+vim.opt.errorbells = false
+vim.opt.expandtab = true
+vim.opt.fo:remove("t") -- Don't automatically wrap text when typing
+vim.opt.foldlevel = 99
+vim.opt.foldmethod = "indent" -- Enable folding
+vim.opt.guicursor = "a:ver1-blinkon100,n:block-blinkon100"
 vim.opt.guifont = { "VictorMono Nerd Font:h13" }
-vim.o.shell = "/opt/homebrew/bin/zsh"
-vim.opt.diffopt:append "vertical" -- Always use vertical windows for diffsplit
-vim.opt.matchpairs:append "<:>"
-vim.opt.fo:remove "t" -- Don't automatically wrap text when typing
-vim.opt.shortmess:append "c" --  Don't pass messages to |ins-completion-menu|
-vim.opt.isfname:append "@-@"
-vim.opt.clipboard:append "unnamedplus"
--- vim.g.vimwiki_list = {{path = "~/vimwiki/", syntax =  "markdown", ext =  ".md"}}
+vim.opt.hidden = true -- When on a buffer becomes hidden when it is abandoned
+vim.opt.history = 700 -- Useful settings
+vim.opt.hlsearch = true
+vim.opt.ignorecase = true -- Make search case insensitive
+vim.opt.incsearch = true
+vim.opt.isfname:append("@-@")
+vim.opt.list = true -- Displays a hypen where there is whitespace
+vim.opt.matchpairs:append("<:>")
+vim.opt.mouse = "a" -- On OSX press ALT and click mouse and backspace
+vim.opt.number = true -- Show line numbers
+vim.opt.relativenumber = true
+vim.opt.scrolloff = 15
+vim.opt.shell = "/opt/homebrew/bin/zsh"
+vim.opt.shiftround = true
+vim.opt.shiftwidth = 4
+vim.opt.shortmess:append("c") -- Don't pass messages to |ins-completion-menu|
+vim.opt.signcolumn = "yes"
+vim.opt.smartcase = true
+vim.opt.smartindent = true
+vim.opt.softtabstop = 4
+vim.opt.spell = true
+vim.opt.spelllang = { "en_us" }
+vim.opt.splitbelow = true
+vim.opt.splitright = true
+vim.opt.swapfile = false
+vim.opt.tabstop = 4
+vim.opt.termguicolors = true
+vim.opt.tw = 79 -- Width of document (used by gd)
+vim.opt.undodir = os.getenv("HOME") .. "/.vim/undodir"
+vim.opt.undofile = true
+vim.opt.undolevels = 700
+vim.opt.updatetime = 50 -- Having longer updatetime (default is 4000 ms = 4 s) leads to noticeable delays and poor user experience
+vim.opt.wildmode = "longest:full,full"
+vim.opt.wrap = false
 
 -- Enable vim-visual-multi mouse mappings
 vim.g.VM_mouse_mappings = 1
 vim.g.VM_theme = "codedark"
-
--- nerd-commenter
-vim.g.NERDSpaceDelims = 1
 
 -- Disable netrw
 vim.g.loaded_netrw = 1
