@@ -51,8 +51,8 @@ vim.filetype.add({
         tmpl = "html",
     },
     pattern = {
-        [".+/playbooks/.+%.ya*ml"] = "yaml.ansible",
-        [".+/playbooks/tasks/.+%.ya*ml"] = "yaml.ansible",
+        [".+/playbooks/.+%.ya?ml"] = "yaml.ansible",
+        [".+/playbooks/tasks/.+%.ya?ml"] = "yaml.ansible",
     },
 })
 
