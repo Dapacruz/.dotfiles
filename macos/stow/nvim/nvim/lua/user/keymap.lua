@@ -57,8 +57,7 @@ keymap("n", "<leader>fsh", "<Cmd>lua require('telescope.builtin').search_history
 keymap("n", "<leader>fS", "<Cmd>lua require('telescope.builtin').lsp_workspace_symbols()<CR>", opts)
 keymap("n", "<leader>fr", "<Cmd>lua require('telescope.builtin').lsp_references()<CR>", opts)
 keymap("n", "<leader>fi", "<Cmd>lua require('telescope.builtin').lsp_implementations()<CR>", opts)
-keymap("n", "<leader>fn", "<Cmd>Telescope notify<CR>", opts)
-keymap("n", "<leader>fN", "<Cmd>Noice telescope<CR>", opts)
+keymap("n", "<leader>fn", "<Cmd>Noice telescope<CR>", opts)
 keymap("n", "<leader>ft", "<Cmd>TodoTelescope<CR>", opts)
 
 -- Make file executable
@@ -88,8 +87,8 @@ keymap("n", "<M-l>", "<Cmd>vertical resize +2<CR>", opts)
 keymap("n", "<leader>bd", "<Cmd>bd<CR>", opts)
 keymap("n", "<leader>bD", "<Cmd>bd!<CR>", opts)
 -- Delete all buffers except the active one
-keymap("n", "<leader>bo", "<Cmd>NERDTreeClose|%bd|e#|bd#<CR>", opts)
-keymap("n", "<leader>bO", "<Cmd>NERDTreeClose|%bd!|e#|bd#<CR>", opts)
+keymap("n", "<leader>bo", "<Cmd>%bd|e#|bd#<CR>", opts)
+keymap("n", "<leader>bO", "<Cmd>%bd!|e#|bd#<CR>", opts)
 keymap("n", "<leader>bm", "<Cmd>b#<CR>", opts)
 
 -- Copilot

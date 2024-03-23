@@ -15,7 +15,7 @@ M.setup = function()
 
     local config = {
         -- disable virtual text
-        virtual_text = false,
+        virtual_text = true,
         -- show signs
         signs = {
             active = signs,
@@ -84,8 +84,15 @@ local function lsp_keymaps(bufnr)
     vim.api.nvim_buf_set_keymap(bufnr, "n", "[d", '<Cmd>lua vim.diagnostic.goto_prev({ border = "rounded" })<CR>', opts)
     vim.api.nvim_buf_set_keymap(bufnr, "n", "]d", '<Cmd>lua vim.diagnostic.goto_next({ border = "rounded" })<CR>', opts)
     vim.api.nvim_buf_set_keymap(bufnr, "n", "<leader>dll", "<Cmd>lua vim.diagnostic.setloclist()<CR>", opts)
-    vim.cmd([[ command! Format execute 'lua vim.lsp.buf.format({async=true})' ]])
-    vim.keymap.set('n', '<space>F', function()
+    vim.keymap.set("n", "<space>di", function()
+        if vim.diagnostic.config().virtual_text then
+            vim.diagnostic.config({ virtual_text = false })
+        else
+            vim.diagnostic.config({ virtual_text = true })
+        end
+    end, opts)
+    vim.cmd([[ command! Format execute "lua vim.lsp.buf.format({async=true})" ]])
+    vim.keymap.set("n", "<space>F", function()
         vim.lsp.buf.format { async = true }
     end, opts)
 end
