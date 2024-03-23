@@ -2,7 +2,7 @@ local opts = { noremap = true, silent = true }
 local expr_opts = { noremap = true, silent = true, expr = true }
 
 -- Shorten function name
-local keymap = vim.api.nvim_set_keymap
+local keymap = vim.keymap.set
 
 -- Set very magic mode (egrep syntax)
 vim.cmd([[
@@ -24,11 +24,9 @@ keymap("n", "<leader>qq", "<Cmd>q<CR>", opts) --Quit all windows, opts
 keymap("n", "<leader>Q", "<Cmd>q!<CR>", opts) --Force quit all windows, opts
 
 -- Preview unsaved changes
-keymap("n", "<leader>U", "<Cmd>UnsavedChanges<CR>", opts)
-
--- TODO: Remove
--- Quick reload LUA config
--- keymap("n", "<leader>rc", "<Cmd>:lua require(user.plugin-configs.telescope).reload()<CR>", opts)
+vim.keymap.set("n", "<leader>U", function()
+    require("noice").redirect("write !git diff --no-index % -")
+end, opts)
 
 -- Fugitive
 keymap("n", "<leader>G", "<Cmd>G<CR>", opts)

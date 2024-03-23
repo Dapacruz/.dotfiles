@@ -27,9 +27,6 @@ require("lazy").setup("user.plugins", {
 vim.cmd([[ command! -range=% TrimWhitespace <line1>,<line2>s/^\s\+//e | <line1>,<line2>s/\s\+$//e ]])
 vim.cmd([[ command! -range=% TrimWhitespaceTrailing <line1>,<line2>s/\s\+$//e ]])
 
--- Preview unsaved changes
-vim.cmd([[ command UnsavedChanges execute "write !git diff --no-index % -" ]])
-
 local autocmd = vim.api.nvim_create_autocmd
 local augroup = vim.api.nvim_create_augroup
 local user_group = augroup('user', {})
