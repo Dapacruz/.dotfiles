@@ -24,7 +24,7 @@ keymap("n", "<leader>qq", "<Cmd>q<CR>", opts) --Quit all windows, opts
 keymap("n", "<leader>Q", "<Cmd>q!<CR>", opts) --Force quit all windows, opts
 
 -- Preview unsaved changes
-vim.keymap.set("n", "<leader>U", function()
+keymap("n", "<leader>U", function()
     require("noice").redirect("write !git diff --no-index % -")
 end, opts)
 
