@@ -71,7 +71,6 @@
           - boost
           - cheat
           - cmatrix
-          - cmake
           - coreutils
           - cowsay
           - cscope
@@ -105,7 +104,6 @@
           - highlight
           - hopenpgp-tools
           - htop
-          - httpie
           - iftop
           - imagemagick
           - ipcalc
