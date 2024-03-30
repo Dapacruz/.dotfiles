@@ -57,6 +57,7 @@
     - name: Install Homebrew packages
       community.general.homebrew:
         state: present
+        install_options: formula
         name:
           - ack
           - aha
@@ -67,6 +68,7 @@
           - bfg
           - boost
           - cheat
+          - cmake
           - cmatrix
           - coreutils
           - cowsay
@@ -202,6 +204,7 @@
     - name: Install Homebrew package Neovim
       community.general.homebrew:
         state: head
+        install_options: formula
         name: neovim
 
     - name: Install Homebrew casks
