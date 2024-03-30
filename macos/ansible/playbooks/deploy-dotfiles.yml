@@ -57,7 +57,9 @@
     - name: Install Homebrew packages
       community.general.homebrew:
         state: present
-        install_options: formula,quiet
+        install_options:
+          - formula
+          - quiet
         name:
           - ack
           - aha
@@ -204,13 +206,16 @@
     - name: Install Homebrew package Neovim
       community.general.homebrew:
         state: head
-        install_options: formula,quiet
+        install_options:
+          - formula
+          - quiet
         name: neovim
 
     - name: Install Homebrew casks
       community.general.homebrew_cask:
         state: present
-        install_options: quiet
+        install_options:
+          - quiet
         name:
           - amethyst
           - chromedriver
@@ -232,7 +237,8 @@
     - name: Install Homebrew taps
       community.general.homebrew_tap:
         state: present
-        install_options: quiet
+        install_options:
+          - quiet
         name:
           - homebrew/bundle
           - homebrew/cask
