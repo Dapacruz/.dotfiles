@@ -214,7 +214,6 @@
         name:
           - amethyst
           - chromedriver
-          - intel-haxm
           - karabiner-elements
           - keepassxc
           - keycastr
@@ -227,6 +226,7 @@
           - spacelauncher
           - vagrant
           - vagrant-manager
+          - vivaldi
           - xquartz
 
     - name: Install Homebrew taps
