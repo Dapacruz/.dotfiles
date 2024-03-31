@@ -234,7 +234,6 @@
         state: present
         name:
           - homebrew/bundle
-          - homebrew/cask
           - homebrew/core
           - homebrew/services
           - koekeishiya/formulae
