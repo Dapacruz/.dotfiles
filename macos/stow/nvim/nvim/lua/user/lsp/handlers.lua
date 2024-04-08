@@ -94,7 +94,7 @@ local function lsp_keymaps(bufnr)
     vim.cmd([[ command! Format execute "lua vim.lsp.buf.format({async=true})" ]])
     vim.keymap.set("n", "<space>F", function()
         vim.lsp.buf.format { async = true }
-    end, opts)
+    end, vim.tbl_extend("force", opts, { desc = "LSP format current buffer" }))
 end
 
 M.on_attach = function(client, bufnr)

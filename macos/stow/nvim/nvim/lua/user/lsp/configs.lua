@@ -1,6 +1,6 @@
 local lspconfig = require("lspconfig")
 
-local servers = { "cssls", "html", "gopls", "jsonls", "yamlls", "lua_ls", "jedi_language_server", "vimls", "bashls", "ansiblels" }
+local servers = { "vtsls", "cssls", "html", "gopls", "jsonls", "yamlls", "lua_ls", "jedi_language_server", "vimls", "bashls", "ansiblels" }
 
 for _, server in pairs(servers) do
 	local opts = {
