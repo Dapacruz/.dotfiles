@@ -60,8 +60,8 @@ alias cmatrix='cmatrix -ab'
 alias dc='docker-compose'
 alias dig='dig +search'
 alias digb='dig +search +noall +answer'
-alias fw='panos-cli panorama get firewalls --terse | grep -v "^scno|^dbst|^bopa|as9|remlb" | fzf'
-alias fwa='panos-cli panorama get firewalls -s active,standalone --terse | grep -v "^scno|^dbst|^bopa|as9|remlb" | fzf'
+alias fw='panos-cli panorama get firewalls --not-tag staging,disable-ansible,user-id-agent --terse | fzf'
+alias fwa='panos-cli panorama get firewalls -s active,standalone --not-tag staging,disable-ansible,user-id-agent --terse | fzf'
 alias fwascrt="panos-cli panorama get firewalls -s active,standalone --terse | fzf | xargs -I {} /Applications/SecureCRT.app/Contents/MacOS/SecureCRT /T /SSH2 {} /AUTH publickey /L ${ADMIN}"
 alias fwassh="panos-cli panorama get firewalls -s active,standalone --terse | fzf | xargs -I {} tmux neww -n {} ssh -o HostKeyAlgorithms=+ssh-rsa -o PubkeyAcceptedAlgorithms=+ssh-rsa ${ADMIN}@{}"
 alias fwaweb="panos-cli panorama get firewalls -s active,standalone --terse | fzf | xargs -I {} open https://{}.${DOMAIN}"
@@ -102,7 +102,7 @@ eval "$(/opt/homebrew/bin/starship init zsh)"
 
 
 # Execute neofetch
-/opt/homebrew/bin/neofetch
+# /opt/homebrew/bin/neofetch
 
 
 # Load custom Zsh functions
@@ -198,6 +198,9 @@ export ANSIBLE_NOCOWS=1
 # Slack webhook for notifications
 slackit() {
     http -q $WEBHOOK_WORK <<< "{\"text\":\"$1\"}"
+}
+slackit_test() {
+    http -q "https://hooks.slack.com/services/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" <<< "{\"text\":\"$1\"}"
 }
 
 
