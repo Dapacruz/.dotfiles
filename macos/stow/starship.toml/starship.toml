@@ -8,9 +8,10 @@ $git_branch\
 $git_state\
 $git_status\
 $git_metrics\
+$jobs\
 $fill\
 $nodejs\
-$cmd_duration $jobs $time\
+$cmd_duration $time\
 $line_break\
 $character"""
 
@@ -25,7 +26,7 @@ style = "bold blue"
 read_only = " "
 truncation_length = 4
 truncate_to_repo = false
-format = "[ ](bright-white)[$path]($style)[$read_only]($read_only_style) "
+format = "[ ](#4A83E7)$path[$read_only]($read_only_style) "
 
 [character]
 success_symbol = "[❯](purple)"
@@ -33,15 +34,14 @@ error_symbol = "[❯](red)"
 vicmd_symbol = "[❮](green)"
 
 [git_branch]
-symbol = "[ ](bright-white)"
-format = "[$symbol$branch]($style) "
-style = "bright-purple"
+symbol = "[ ](#4A83E7)"
+format = "$symbol$branch "
 
 [jobs]
 symbol = ""
 style = "bold red"
 number_threshold = 1
-format = "[$symbol]($style)"
+format = "[$symbol ]($style)"
 
 [git_status]
 format = '([\[$all_status$ahead_behind\]]($style) )'
@@ -70,22 +70,22 @@ style = "bold white"
 format = "[$time]($style)"
 
 [username]
-style_user = "bright-purple"
-style_root = "red bold"
-format = " [$user]($style) "
+format = "[ ](#4A83E7)$user "
 disabled = false
 show_always = true
 
 [hostname]
 ssh_only = false
-format = "  [$hostname](bold blue) "
+format = "[ ](#4A83E7) $hostname "
 trim_at = "."
 disabled = false
 
 [golang]
-format = 'via [ $version](bold cyan) '
+symbol = "[ ](#67D7E1)"
+format = "$symbol$version "
 
 [python]
-format = "via [  $version $virtualenv](bold yellow)"
-python_binary = 'python3'
-detect_extensions = ['py']
+symbol = "[ ](bold yellow)"
+format = "$symbol$version( [ ](#D02090)$virtualenv) "
+python_binary = "python3"
+detect_extensions = ["py"]

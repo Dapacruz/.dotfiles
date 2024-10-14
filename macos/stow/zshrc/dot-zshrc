@@ -81,7 +81,7 @@ alias mtr='sudo mtr'
 alias pan-os-php='php -r "require_once '\''$HOME/pan-configurator/utils/pan-os-php.php'\'';" $@'
 alias pip='pip3'
 alias pp='curl http://parrot.live'
-alias python='python3'
+alias python="python3"
 alias rg=hg
 alias rm=trash
 alias ssh="ssh -o HostKeyAlgorithms=+ssh-rsa -o PubkeyAcceptedAlgorithms=+ssh-rsa -l ${ADMIN}"
