@@ -3,6 +3,7 @@ $username\
 $hostname\
 $directory\
 $golang\
+$rust\
 $python\
 $git_branch\
 $git_state\
@@ -62,7 +63,8 @@ style = "yellow"
 symbol = " "
 
 [rust]
-symbol = " "
+style = "white"
+symbol = "[ ](#E36F39) "
 
 [time]
 disabled = false
