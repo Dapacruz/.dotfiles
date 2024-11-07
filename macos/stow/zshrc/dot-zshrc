@@ -2,17 +2,16 @@ source $HOME/.zshrc.local
 
 
 # Path
-PATH="$HOME/.local/bin:${PATH}"
-PATH="/Library/Frameworks/Python.framework/Versions/3.10/bin:${PATH}"
+PATH="${HOME}/.local/bin:${PATH}"
 # GO
-# export PATH="$GOPATH:$HOME/go/bin:$HOME/repos/go/bin:$HOME/go/bin/darwin_amd64:$HOME/go/bin/darwin_arm64:${PATH}"
-PATH="$HOME/go/bin:${PATH}"
+PATH="${HOME}/go/bin:${PATH}"
 # Rust modules install to user
-PATH="$HOME/.cargo/bin:${PATH}"
+PATH="${HOME}/.cargo/bin:${PATH}"
 # Homebrew
 eval "$(/opt/homebrew/bin/brew shellenv)"
 # Python
-PATH="$HOME/.venv/3.12/bin:${PATH}"
+PYTHON_VERSION="3.12"
+PATH="${HOME}/venv/${PYTHON_VERSION}/bin:${PATH}"
 export PATH
 
 
@@ -21,7 +20,6 @@ export DISPLAY=:0
 export EDITOR=/opt/homebrew/bin/nvim
 export VISUAL=/opt/homebrew/bin/nvim
 export GOOS=darwin
-# export GOPATH="$HOME/go:$HOME/repos/go"
 export GOOGLE_APPLICATION_CREDENTIALS=~/PyPi-42f44041fd99.json
 export HISTCONTROL=ignorespace
 export WORDCHARS='*?_-.[]~=&;!#$%^(){}<>|'
@@ -62,12 +60,12 @@ alias dig='dig +search'
 alias digb='dig +search +noall +answer'
 alias fw='panos-cli panorama get firewalls --not-tag staging,disable-ansible,user-id-agent --terse | fzf'
 alias fwa='panos-cli panorama get firewalls -s active,standalone --not-tag staging,disable-ansible,user-id-agent --terse | fzf'
-alias fwascrt="panos-cli panorama get firewalls -s active,standalone --terse | fzf | xargs -I {} /Applications/SecureCRT.app/Contents/MacOS/SecureCRT /T /SSH2 {} /AUTH publickey /L ${ADMIN}"
-alias fwassh="panos-cli panorama get firewalls -s active,standalone --terse | fzf | xargs -I {} tmux neww -n {} ssh -o HostKeyAlgorithms=+ssh-rsa -o PubkeyAcceptedAlgorithms=+ssh-rsa ${ADMIN}@{}"
-alias fwaweb="panos-cli panorama get firewalls -s active,standalone --terse | fzf | xargs -I {} open https://{}.${DOMAIN}"
-alias fwscrt="panos-cli panorama get firewalls --terse | fzf | xargs -I {} /Applications/SecureCRT.app/Contents/MacOS/SecureCRT /T /SSH2 {} /AUTH publickey /L ${ADMIN}"
-alias fwssh="panos-cli panorama get firewalls --terse | fzf | xargs -I {} tmux neww -n {} ssh -o HostKeyAlgorithms=+ssh-rsa -o PubkeyAcceptedAlgorithms=+ssh-rsa ${ADMIN}@{}"
-alias fwweb="panos-cli panorama get firewalls --terse | fzf | xargs -I {} open https://{}.${DOMAIN}"
+alias fwascrt="panos-cli panorama get firewalls --not-tag staging,disable-ansible,user-id-agent -s active,standalone --terse | fzf | xargs -I {} /Applications/SecureCRT.app/Contents/MacOS/SecureCRT /T /SSH2 {} /AUTH publickey /L ${ADMIN}"
+alias fwassh="panos-cli panorama get firewalls --not-tag staging,disable-ansible,user-id-agent -s active,standalone --terse | fzf | xargs -I {} tmux neww -n {} ssh -o HostKeyAlgorithms=+ssh-rsa -o PubkeyAcceptedAlgorithms=+ssh-rsa ${ADMIN}@{}"
+alias fwaweb="panos-cli panorama get firewalls --not-tag staging,disable-ansible,user-id-agent -s active,standalone --terse | fzf | xargs -I {} open https://{}.${DOMAIN}"
+alias fwscrt="panos-cli panorama get firewalls --not-tag staging,disable-ansible,user-id-agent --terse | fzf | xargs -I {} /Applications/SecureCRT.app/Contents/MacOS/SecureCRT /T /SSH2 {} /AUTH publickey /L ${ADMIN}"
+alias fwssh="panos-cli panorama get firewalls --not-tag staging,disable-ansible,user-id-agent --terse | fzf | xargs -I {} tmux neww -n {} ssh -o HostKeyAlgorithms=+ssh-rsa -o PubkeyAcceptedAlgorithms=+ssh-rsa ${ADMIN}@{}"
+alias fwweb="panos-cli panorama get firewalls --not-tag staging,disable-ansible,user-id-agent --terse | fzf | xargs -I {} open https://{}.${DOMAIN}"
 alias getip='ifconfig | egrep -v "\s+(options|ether|inet6)" | egrep -A1 "^(en0|en10)"; echo --; ifconfig | egrep -A1 "^(utun3)"; echo --; echo -n "Internet IP Address: "; curl ipecho.net/plain; echo'
 alias grep='egrep --color'
 alias icat='kitty +kitten icat'
@@ -79,9 +77,15 @@ alias mkstart='minikube start --driver=qemu && eval $(minikube -p minikube docke
 alias mkstop='minikube stop'
 alias mtr='sudo mtr'
 alias pan-os-php='php -r "require_once '\''$HOME/pan-configurator/utils/pan-os-php.php'\'';" $@'
-alias pip='pip3'
+alias pip3.12="${HOME}/venv/3.12/bin/pip"
+alias pip3.13="${HOME}/venv/3.13/bin/pip"
+alias pip3="python${PYTHON_VERSION} -m pip"
+alias pip=pip3
 alias pp='curl http://parrot.live'
-alias python="python3"
+alias python3.12="${HOME}/venv/3.12/bin/python"
+alias python3.13="${HOME}/venv/3.13/bin/python"
+alias python3="python${PYTHON_VERSION}"
+alias python=python3
 alias rg=hg
 alias rm=trash
 alias ssh="ssh -o HostKeyAlgorithms=+ssh-rsa -o PubkeyAcceptedAlgorithms=+ssh-rsa -l ${ADMIN}"
@@ -126,6 +130,7 @@ if test -n "$KITTY_INSTALLATION_DIR"; then
     kitty-integration
     unfunction kitty-integration
 fi
+WORDCHARS='_-*'
 bindkey "^[[1;3C" forward-word  # alt+right
 bindkey "^[[1;3D" backward-word # alt+left
 bindkey "^[[1;3A" beginning-of-history  # alt+up
@@ -199,9 +204,6 @@ export ANSIBLE_NOCOWS=1
 slackit() {
     http -q $WEBHOOK_WORK <<< "{\"text\":\"$1\"}"
 }
-slackit_test() {
-    http -q "https://hooks.slack.com/services/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" <<< "{\"text\":\"$1\"}"
-}
 
 
 # Change directories efficiently
@@ -209,11 +211,11 @@ eval "$(zoxide init zsh)"
 
 
 # Rust package manager (Cargo)
-. "$HOME/.cargo/env"
+. "${HOME}/.cargo/env"
 
 
 # Node Version Manager
-export NVM_DIR="$HOME/.nvm"
+export NVM_DIR="${HOME}/.nvm"
 [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"
 [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"
 
@@ -223,3 +225,7 @@ export NVM_DIR="$HOME/.nvm"
 CERT_PATH=$(python3 -m certifi)
 export SSL_CERT_FILE=${CERT_PATH}
 export REQUESTS_CA_BUNDLE=${CERT_PATH}
+
+
+# Python uv
+eval "$(uv generate-shell-completion bash)"
