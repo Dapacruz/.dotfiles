@@ -23,6 +23,7 @@ export GOOS=darwin
 export GOOGLE_APPLICATION_CREDENTIALS=~/PyPi-42f44041fd99.json
 export HISTCONTROL=ignorespace
 export WORDCHARS='*?_-.[]~=&;!#$%^(){}<>|'
+export XDG_CONFIG_HOME="$HOME/.config"
 
 
 # GPG
@@ -70,6 +71,7 @@ alias getip='ifconfig | egrep -v "\s+(options|ether|inet6)" | egrep -A1 "^(en0|e
 alias grep='egrep --color'
 alias icat='kitty +kitten icat'
 alias lf=lfcd
+alias lg=lazygit
 alias ll='lsd --group-directories-first --hyperlink=always -l'
 alias ls='lsd --group-directories-first --hyperlink=always'
 alias mkenv='eval $(minikube -p minikube docker-env)'
