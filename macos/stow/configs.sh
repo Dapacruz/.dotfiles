@@ -8,6 +8,7 @@ configs=(
     "$HOME/.config/tmux"
     "$HOME/.config/raycast"
     "$HOME/.config/cheat"
+    "$HOME/.config/lazygit"
     "$HOME/.config/karabiner"
     "$HOME/.config/lf"
     "$HOME/.config/neofetch"
