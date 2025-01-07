@@ -56,17 +56,16 @@ source $ZSH/oh-my-zsh.sh
 alias bfg='/opt/homebrew/bin/bfg'
 alias cat='bat'
 alias cmatrix='cmatrix -ab'
-alias dc='docker-compose'
 alias dig='dig +search'
 alias digb='dig +search +noall +answer'
-alias fw='panos-cli panorama get firewalls --not-tag staging,disable-ansible,user-id-agent --terse | fzf'
-alias fwa='panos-cli panorama get firewalls -s active,standalone --not-tag staging,disable-ansible,user-id-agent --terse | fzf'
-alias fwascrt="panos-cli panorama get firewalls --not-tag staging,disable-ansible,user-id-agent -s active,standalone --terse | fzf | xargs -I {} /Applications/SecureCRT.app/Contents/MacOS/SecureCRT /T /SSH2 {} /AUTH publickey /L ${ADMIN}"
-alias fwassh="panos-cli panorama get firewalls --not-tag staging,disable-ansible,user-id-agent -s active,standalone --terse | fzf | xargs -I {} tmux neww -n {} ssh -o HostKeyAlgorithms=+ssh-rsa -o PubkeyAcceptedAlgorithms=+ssh-rsa ${ADMIN}@{}"
-alias fwaweb="panos-cli panorama get firewalls --not-tag staging,disable-ansible,user-id-agent -s active,standalone --terse | fzf | xargs -I {} open https://{}.${DOMAIN}"
-alias fwscrt="panos-cli panorama get firewalls --not-tag staging,disable-ansible,user-id-agent --terse | fzf | xargs -I {} /Applications/SecureCRT.app/Contents/MacOS/SecureCRT /T /SSH2 {} /AUTH publickey /L ${ADMIN}"
-alias fwssh="panos-cli panorama get firewalls --not-tag staging,disable-ansible,user-id-agent --terse | fzf | xargs -I {} tmux neww -n {} ssh -o HostKeyAlgorithms=+ssh-rsa -o PubkeyAcceptedAlgorithms=+ssh-rsa ${ADMIN}@{}"
-alias fwweb="panos-cli panorama get firewalls --not-tag staging,disable-ansible,user-id-agent --terse | fzf | xargs -I {} open https://{}.${DOMAIN}"
+alias fw='panos-cli panorama get firewalls --not-tag staging,disable-ansible --terse | fzf'
+alias fwa='panos-cli panorama get firewalls -s active,standalone --not-tag staging,disable-ansible --terse | fzf'
+alias fwascrt="panos-cli panorama get firewalls --not-tag staging,disable-ansible -s active,standalone --terse | fzf | xargs -I {} /Applications/SecureCRT.app/Contents/MacOS/SecureCRT /T /SSH2 {} /AUTH publickey /L ${ADMIN}"
+alias fwassh="panos-cli panorama get firewalls --not-tag staging,disable-ansible -s active,standalone --terse | fzf | xargs -I {} tmux neww -n {} ssh -o HostKeyAlgorithms=+ssh-rsa -o PubkeyAcceptedAlgorithms=+ssh-rsa ${ADMIN}@{}"
+alias fwaweb="panos-cli panorama get firewalls --not-tag staging,disable-ansible -s active,standalone --terse | fzf | xargs -I {} open https://{}.${DOMAIN}"
+alias fwscrt="panos-cli panorama get firewalls --not-tag staging,disable-ansible --terse | fzf | tr 'a-z' 'A-Z' | xargs -I {} /Applications/SecureCRT.app/Contents/MacOS/SecureCRT /T /SSH2 {} /AUTH publickey /L ${ADMIN}"
+alias fwssh="panos-cli panorama get firewalls --not-tag staging,disable-ansible --terse | fzf | xargs -I {} tmux neww -n {} ssh -o HostKeyAlgorithms=+ssh-rsa -o PubkeyAcceptedAlgorithms=+ssh-rsa ${ADMIN}@{}"
+alias fwweb="panos-cli panorama get firewalls --not-tag staging,disable-ansible --terse | fzf | xargs -I {} open https://{}.${DOMAIN}"
 alias getip='ifconfig | egrep -v "\s+(options|ether|inet6)" | egrep -A1 "^(en0|en10)"; echo --; ifconfig | egrep -A1 "^(utun3)"; echo --; echo -n "Internet IP Address: "; curl ipecho.net/plain; echo'
 alias grep='egrep --color'
 alias icat='kitty +kitten icat'
@@ -224,10 +223,10 @@ export NVM_DIR="${HOME}/.nvm"
 
 # Needed to trust Ansible Galaxy API certificate
 # https://stackoverflow.com/a/57795811
-CERT_PATH=$(python3 -m certifi)
-export SSL_CERT_FILE=${CERT_PATH}
-export REQUESTS_CA_BUNDLE=${CERT_PATH}
+# CERT_PATH=$(python3 -m certifi)
+# export SSL_CERT_FILE=${CERT_PATH}
+# export REQUESTS_CA_BUNDLE=${CERT_PATH}
 
 
 # Python uv
-eval "$(uv generate-shell-completion bash)"
+eval "$(uv generate-shell-completion zsh)"
