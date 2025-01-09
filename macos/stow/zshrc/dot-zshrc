@@ -58,19 +58,21 @@ alias cat='bat'
 alias cmatrix='cmatrix -ab'
 alias dig='dig +search'
 alias digb='dig +search +noall +answer'
+alias fd='fd --hyperlink=always'
 alias fw='panos-cli panorama get firewalls --not-tag staging,disable-ansible --terse | fzf'
 alias fwa='panos-cli panorama get firewalls -s active,standalone --not-tag staging,disable-ansible --terse | fzf'
 alias fwascrt="panos-cli panorama get firewalls --not-tag staging,disable-ansible -s active,standalone --terse | fzf | xargs -I {} /Applications/SecureCRT.app/Contents/MacOS/SecureCRT /T /SSH2 {} /AUTH publickey /L ${ADMIN}"
-alias fwassh="panos-cli panorama get firewalls --not-tag staging,disable-ansible -s active,standalone --terse | fzf | xargs -I {} tmux neww -n {} ssh -o HostKeyAlgorithms=+ssh-rsa -o PubkeyAcceptedAlgorithms=+ssh-rsa ${ADMIN}@{}"
+alias fwassh="panos-cli panorama get firewalls --not-tag staging,disable-ansible -s active,standalone --terse | fzf | xargs -I {} tmux neww -n {} ssh -J ${ADMIN}@$JUMPHOST ${ADMIN}@{}"
 alias fwaweb="panos-cli panorama get firewalls --not-tag staging,disable-ansible -s active,standalone --terse | fzf | xargs -I {} open https://{}.${DOMAIN}"
 alias fwscrt="panos-cli panorama get firewalls --not-tag staging,disable-ansible --terse | fzf | tr 'a-z' 'A-Z' | xargs -I {} /Applications/SecureCRT.app/Contents/MacOS/SecureCRT /T /SSH2 {} /AUTH publickey /L ${ADMIN}"
-alias fwssh="panos-cli panorama get firewalls --not-tag staging,disable-ansible --terse | fzf | xargs -I {} tmux neww -n {} ssh -o HostKeyAlgorithms=+ssh-rsa -o PubkeyAcceptedAlgorithms=+ssh-rsa ${ADMIN}@{}"
+alias fwssh="panos-cli panorama get firewalls --not-tag staging,disable-ansible --terse | fzf | xargs -I {} tmux neww -n {} ssh -J ${ADMIN}@$JUMPHOST ${ADMIN}@{}"
 alias fwweb="panos-cli panorama get firewalls --not-tag staging,disable-ansible --terse | fzf | xargs -I {} open https://{}.${DOMAIN}"
 alias getip='ifconfig | egrep -v "\s+(options|ether|inet6)" | egrep -A1 "^(en0|en10)"; echo --; ifconfig | egrep -A1 "^(utun3)"; echo --; echo -n "Internet IP Address: "; curl ipecho.net/plain; echo'
 alias grep='egrep --color'
-alias icat='kitty +kitten icat'
+alias icat='kitten icat'
 alias lf=lfcd
 alias lg=lazygit
+alias l='lsd --group-directories-first --hyperlink=always -la'
 alias ll='lsd --group-directories-first --hyperlink=always -l'
 alias ls='lsd --group-directories-first --hyperlink=always'
 alias mkenv='eval $(minikube -p minikube docker-env)'
@@ -87,9 +89,10 @@ alias python3.12="${HOME}/venv/3.12/bin/python"
 alias python3.13="${HOME}/venv/3.13/bin/python"
 alias python3="python${PYTHON_VERSION}"
 alias python=python3
-alias rg=hg
+alias rg="kitten hyperlinked_grep --smart-case"
 alias rm=trash
-alias ssh="ssh -o HostKeyAlgorithms=+ssh-rsa -o PubkeyAcceptedAlgorithms=+ssh-rsa -l ${ADMIN}"
+alias ssh="ssh -l ${ADMIN} -J ${ADMIN}@$JUMPHOST"
+alias sshl="ssh -o HostKeyAlgorithms=+ssh-rsa -o PubkeyAcceptedAlgorithms=+ssh-rsa -l ${ADMIN} -J ${ADMIN}@$JUMPHOST"
 alias t=t.sh
 alias ta='tmux attach || tmux'
 alias tn='tmux new -s $(pwd | sed -E '\''s/.*\/\.?//g'\'') || tmux a -t $(pwd | sed -E '\''s/.*\/\.?//g'\'')'
