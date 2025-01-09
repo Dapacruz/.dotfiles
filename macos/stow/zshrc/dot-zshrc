@@ -91,9 +91,6 @@ alias python3="python${PYTHON_VERSION}"
 alias python=python3
 alias rg="kitten hyperlinked_grep --smart-case"
 alias rm=trash
-alias ssh="ssh -l ${ADMIN} -J ${ADMIN}@$JUMPHOST"
-alias s="kitten ssh -l ${ADMIN} -J ${ADMIN}@$JUMPHOST"
-alias sshl="ssh -o HostKeyAlgorithms=+ssh-rsa -o PubkeyAcceptedAlgorithms=+ssh-rsa -l ${ADMIN} -J ${ADMIN}@$JUMPHOST"
 alias t=t.sh
 alias ta='tmux attach || tmux'
 alias tn='tmux new -s $(pwd | sed -E '\''s/.*\/\.?//g'\'') || tmux a -t $(pwd | sed -E '\''s/.*\/\.?//g'\'')'
