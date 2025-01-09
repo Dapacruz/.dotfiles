@@ -92,6 +92,7 @@ alias python=python3
 alias rg="kitten hyperlinked_grep --smart-case"
 alias rm=trash
 alias ssh="ssh -l ${ADMIN} -J ${ADMIN}@$JUMPHOST"
+alias s="kitten ssh -l ${ADMIN} -J ${ADMIN}@$JUMPHOST"
 alias sshl="ssh -o HostKeyAlgorithms=+ssh-rsa -o PubkeyAcceptedAlgorithms=+ssh-rsa -l ${ADMIN} -J ${ADMIN}@$JUMPHOST"
 alias t=t.sh
 alias ta='tmux attach || tmux'
