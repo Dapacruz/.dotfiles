@@ -114,7 +114,7 @@ eval "$(/opt/homebrew/bin/starship init zsh)"
 # Load custom Zsh functions
 fpath=( ~/.zsh.d ~/.zsh.funcs "${fpath[@]}" )
 autoload -Uz compinit && compinit
-autoload -Uz _fzf_comprun
+# autoload -Uz _fzf_comprun
 autoload -Uz lfcd
 autoload -Uz encrypt
 autoload -Uz decrypt
@@ -133,21 +133,30 @@ if test -n "$KITTY_INSTALLATION_DIR"; then
     unfunction kitty-integration
 fi
 WORDCHARS='_-*'
-bindkey "^[[1;3C" forward-word  # alt+right
-bindkey "^[[1;3D" backward-word # alt+left
-bindkey "^[[1;3A" beginning-of-history  # alt+up
-bindkey "^[[1;3B" end-of-history    # alt+down
-bindkey "^P" up-line-or-beginning-search
-bindkey "^N" down-line-or-beginning-search
+# bindkey "^[[1;3C" forward-word  # alt+right
+# bindkey "^[[1;3D" backward-word # alt+left
+# bindkey "^[[1;3A" beginning-of-history  # alt+up
+# bindkey "^[[1;3B" end-of-history    # alt+down
+# bindkey "^P" up-line-or-beginning-search
+# bindkey "^N" down-line-or-beginning-search
 
 
 # fzf settings
 export FZF_DEFAULT_COMMAND="\rg -uu --files --hidden -H --glob='!**/.git/' 2> /dev/null"
 export FZF_CTRL_T_COMMAND="$FZF_DEFAULT_COMMAND"
-export FZF_CTRL_T_OPTS="--preview='bat --style=numbers --color=always --line-range :500 {}'"
+export FZF_CTRL_T_OPTS="
+    --preview='bat --style=numbers --color=always --line-range :500 {}'
+    --walker-skip .git,node_modules,target
+    --bind 'ctrl-/:change-preview-window(down|hidden|)'"
 export FZF_ALT_C_COMMAND="fd -t d --strip-cwd-prefix --hidden --exclude '.git' 2> /dev/null"
-export FZF_ALT_C_OPTS="--preview 'tre --color=always {} | head -500'"
-# export FZF_CTRL_R_OPTS=""
+export FZF_ALT_C_OPTS="
+    --walker-skip .git,node_modules,target
+    --preview 'tre --color=always {} | head -500'
+    --bind 'ctrl-/:change-preview-window(down|hidden|)'"
+export FZF_CTRL_R_OPTS="
+  --bind 'ctrl-y:execute-silent(echo -n {2..} | pbcopy)+abort'
+  --color header:italic
+  --header 'Press CTRL-Y to copy command into clipboard'"
 # export FZF_TMUX_OPTS=""
 export FZF_MOVEMENT="\
     --bind='alt-p:toggle-preview' \
@@ -195,7 +204,18 @@ if [[ -z "$DISPLAY" ]]; then
         --color=fg:13 \
         --color=fg+:14"
 fi
-[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
+
+_fzf_compgen_path() {
+  fd --hidden --follow --exclude ".git" . "$1"
+}
+
+# Use fd to generate the list for directory completion
+_fzf_compgen_dir() {
+  fd --type d --hidden --follow --exclude ".git" . "$1"
+}
+
+# [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
+source <(fzf --zsh)
 
 
 # Disable Cowsay in Ansible
@@ -231,3 +251,16 @@ export NVM_DIR="${HOME}/.nvm"
 
 # Python uv
 eval "$(uv generate-shell-completion zsh)"
+
+
+# # Zsh Vi Mode
+# source /opt/homebrew/opt/zsh-vi-mode/share/zsh-vi-mode/zsh-vi-mode.plugin.zsh
+# zvm_after_init_commands+=(
+#     "bindkey '^P' up-line-or-search"
+#     "bindkey '^N' down-line-or-search"
+#     "bindkey '^[[1;3C' forward-word"  # alt+right
+#     "bindkey '^[[1;3D' backward-word"  # alt+left
+#     "bindkey '^[[1;3A' beginning-of-history"  # alt+up
+#     "bindkey '^[[1;3B' end-of-history"  # alt+down
+# )
+
