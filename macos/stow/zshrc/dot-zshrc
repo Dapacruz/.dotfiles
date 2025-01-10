@@ -253,14 +253,14 @@ export NVM_DIR="${HOME}/.nvm"
 eval "$(uv generate-shell-completion zsh)"
 
 
-# # Zsh Vi Mode
-# source /opt/homebrew/opt/zsh-vi-mode/share/zsh-vi-mode/zsh-vi-mode.plugin.zsh
-# zvm_after_init_commands+=(
-#     "bindkey '^P' up-line-or-search"
-#     "bindkey '^N' down-line-or-search"
-#     "bindkey '^[[1;3C' forward-word"  # alt+right
-#     "bindkey '^[[1;3D' backward-word"  # alt+left
-#     "bindkey '^[[1;3A' beginning-of-history"  # alt+up
-#     "bindkey '^[[1;3B' end-of-history"  # alt+down
-# )
+# Zsh Vi Mode
+source /opt/homebrew/opt/zsh-vi-mode/share/zsh-vi-mode/zsh-vi-mode.plugin.zsh
+zvm_after_init_commands+=(
+    "bindkey '^P' up-line-or-search"
+    "bindkey '^N' down-line-or-search"
+    "bindkey '^[[1;3C' forward-word"  # alt+right
+    "bindkey '^[[1;3D' backward-word"  # alt+left
+    "bindkey '^[[1;3A' beginning-of-history"  # alt+up
+    "bindkey '^[[1;3B' end-of-history"  # alt+down
+)
 
