@@ -133,12 +133,12 @@ if test -n "$KITTY_INSTALLATION_DIR"; then
     unfunction kitty-integration
 fi
 WORDCHARS='_-*'
-# bindkey "^[[1;3C" forward-word  # alt+right
-# bindkey "^[[1;3D" backward-word # alt+left
-# bindkey "^[[1;3A" beginning-of-history  # alt+up
-# bindkey "^[[1;3B" end-of-history    # alt+down
-# bindkey "^P" up-line-or-beginning-search
-# bindkey "^N" down-line-or-beginning-search
+bindkey "^[[1;3C" forward-word  # alt+right
+bindkey "^[[1;3D" backward-word # alt+left
+bindkey "^[[1;3A" beginning-of-history  # alt+up
+bindkey "^[[1;3B" end-of-history    # alt+down
+bindkey "^P" up-line-or-beginning-search
+bindkey "^N" down-line-or-beginning-search
 
 
 # Disable Cowsay in Ansible
@@ -249,20 +249,5 @@ _fzf_compgen_dir() {
   fd --type d --hidden --follow --exclude ".git" . "$1"
 }
 
-# [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
-zvm_after_init() {
-    source <(fzf --zsh)
-}
-
-
-# Zsh Vi Mode
-source /opt/homebrew/opt/zsh-vi-mode/share/zsh-vi-mode/zsh-vi-mode.plugin.zsh
-zvm_after_init_commands+=(
-    "bindkey '^P' up-line-or-search"
-    "bindkey '^N' down-line-or-search"
-    "bindkey '^[[1;3C' forward-word"  # alt+right
-    "bindkey '^[[1;3D' backward-word"  # alt+left
-    "bindkey '^[[1;3A' beginning-of-history"  # alt+up
-    "bindkey '^[[1;3B' end-of-history"  # alt+down
-)
+source <(fzf --zsh)
 

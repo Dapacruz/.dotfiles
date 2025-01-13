@@ -64,41 +64,41 @@ local function lsp_keymaps(bufnr)
     local keymap_set_buf = vim.api.nvim_buf_set_keymap
     local keymap_set = vim.keymap.set
 
-    keymap_set_buf(bufnr, "n", "gd", "<Cmd>lua vim.lsp.buf.definition()<CR>", opts)
-    keymap_set_buf(bufnr, "n", "gD", "<Cmd>lua vim.lsp.buf.declaration()<CR>", opts)
-    keymap_set_buf(bufnr, "n", "K", "<Cmd>lua vim.lsp.buf.hover()<CR>", opts)
-    keymap_set_buf(bufnr, "n", "gI", "<Cmd>lua vim.lsp.buf.implementation()<CR>", opts)
-    keymap_set_buf(bufnr, "n", "<C-k>", "<Cmd>lua vim.lsp.buf.signature_help()<CR>", opts)
-    keymap_set_buf(bufnr, "n", "gr", "<Cmd>lua vim.lsp.buf.references()<CR>", opts)
-    keymap_set_buf(bufnr, "n", "<leader>rn", "<Cmd>lua vim.lsp.buf.rename()<CR>", opts)
-    keymap_set_buf(bufnr, "n", "<leader>ca", "<Cmd>lua vim.lsp.buf.code_action()<CR>", opts)
-    keymap_set("n", "<leader>D", vim.lsp.buf.type_definition, tabl_ext('force', opts, { desc = "Get LSP type definition" }))
-    keymap_set("n", "<leader>wa", vim.lsp.buf.add_workspace_folder, opts)
-    keymap_set("n", "<leader>wr", vim.lsp.buf.remove_workspace_folder, opts)
+    keymap_set_buf(bufnr, "n", "gd", "<Cmd>lua vim.lsp.buf.definition()<CR>", tabl_ext('force', opts, { desc = "LSP: Go to definition" }))
+    keymap_set_buf(bufnr, "n", "gD", "<Cmd>lua vim.lsp.buf.declaration()<CR>", tabl_ext('force', opts, { desc = "LSP: Go to declaration" }))
+    keymap_set_buf(bufnr, "n", "K", "<Cmd>lua vim.lsp.buf.hover()<CR>", tabl_ext('force', opts, { desc = "LSP: Show hover information about the symbol under the cursor" }))
+    keymap_set_buf(bufnr, "n", "gI", "<Cmd>lua vim.lsp.buf.implementation()<CR>", tabl_ext('force', opts, { desc = "LSP: Go to implementation" }))
+    keymap_set_buf(bufnr, "n", "<C-k>", "<Cmd>lua vim.lsp.buf.signature_help()<CR>", tabl_ext('force', opts, { desc = "LSP: Signature help" }))
+    keymap_set_buf(bufnr, "n", "gr", "<Cmd>lua vim.lsp.buf.references()<CR>", tabl_ext('force', opts, { desc = "LSP: Get all references" }))
+    keymap_set_buf(bufnr, "n", "<leader>rn", "<Cmd>lua vim.lsp.buf.rename()<CR>", tabl_ext('force', opts, { desc = "LSP: Rename symbol" }))
+    keymap_set_buf(bufnr, "n", "<leader>ca", "<Cmd>lua vim.lsp.buf.code_action()<CR>", tabl_ext('force', opts, { desc = "LSP: Code action" }))
+    keymap_set("n", "<leader>D", vim.lsp.buf.type_definition, tabl_ext('force', opts, { desc = "LSP: Get type definition" }))
+    keymap_set("n", "<leader>wa", vim.lsp.buf.add_workspace_folder, tabl_ext('force', opts, { desc = "LSP: Add workspace folder" }))
+    keymap_set("n", "<leader>wr", vim.lsp.buf.remove_workspace_folder, tabl_ext('force', opts, { desc = "LSP: Remove workspace folder" }))
     keymap_set("n", "<leader>wl", function()
         print(vim.inspect(vim.lsp.buf.list_workspace_folders()))
-    end, opts)
+    end, tabl_ext('force', opts, { desc = "LSP: List workspace folders" }))
     keymap_set_buf(
         bufnr,
         "n",
         "<leader><leader>d",
         '<Cmd>lua vim.diagnostic.open_float({ border="rounded" })<CR>',
-        opts
+       tabl_ext('force', opts, { desc = "LSP: Open diagnostic float" })
     )
-    keymap_set_buf(bufnr, "n", "[d", '<Cmd>lua vim.diagnostic.goto_prev({ border = "rounded" })<CR>', opts)
-    keymap_set_buf(bufnr, "n", "]d", '<Cmd>lua vim.diagnostic.goto_next({ border = "rounded" })<CR>', opts)
-    keymap_set_buf(bufnr, "n", "<leader>dll", "<Cmd>lua vim.diagnostic.setloclist()<CR>", opts)
+    keymap_set_buf(bufnr, "n", "[d", '<Cmd>lua vim.diagnostic.goto_prev({ border = "rounded" })<CR>', tabl_ext('force', opts, { desc = "LSP: Go to previous diagnostic" }))
+    keymap_set_buf(bufnr, "n", "]d", '<Cmd>lua vim.diagnostic.goto_next({ border = "rounded" })<CR>', tabl_ext('force', opts, { desc = "LSP: Go to next diagnostic" }))
+    keymap_set_buf(bufnr, "n", "<leader>dll", "<Cmd>lua vim.diagnostic.setloclist()<CR>", tabl_ext('force', opts, { desc = "LSP: Send all diagnostics to a location list" }))
     keymap_set("n", "<space>di", function()
         if vim.diagnostic.config().virtual_text then
             vim.diagnostic.config({ virtual_text = false })
         else
             vim.diagnostic.config({ virtual_text = true })
         end
-    end, opts)
+    end, tabl_ext('force', opts, { desc = "LSP: Toggle diagnostic virtual text" }))
     vim.cmd([[ command! Format execute "lua vim.lsp.buf.format({async=true})" ]])
     keymap_set("n", "<space>F", function()
         vim.lsp.buf.format { async = true }
-    end, vim.tbl_extend("force", opts, { desc = "LSP format current buffer" }))
+    end, vim.tbl_extend("force", opts, { desc = "LSP: Format current buffer" }))
 end
 
 M.on_attach = function(client, bufnr)
