@@ -122,17 +122,17 @@ return {
                 winblend = 10,
                 previewer = false,
             })
-        end, { desc = "telescope: [/] Fuzzy search current buffer" })
+        end, { desc = "Telescope: Fuzzy find in the current buffer" })
 
         vim.keymap.set("n", "<leader>s/", function()
             builtin.live_grep {
                 grep_open_files = true,
-                prompt_title = "Live Grep in Open Files",
+                prompt_title = "Telescope: Live Grep in Open Files",
             }
-        end, { desc = "telescope: [S]earch [/] in Open Files" })
+        end, { desc = "Telescope: Search in Open Files" })
 
         vim.keymap.set("n", "<leader>fC", function()
             builtin.find_files { cwd = vim.fn.stdpath "config" }
-        end, { desc = "telescope: Search Neovim files" })
+        end, { desc = "Telescope: Search Neovim config files" })
     end,
 }
