@@ -50,18 +50,18 @@ return {
                     if vim.wo.diff then return ']c' end
                     vim.schedule(function() gs.next_hunk() end)
                     return '<Ignore>'
-                end, {expr=true})
+                end, {expr = true, desc = "GitSigns: Next hunk" })
                 map('n', '[h', function()
                     if vim.wo.diff then return '[c' end
                     vim.schedule(function() gs.prev_hunk() end)
                     return '<Ignore>'
-                end, {expr=true})
-                map('n', '<leader>ghp', gs.preview_hunk)
-                map('n', '<leader>ghs', gs.stage_hunk)
-                map('n', '<leader>ghu', gs.undo_stage_hunk)
-                map('n', '<leader>ghr', gs.reset_hunk)
-                map('n', '<leader>gb', function() gs.blame_line{full=true} end)
-                map('n', '<leader>gB', gs.toggle_current_line_blame)
+                end, {expr = true, desc = "GitSigns: Previous hunk" })
+                map('n', '<leader>ghp', gs.preview_hunk, { desc = "GitSigns: Preview hunk" })
+                map('n', '<leader>ghs', gs.stage_hunk, { desc = "GitSigns: Stage hunk" })
+                map('n', '<leader>ghu', gs.undo_stage_hunk, { desc = "GitSigns: Undo stage hunk" })
+                map('n', '<leader>ghr', gs.reset_hunk, { desc = "GitSigns: Reset hunk" })
+                map('n', '<leader>gb', function() gs.blame_line{full=true} end, { desc = "GitSigns: Line blame" })
+                map('n', '<leader>gB', gs.toggle_current_line_blame, { desc = "GitSigns: Toggle current line blame" })
             end
         }
     end,

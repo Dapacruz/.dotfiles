@@ -42,6 +42,6 @@ return {
             if filetype == "noice" then
                 vim.cmd.normal("G")
             end
-        end)
+        end, { desc = "Noice: Show messages" })
     end
 }
