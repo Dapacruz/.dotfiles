@@ -27,10 +27,15 @@ export HISTCONTROL=ignorespace
 export HISTSIZE=100000
 export SAVEHIST=100000
 
-setopt HIST_IGNORE_ALL_DUPS  # do not put duplicated command into history list
-setopt HIST_SAVE_NO_DUPS  # do not save duplicated command
-setopt HIST_REDUCE_BLANKS  # remove unnecessary blanks
-setopt INC_APPEND_HISTORY_TIME  # append command to history file immediately after execution
+
+# Zsh options
+setopt EXTENDED_HISTORY # Write the history file in the ":start:elapsed;command" format.
+setopt HIST_BEEP # Beep when accessing nonexistent history.
+setopt HIST_IGNORE_ALL_DUPS # do not put duplicated command into history list
+setopt HIST_REDUCE_BLANKS # Remove superfluous blanks before recording entry.
+setopt HIST_REDUCE_BLANKS # remove unnecessary blanks
+setopt HIST_SAVE_NO_DUPS # do not save duplicated command
+setopt INC_APPEND_HISTORY_TIME # append command to history file immediately after execution
 
 
 # GPG
