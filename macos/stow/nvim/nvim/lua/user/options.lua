@@ -47,6 +47,7 @@ vim.opt.undolevels = 700
 vim.opt.updatetime = 50 -- Having longer updatetime (default is 4000 ms = 4 s) leads to noticeable delays and poor user experience
 vim.opt.wildmode = "longest:full,full"
 vim.opt.wrap = false
+vim.opt.laststatus = 3
 
 -- Enable vim-visual-multi mouse mappings
 vim.g.VM_mouse_mappings = 1

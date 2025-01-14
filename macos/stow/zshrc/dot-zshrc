@@ -21,9 +21,16 @@ export EDITOR=/opt/homebrew/bin/nvim
 export VISUAL=/opt/homebrew/bin/nvim
 export GOOS=darwin
 export GOOGLE_APPLICATION_CREDENTIALS=~/PyPi-42f44041fd99.json
-export HISTCONTROL=ignorespace
 export WORDCHARS='*?_-.[]~=&;!#$%^(){}<>|'
 export XDG_CONFIG_HOME="$HOME/.config"
+export HISTCONTROL=ignorespace
+export HISTSIZE=100000
+export SAVEHIST=100000
+
+setopt HIST_IGNORE_ALL_DUPS  # do not put duplicated command into history list
+setopt HIST_SAVE_NO_DUPS  # do not save duplicated command
+setopt HIST_REDUCE_BLANKS  # remove unnecessary blanks
+setopt INC_APPEND_HISTORY_TIME  # append command to history file immediately after execution
 
 
 # GPG
