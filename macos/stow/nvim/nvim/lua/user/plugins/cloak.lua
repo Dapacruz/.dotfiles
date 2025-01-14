@@ -22,5 +22,8 @@ return {
                 },
             },
         })
+
+        vim.keymap.set("n", "<leader>ct", "<Cmd>CloakToggle<CR>", { desc = "Cloak: Toggle"})
+        vim.keymap.set("n", "<leader>cp", "<Cmd>CloakPreviewLine<CR>", { desc = "Cloak: Preview line"})
     end
 }

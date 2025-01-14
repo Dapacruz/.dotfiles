@@ -97,8 +97,8 @@ keymap("n", "<leader>bm", "<Cmd>b#<CR>", tabl_ext('force', opts, { desc = "Previ
 -- Obsidian
 keymap("n", "<leader>of", "<Cmd>ObsidianQuickSwitch<CR>", tabl_ext('force', opts, { desc = "Obsidian: Find files" }))
 keymap("n", "<leader>ot", "<Cmd>ObsidianTags<CR>", tabl_ext('force', opts, { desc = "Obsidian: Find tags" }))
-keymap("n", "<leader>on", ":ObsidianNew ", { noremap = true, silent = false, desc = "Obsidian: Create new file" })
-keymap("n", "<leader>or", ":ObsidianRename ", { noremap = true, silent = false, desc = "Obsidian: Rename file" })
+keymap("n", "<leader>on", "<Cmd>ObsidianNew<CR>", { noremap = true, silent = false, desc = "Obsidian: Create new file" })
+keymap("n", "<leader>or", "<Cmd>ObsidianRename<CR>", { noremap = true, silent = false, desc = "Obsidian: Rename file" })
 keymap("n", "<leader>off", "<Cmd>ObsidianFollowLink<CR>", tabl_ext('force', opts, { desc = "Obsidian: Follow link" }))
 keymap("n", "<leader>ofv", "<Cmd>ObsidianFollowLink vsplit<CR>", tabl_ext('force', opts, { desc = "Obsidian: Follow link in a vertical split" }))
 keymap("n", "<leader>ofh", "<Cmd>ObsidianFollowLink hsplit<CR>", tabl_ext('force', opts, { desc = "Obsidian: Follow link in a horizontal split" }))
