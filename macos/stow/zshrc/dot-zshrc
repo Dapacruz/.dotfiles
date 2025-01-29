@@ -26,9 +26,10 @@ export XDG_CONFIG_HOME="$HOME/.config"
 export HISTCONTROL=ignorespace
 export HISTSIZE=100000
 export SAVEHIST=100000
+export VI_MODE_SET_CURSOR=true
 
 
-# Zsh options
+# # Zsh options
 setopt EXTENDED_HISTORY # Write the history file in the ":start:elapsed;command" format.
 setopt HIST_BEEP # Beep when accessing nonexistent history.
 setopt HIST_IGNORE_ALL_DUPS # do not put duplicated command into history list
@@ -48,6 +49,7 @@ HYPHEN_INSENSITIVE="true"
 DISABLE_AUTO_UPDATE="true"
 COMPLETION_WAITING_DOTS="true"
 plugins=(
+    vi-mode
     ansible
     docker
     docker-compose
@@ -103,6 +105,7 @@ alias python3="python${PYTHON_VERSION}"
 alias python=python3
 alias rg="kitten hyperlinked_grep --smart-case"
 alias rm=trash
+alias sed="sed -E"
 alias t=t.sh
 alias ta='tmux attach || tmux'
 alias tn='tmux new -s $(pwd | sed -E '\''s/.*\/\.?//g'\'') || tmux a -t $(pwd | sed -E '\''s/.*\/\.?//g'\'')'

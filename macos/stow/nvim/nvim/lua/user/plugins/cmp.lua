@@ -49,6 +49,7 @@ return {
                 Event = "",
                 Operator = "",
                 TypeParameter = "",
+                Supermaven = "",
             }
             -- find more here: https://www.nerdfonts.com/cheat-sheet
 
@@ -112,6 +113,7 @@ return {
                     vim_item.kind = string.format("%s", kind_icons[vim_item.kind])
                     -- vim_item.kind = string.format('%s %s', kind_icons[vim_item.kind], vim_item.kind) -- This concatonates the icons with the name of the item kind
                     vim_item.menu = ({
+                        supermaven = "[SuperMaven]",
                         nvim_lsp = "[LSP]",
                         luasnip = "[Snippet]",
                         buffer = "[Buffer]",
@@ -121,6 +123,7 @@ return {
                 end,
             },
             sources = {
+                { name = "supermaven" },
                 { name = "nvim_lsp" },
                 { name = "nvim_lua" },
                 { name = "luasnip" },

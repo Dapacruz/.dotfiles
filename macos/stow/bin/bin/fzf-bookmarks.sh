@@ -12,4 +12,4 @@ then
     url=$(/opt/homebrew/bin/jq --color-output -r --arg BOOKMARK "$bookmark" '.roots.bookmark_bar.children[]?.children[]? | select(.name==$BOOKMARK) | .url' $bookmarks)
 fi
 
-open  $url
+open $url
