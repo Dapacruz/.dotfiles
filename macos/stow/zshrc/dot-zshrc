@@ -84,6 +84,13 @@ alias fwweb="panos-cli panorama get firewalls --not-tag staging,disable-ansible 
 alias getip='ifconfig | egrep -v "\s+(options|ether|inet6)" | egrep -A1 "^(en0|en10)"; echo --; ifconfig | egrep -A1 "^(utun3)"; echo --; echo -n "Internet IP Address: "; curl ipecho.net/plain; echo'
 alias grep='egrep --color'
 alias icat='kitten icat'
+alias k=kubectl
+alias kc="kubectl config get-contexts | grep -v ^CURRENT | awk '{print \$2}' | fzf | xargs kubectl config use-context"
+alias kga='kubectl get all'
+alias kgA='kubectl get all -A'
+alias kgc='kubectl config get-contexts'
+alias kgp='kubectl get pods'
+alias kn="kubectl get ns | grep -v ^NAME | awk '{print \$1}' | fzf | xargs kubectl config set-context --current --namespace"
 alias lf=lfcd
 alias lg=lazygit
 alias l='lsd --group-directories-first --hyperlink=always -la'
@@ -93,7 +100,6 @@ alias mkenv='eval $(minikube -p minikube docker-env)'
 alias mkstart='minikube start --driver=qemu && eval $(minikube -p minikube docker-env)'
 alias mkstop='minikube stop'
 alias mtr='sudo mtr'
-alias pan-os-php='php -r "require_once '\''$HOME/pan-configurator/utils/pan-os-php.php'\'';" $@'
 alias pip3.12="${HOME}/venv/3.12/bin/pip"
 alias pip3.13="${HOME}/venv/3.13/bin/pip"
 alias pip3="python${PYTHON_VERSION} -m pip"

@@ -5,6 +5,7 @@ macos/stow/tmux/tmux/plugins
 macos/stow/cheat/cheat/cheatsheets/community
 macos/stow/karabiner/karabiner/automatic_backups
 macos/stow/raycast/raycast/extensions
+macos/stow/zsh.d/dot-zsh.d/_podman
 
 macos/stow/bin/bin
 !macos/stow/bin/bin/cht.sh
