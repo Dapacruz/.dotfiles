@@ -272,6 +272,9 @@ _fzf_compgen_dir() {
 
 source <(fzf --zsh)
 
+# Make "kubecolor" borrow the same completion logic as "kubectl"
+compdef kubecolor=kubectl
+
 
 ### MANAGED BY RANCHER DESKTOP START (DO NOT EDIT)
 export PATH="/Users/dacruz/.rd/bin:$PATH"
