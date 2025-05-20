@@ -2,6 +2,7 @@ format = """
 $username\
 $hostname\
 $directory\
+$kubernetes\
 $golang\
 $rust\
 $python\
@@ -15,6 +16,13 @@ $nodejs\
 $cmd_duration $time\
 $line_break\
 $character"""
+
+[kubernetes]
+disabled = false
+# detect_files = ['k8s']
+format = '[$symbol](blue) [$cluster]($style) [\[$namespace\]](blue) '
+symbol = ""
+style = "bold white"
 
 [nodejs]
 format = "[$symbol($version )]($style)"
