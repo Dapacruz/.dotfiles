@@ -20,8 +20,7 @@ $character"""
 [kubernetes]
 disabled = false
 # detect_files = ['k8s']
-# format = '[$symbol](blue) [$cluster]($style) [](blue) $namespace '
-format = '[$symbol](blue) [$cluster]($style) [{](blue)$namespace[}](blue) '
+format = '[$symbol](blue) [$cluster]($style)[{](blue)$namespace[}](blue) '
 symbol = ""
 style = "bold white"
 
