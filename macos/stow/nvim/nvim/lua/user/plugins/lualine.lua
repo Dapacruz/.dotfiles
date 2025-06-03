@@ -189,6 +189,14 @@ return {
         }
 
         -- Add components to right sections
+        ins_right {
+            function ()
+                local key_value = require("yaml_nvim").get_yaml_key()
+                if key_value == nil then return "" end
+                return key_value
+            end
+        }
+
         ins_right { 'location' }
 
         ins_right { 'progress', color = { fg = colors.fg, gui = 'bold' } }
