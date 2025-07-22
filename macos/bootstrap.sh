@@ -13,4 +13,4 @@ then
 fi
 
 echo "Executing Ansible playbook ..."
-ansible-pull -U https://github.com/Dapacruz/.dotfiles macos/ansible/playbooks/deploy-dotfiles.yml
+ansible-pull -U https://raw.githubusercontent.com/Dapacruz/.dotfiles/refs/heads/master/macos/ansible/playbooks/deploy-dotfiles.yml
