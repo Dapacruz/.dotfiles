@@ -77,7 +77,6 @@ keymap("n", "<leader>sbd", "<Cmd>bp|bd #<CR>", tabl_ext('force', opts, { desc = 
 keymap("n", "<leader>so", "<Cmd>only<CR>", tabl_ext('force', opts, { desc = "Close other split windows" }))
 keymap("n", "<leader>sz", "<Cmd>MaximizerToggle<CR>", tabl_ext('force', opts, { desc = "Maximize/restore current split (vim-maximizer)" }))
 
-
 -- Resize with arrows
 keymap("n", "<M-k>", "<Cmd>resize +2<CR>", tabl_ext('force', opts, { desc = "Resize window height" }))
 keymap("n", "<M-j>", "<Cmd>resize -2<CR>", tabl_ext('force', opts, { desc = "Resize window height" }))
@@ -126,6 +125,12 @@ keymap("n", "<leader>lt", "empty(filter(getwininfo(), 'v:val.loclist')) ? ':lope
 
 -- Save and source file
 keymap("n", "<leader><leader>w", "<Cmd>write | source<CR>", tabl_ext('force', opts, { desc = "Save and source file" }))
+
+-- Vim Visual Multi
+vim.g.VM_maps = {
+    ["Add Cursor Down"] = '<C-M-j>',
+    ["Add Cursor Up"] = '<C-M-k>'
+}
 
 -- If you only want these mappings for toggle term use term://*toggleterm#* instead
 -- vim.cmd("autocmd! TermOpen term://*toggleterm#* lua set_terminal_keymaps()")

@@ -52,10 +52,6 @@ vim.opt.laststatus = 3
 -- Enable vim-visual-multi mouse mappings
 vim.g.VM_mouse_mappings = 1
 vim.g.VM_theme = "codedark"
--- vim.g.VM_maps = {
---     ["Find Under"] = "<C-m>",
---     ["Find Subword Under"] = "<C-d>",
--- }
 
 -- Disable netrw
 vim.g.loaded_netrw = 1
