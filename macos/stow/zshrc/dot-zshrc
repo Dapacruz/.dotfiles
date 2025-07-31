@@ -9,8 +9,9 @@ PATH="${HOME}/.cargo/bin:${PATH}"
 # Homebrew
 eval "$(/opt/homebrew/bin/brew shellenv)"
 # Python
-PYTHON_VERSION="3.12"
-PATH="${HOME}/venv/${PYTHON_VERSION}/bin:${PATH}"
+PYTHON_VERSION="3.13"
+PATH="${HOME}/venv/3.12/bin:${PATH}"
+PATH="${HOME}/venv/3.13/bin:${PATH}"
 PATH="${HOME}/.local/bin:${PATH}"
 export PATH
 
@@ -100,13 +101,13 @@ alias mkenv='eval $(minikube -p minikube docker-env)'
 alias mkstart='minikube start --driver=qemu && eval $(minikube -p minikube docker-env)'
 alias mkstop='minikube stop'
 alias mtr='sudo mtr'
-alias pip3.12="${HOME}/venv/3.12/bin/pip"
-alias pip3.13="${HOME}/venv/3.13/bin/pip"
+# alias pip3.12="${HOME}/venv/3.12/bin/pip"
+# alias pip3.13="${HOME}/venv/3.13/bin/pip"
 alias pip3="python${PYTHON_VERSION} -m pip"
 alias pip=pip3
 alias pp='curl http://parrot.live'
-alias python3.12="${HOME}/venv/3.12/bin/python"
-alias python3.13="${HOME}/venv/3.13/bin/python"
+# alias python3.12="${HOME}/venv/3.12/bin/python"
+# alias python3.13="${HOME}/venv/3.13/bin/python"
 alias python3="python${PYTHON_VERSION}"
 alias python=python3
 alias rg="kitten hyperlinked_grep --smart-case"
