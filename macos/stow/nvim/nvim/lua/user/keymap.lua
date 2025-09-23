@@ -77,6 +77,12 @@ keymap("n", "<leader>sbd", "<Cmd>bp|bd #<CR>", tabl_ext('force', opts, { desc = 
 keymap("n", "<leader>so", "<Cmd>only<CR>", tabl_ext('force', opts, { desc = "Close other split windows" }))
 keymap("n", "<leader>sz", "<Cmd>MaximizerToggle<CR>", tabl_ext('force', opts, { desc = "Maximize/restore current split (vim-maximizer)" }))
 
+-- File navigation
+keymap("n", "<C-f>", "<C-f>zz", tabl_ext('force', opts, { desc = "Page down and center" }))
+keymap("n", "<C-b>", "<C-b>zz", tabl_ext('force', opts, { desc = "Page up and center" }))
+keymap("n", "<C-d>", "<C-d>zz", tabl_ext('force', opts, { desc = "Half page down and center" }))
+keymap("n", "<C-u>", "<C-u>zz", tabl_ext('force', opts, { desc = "Half page up and center" }))
+
 -- Resize with arrows
 keymap("n", "<M-k>", "<Cmd>resize +2<CR>", tabl_ext('force', opts, { desc = "Resize window height" }))
 keymap("n", "<M-j>", "<Cmd>resize -2<CR>", tabl_ext('force', opts, { desc = "Resize window height" }))

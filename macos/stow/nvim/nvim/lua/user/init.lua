@@ -50,6 +50,7 @@ vim.filetype.add({
     pattern = {
         [".+/playbooks/.+%.ya?ml"] = "yaml.ansible",
         [".+/playbooks/tasks/.+%.ya?ml"] = "yaml.ansible",
+        [".+/ansible/inventory%.ya?ml"] = "yaml.ansible",
     },
 })
 
@@ -70,7 +71,14 @@ autocmd({ "BufWritePost" }, {
 autocmd({ "BufWritePost" }, {
     group = user_group,
     pattern = "*.py",
-    command = "silent !black --quiet %",
+    command = "silent !ruff format --quiet",
+})
+
+-- Format Python imports
+autocmd({ "BufWritePost" }, {
+    group = user_group,
+    pattern = "*.py",
+    command = "silent !ruff check --select I --fix",
 })
 
 autocmd({ "BufEnter", "BufWinEnter", "TabEnter" }, {

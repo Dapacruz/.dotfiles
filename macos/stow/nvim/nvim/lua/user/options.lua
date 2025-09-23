@@ -24,7 +24,7 @@ vim.opt.matchpairs:append("<:>")
 vim.opt.mouse = "a" -- On OSX press ALT and click mouse and backspace
 vim.opt.number = true -- Show line numbers
 vim.opt.relativenumber = true
-vim.opt.scrolloff = 15
+vim.opt.scrolloff = 8
 vim.opt.shell = "/opt/homebrew/bin/zsh"
 vim.opt.shiftround = true
 vim.opt.shiftwidth = 4
