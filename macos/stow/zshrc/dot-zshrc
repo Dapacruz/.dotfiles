@@ -281,3 +281,6 @@ source $HOME/.zshrc.local
 
 export WORDCHARS='*?_-.[]~=&;!#$%^(){}<>|'
 
+# Added by LM Studio CLI (lms)
+export PATH="$PATH:/Users/dacruz/.lmstudio/bin"
+# End of LM Studio CLI section
