@@ -9,7 +9,7 @@
       register: result
       changed_when: "'Nothing to do.' not in result.stdout"
 
-    - name: Install apps
+    - name: Install APT packages
       apt:
         name:
           - build-essential
@@ -32,26 +32,28 @@
         shell: /usr/bin/zsh
       become: true
 
-    - name: Download Oh My Zsh installation script
-      get_url:
-        url: https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh
-        dest: /tmp/install_ohmyzsh.sh
-        mode: '0755'
-      become: false
-
-    - name: Check if Oh My Zsh is Installed
+    - name: Check if Oh My Zsh is installed
       ansible.builtin.stat:
         path: ~/.oh-my-zsh
       register: ohmyzsh
 
-    - name: Run Oh My Zsh installation script (unattended)
-      command: sh /tmp/install_ohmyzsh.sh --unattended
-      become: false
-      register: ohmyzsh_result
-      failed_when: "'FAILED' in ohmyzsh_result.stderr"
+    - name: Install Oh My Zsh
+      block:
+        - name: Download Oh My Zsh installation script
+          get_url:
+            url: https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh
+            dest: /tmp/install_ohmyzsh.sh
+            mode: '0755'
+          become: false
+
+        - name: Run Oh My Zsh installation script
+          command: sh /tmp/install_ohmyzsh.sh --unattended
+          become: false
+          register: ohmyzsh_result
+          failed_when: "'FAILED' in ohmyzsh_result.stderr"
       when: not ohmyzsh.stat.exists
 
-    - name: Check if Homebrew is Installed
+    - name: Check if Homebrew is installed
       ansible.builtin.stat:
         path: /home/linuxbrew/.linuxbrew/bin/brew
       register: homebrew

@@ -8,5 +8,5 @@ My Dotfiles
 
 ### Bootstrap Linux
 ```bash
-sudo apt update && sudo apt install -y ansible curl git && sudo /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Dapacruz/.dotfiles/master/linux/bootstrap.sh)"
+sudo apt update && sudo apt install -y ansible curl git && /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Dapacruz/.dotfiles/master/linux/bootstrap.sh)"
 ```
