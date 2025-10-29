@@ -1,0 +1,128 @@
+tap "felixkratz/formulae"
+tap "fluxcd/tap"
+tap "homebrew/bundle"
+tap "homebrew/services"
+tap "jesseduffield/lazygit"
+tap "koekeishiya/formulae"
+tap "nikitabobko/tap"
+tap "teamookla/speedtest"
+# Simple, modern, secure file encryption
+brew "age"
+# Automate deployment, configuration, and upgrading
+brew "ansible"
+# Utility to check whether MAC addresses are already taken on a LAN
+brew "arping"
+# Remove large files or passwords from Git history like git-filter-branch
+brew "bfg"
+# Resource monitor. C++ version and continuation of bashtop and bpytop
+brew "btop"
+# Console Matrix
+brew "cmatrix"
+# More intuitive version of du in rust
+brew "dust"
+# Simple, fast and user-friendly alternative to find
+brew "fd"
+# Banner-like program prints strings as ASCII art
+brew "figlet"
+# Scriptable ping program for checking if multiple hosts are up
+brew "fping"
+# Command-line fuzzy finder written in Go
+brew "fzf"
+# GitHub command-line tool
+brew "gh"
+# Distributed revision control system
+brew "git"
+# Syntax-highlighting pager for git and diff output
+brew "git-delta"
+# Open source programming language to build simple/reliable/efficient software
+brew "go"
+# Ping, but with a graph
+brew "gping"
+# User-friendly cURL replacement (command-line HTTP client)
+brew "httpie"
+# Display an interface's bandwidth usage
+brew "iftop"
+# Calculate various network masks, etc. from a given IP address
+brew "ipcalc"
+# Update of iperf: measures TCP, UDP, and SCTP bandwidth
+brew "iperf3"
+# Lightweight and flexible command-line JSON processor
+brew "jq"
+# Kubernetes CLI To Manage Your Clusters In Style!
+brew "k9s"
+# Colorize your kubectl output
+brew "kubecolor"
+# Simple terminal UI for git commands
+brew "lazygit"
+# Rainbows and unicorns in your console!
+brew "lolcat"
+# Clone of ls with colorful output, file type icons, and more
+brew "lsd"
+# Ambitious Vim-fork focused on extensibility and agility
+brew "neovim"
+# Port scanning utility for large networks
+brew "nmap"
+# Platform built on V8 to build network applications
+brew "node"
+# Modern replacement for ps written in Rust
+brew "procs"
+# Search tool like grep and The Silver Searcher
+brew "ripgrep"
+# Safe, concurrent, practical language
+brew "rust"
+# Intuitive find & replace CLI
+brew "sd"
+# Editor of encrypted files
+brew "sops"
+# Cross-shell prompt for astronauts
+brew "starship"
+# Organize software neatly under a single directory tree (e.g. /usr/local)
+brew "stow"
+# Terminal multiplexer
+brew "tmux"
+# Program that allows you to count code, quickly
+brew "tokei"
+# Tree command, improved
+brew "tre-command"
+# Extremely fast Python package installer and resolver, written in Rust
+brew "uv"
+# Internet file retriever
+brew "wget"
+# XML command-line utilities
+brew "xmlstarlet"
+# Command-line XML and HTML beautifier and content extractor
+brew "xq"
+# Process YAML, JSON, XML, CSV and properties documents from the CLI
+brew "yq"
+# Shell extension to navigate your filesystem faster
+brew "zoxide"
+# UNIX shell (command interpreter)
+brew "zsh"
+# Fish shell like syntax highlighting for zsh
+brew "zsh-syntax-highlighting"
+cask "font-victor-mono-nerd-font"
+# Password manager app
+cask "keepassxc"
+# GPU-based terminal emulator
+cask "kitty"
+# Knowledge base that works on top of a local folder of plain text Markdown files
+cask "obsidian"
+# Collaboration platform for API development
+cask "postman"
+# Command-line shell and scripting language
+cask "powershell"
+# Control your tools with a few keystrokes
+cask "raycast"
+# Development environment
+cask "vagrant"
+cask "vagrant-manager"
+# Web browser with built-in email client focusing on customization and control
+cask "vivaldi"
+# Multimedia player
+cask "vlc"
+go "github.com/mdempsky/gocode"
+go "golang.org/x/tools/gopls"
+go "github.com/x-motemen/gore/cmd/gore"
+go "github.com/jonasvinther/medusa"
+go "honnef.co/go/tools/cmd/staticcheck"
+go "github.com/traefik/yaegi/cmd/yaegi"

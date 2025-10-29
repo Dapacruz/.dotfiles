@@ -1,3 +1,3 @@
 #!/usr/bin/env bash
 
-brew bundle dump --describe --file $1
+brew bundle dump --force --describe --file $1
