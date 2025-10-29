@@ -1,0 +1,167 @@
+---
+- name: Deploy .dotfiles on Linux
+  hosts: localhost
+  gather_facts: true
+
+  tasks:
+    - name: Install Ansible Galaxy community.general collection
+      command: ansible-galaxy collection install community.general
+      register: result
+      changed_when: "'Nothing to do.' not in result.stdout"
+
+    - name: Install apps
+      apt:
+        name:
+          - build-essential
+          - curl
+          - zsh
+        state: present
+        update_cache: yes
+      become: true
+
+    - name: Clone .dotfiles repository
+      ansible.builtin.git:
+        repo: https://github.com/Dapacruz/.dotfiles.git
+        dest: ~/.dotfiles
+        clone: yes
+        update: no
+
+    - name: Set default shell to Zsh
+      user:
+        name: parallels
+        shell: /usr/bin/zsh
+      become: true
+
+    - name: Download Oh My Zsh installation script
+      get_url:
+        url: https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh
+        dest: /tmp/install_ohmyzsh.sh
+        mode: '0755'
+      become: false
+
+    - name: Check if Oh My Zsh is Installed
+      ansible.builtin.stat:
+        path: ~/.oh-my-zsh
+      register: ohmyzsh
+
+    - name: Run Oh My Zsh installation script (unattended)
+      command: sh /tmp/install_ohmyzsh.sh --unattended
+      become: false
+      register: ohmyzsh_result
+      failed_when: "'FAILED' in ohmyzsh_result.stderr"
+      when: not ohmyzsh.stat.exists
+
+    - name: Check if Homebrew is Installed
+      ansible.builtin.stat:
+        path: /home/linuxbrew/.linuxbrew/bin/brew
+      register: homebrew
+
+    - name: Install Homebrew
+      block:
+        - name: Download Homebrew installation script
+          get_url:
+            url: https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh
+            dest: /tmp/install_homebrew.sh
+            mode: '0755'
+          become: false
+
+        - name: Run Homebrew installation script
+          ansible.builtin.shell: CI=1 /tmp/install_homebrew.sh
+          args:
+            executable: /bin/bash
+          become: false
+          register: homebrew_result
+          failed_when: "'FAILED' in homebrew_result.stderr"
+
+        - name: Update .zshrc
+          ansible.builtin.lineinfile:
+            path: /home/{{ ansible_user_id }}/.zshrc
+            line: |
+
+                    eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"
+      when: not homebrew.stat.exists
+
+    - name: Install Homebrew packages
+      community.general.homebrew:
+        state: present
+        install_options:
+          - formula
+          - quiet
+        name:
+          - bat
+          - bfg
+          - cmatrix
+          - dust
+          - fd
+          - fping
+          - fzf
+          - gcc
+          - go
+          - iftop
+          - ipcalc
+          - iperf3
+          - jq
+          - lsd
+          - mtr
+          - neovim
+          - netpbm
+          - nload
+          - nmap
+          - node
+          - nuttcp
+          - procs
+          - ripgrep
+          - rust
+          - sd
+          - starship
+          - stow
+          - stylua
+          - tmux
+          - tokei
+          - tre-command
+          - utf8proc
+          - wget
+          - xmlstarlet
+          - xq
+          - yarn
+          - yq
+          - zoxide
+          - zsh-vi-mode
+
+    #    - name: Install Homebrew casks
+    #      community.general.homebrew_cask:
+    #        state: present
+    #        install_options:
+    #          - quiet
+    #        name:
+    #          - amethyst
+    #          - chromedriver
+    #          - karabiner-elements
+    #          - keepassxc
+    #          - keycastr
+    #          - kitty
+    #          - maccy
+    #          - neovide
+    #          - powershell
+    #          - rar
+    #          - raycast
+    #          - spacelauncher
+    #          - vagrant
+    #          - vagrant-manager
+    #          - vivaldi
+    #          - xquartz
+
+    #    - name: Install Homebrew taps
+    #      community.general.homebrew_tap:
+    #        state: present
+    #        name:
+    #          - homebrew/bundle
+    #          - homebrew/services
+    #          - koekeishiya/formulae
+    #          - teamookla/speedtest
+
+    #    - name: Stow dotfiles
+    #      ansible.builtin.shell:
+    #        cmd: ~/.dotfiles/macos/stow/stow.sh
+    #        chdir: ~/.dotfiles/macos/stow
+
