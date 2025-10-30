@@ -107,6 +107,7 @@
           - kubectl
           - lazygit
           - lsd
+          - luarocks
           - mtr
           - neovim
           - netpbm
