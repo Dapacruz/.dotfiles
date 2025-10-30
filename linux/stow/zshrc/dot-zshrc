@@ -4,7 +4,7 @@ PATH="${HOME}/go/bin:${PATH}"
 # Rust modules install to user
 PATH="${HOME}/.cargo/bin:${PATH}"
 # Homebrew
-eval "$(/opt/homebrew/bin/brew shellenv)"
+eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"
 # Python
 PYTHON_VERSION="3.13"
 PATH="${HOME}/venv/3.12/bin:${PATH}"
@@ -15,8 +15,8 @@ export PATH
 
 # Environment variables
 export DISPLAY=:0
-export EDITOR=/opt/homebrew/bin/nvim
-export VISUAL=/opt/homebrew/bin/nvim
+export EDITOR=/home/linuxbrew/.linuxbrew/bin/nvim
+export VISUAL=/home/linuxbrew/.linuxbrew/bin/nvim
 export GOOS=darwin
 export GOOGLE_APPLICATION_CREDENTIALS=~/PyPi-42f44041fd99.json
 export XDG_CONFIG_HOME="$HOME/.config"
@@ -58,13 +58,13 @@ plugins=(
     rsync
     sudo
     vscode
-    zsh-syntax-highlighting
 )
 source $ZSH/oh-my-zsh.sh
+source /home/linuxbrew/.linuxbrew/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
 
 
 # Aliases
-alias bfg='/opt/homebrew/bin/bfg'
+alias bfg='/home/linuxbrew/.linuxbrew/bin/bfg'
 alias cat='bat'
 alias cmatrix='cmatrix -ab'
 alias dig='dig +search'
@@ -122,11 +122,11 @@ alias vim=nvim
 
 
 # Initialize the Starship prompt
-eval "$(/opt/homebrew/bin/starship init zsh)"
+eval "$(/home/linuxbrew/.linuxbrew/bin/starship init zsh)"
 
 
 # Execute neofetch
-# /opt/homebrew/bin/neofetch
+# /home/linuxbrew/.linuxbrew/bin/neofetch
 
 
 # Load custom Zsh functions
@@ -174,7 +174,7 @@ eval "$(zoxide init zsh)"
 
 
 # Rust package manager (Cargo)
-. "${HOME}/.cargo/env"
+# . "${HOME}/.cargo/env"
 
 
 # Node Version Manager

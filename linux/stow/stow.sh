@@ -1,5 +1,8 @@
 #!/usr/bin/env bash
 
+STOW_DIR="$(cd "$(dirname "$0")" && pwd)"
+COMMON_STOW_DIR="$HOME/.dotfiles/common/stow"
+
 ZSHRC_LOCAL="$HOME/.zshrc.local"
 if [ ! -f $ZSHRC_LOCAL ]
 then
@@ -9,23 +12,20 @@ fi
 
 source configs.sh
 
-stow() {
+process_stows() {
     local configs_arr="$1"
     eval "local configs=(\"\${${configs_arr}[@]}\")"
+
     local package_dir="$2"
+    cd $package_dir
+
     for c in ${configs[@]}
     do
         target="$(dirname $c)"
         config_name="$(basename $c)"
 
         # Remove config_name leading dot if one exists
-        package="$package_dir/$(sed -E 's/^\.(.*)/\1/' <<< $config_name)"
-
-        # echo $c
-        # echo $target
-        # echo $config_name
-        # echo $package
-        # echo
+        package="$(sed -E 's/^\.(.*)/\1/' <<< $config_name)"
 
         # Create Stow package directory if it does not exist
         if [ ! -d $package ]
@@ -38,7 +38,7 @@ stow() {
             if [[ $config_name = .* ]]
             then
                 # Rename config directory leading dot to 'dot-'
-                mv $package/$config_name $package/dot-${package}
+                mv $package/$config_name $package/dot-$(sed -E 's/^\.(.*)/\1/' <<< $config_name)
             fi
         fi
 
@@ -54,6 +54,6 @@ stow() {
     done
 }
 
-stow common_configs "$HOME/.dotfiles/common/stow"
-# stow configs "."
+process_stows common_configs $COMMON_STOW_DIR
+process_stows configs $STOW_DIR
 

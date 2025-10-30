@@ -103,6 +103,7 @@
           - ipcalc
           - iperf3
           - jq
+          - kubectl
           - lsd
           - mtr
           - neovim
@@ -122,6 +123,7 @@
           - tokei
           - tre-command
           - utf8proc
+          - uv
           - wget
           - xmlstarlet
           - xq
@@ -129,6 +131,12 @@
           - yq
           - zoxide
           - zsh-vi-mode
+          - zsh-syntax-highlighting
+
+    - name: Stow dotfiles
+      ansible.builtin.shell:
+        cmd: ~/.dotfiles/linux/stow/stow.sh
+        chdir: ~/.dotfiles/linux/stow
 
     #    - name: Install Homebrew casks
     #      community.general.homebrew_cask:
@@ -152,18 +160,4 @@
     #          - vagrant-manager
     #          - vivaldi
     #          - xquartz
-
-    #    - name: Install Homebrew taps
-    #      community.general.homebrew_tap:
-    #        state: present
-    #        name:
-    #          - homebrew/bundle
-    #          - homebrew/services
-    #          - koekeishiya/formulae
-    #          - teamookla/speedtest
-
-    #    - name: Stow dotfiles
-    #      ansible.builtin.shell:
-    #        cmd: ~/.dotfiles/macos/stow/stow.sh
-    #        chdir: ~/.dotfiles/macos/stow
 
