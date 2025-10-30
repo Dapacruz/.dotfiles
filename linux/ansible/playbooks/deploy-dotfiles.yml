@@ -9,11 +9,36 @@
       register: result
       changed_when: "'Nothing to do.' not in result.stdout"
 
+    - name: Add Vivaldi APT repo
+      block:
+        - name: Download the Vivaldi repo key to /tmp
+          ansible.builtin.get_url:
+            url: https://repo.vivaldi.com/stable/linux_signing_key.pub
+            dest: /tmp/vivaldi-key.pub
+            mode: '0644'
+
+        - name: Convert Vivaldi key to binary .gpg
+          ansible.builtin.command:
+            cmd: "gpg --batch --dearmor -o /usr/share/keyrings/vivaldi-browser.gpg /tmp/vivaldi-key.pub"
+          args:
+            creates: /usr/share/keyrings/vivaldi-browser.gpg
+          become: true
+
+        - name: Add the APT repository
+          ansible.builtin.apt_repository:
+            repo: "deb [signed-by=/usr/share/keyrings/vivaldi-browser.gpg] https://repo.vivaldi.com/stable/deb/ stable main"
+            state: present
+            filename: "vivaldi"
+            update_cache: yes
+          become: true
+
     - name: Install APT packages
       apt:
         name:
           - build-essential
           - curl
+          - keepassxc
+          - vivaldi-stable
           - zsh
         state: present
         update_cache: yes
@@ -28,7 +53,7 @@
 
     - name: Set default shell to Zsh
       user:
-        name: parallels
+        name: "{{ ansible_user_id }}"
         shell: /usr/bin/zsh
       become: true
 
@@ -52,6 +77,27 @@
           register: ohmyzsh_result
           failed_when: "'FAILED' in ohmyzsh_result.stderr"
       when: not ohmyzsh.stat.exists
+
+    - name: Check if Kitty is installed
+      ansible.builtin.stat:
+        path: ~/.local/kitty.app
+      register: kitty
+
+    - name: Install Kitty terminal
+      block:
+        - name: Download Kitty installation script
+          get_url:
+            url: https://sw.kovidgoyal.net/kitty/installer.sh
+            dest: /tmp/install_kitty.sh
+            mode: '0755'
+          become: false
+
+        - name: Run Kitty installation script
+          command: sh /tmp/install_kitty.sh
+          become: false
+          register: kitty_result
+          failed_when: "'FAILED' in kitty_result.stderr"
+      when: not kitty.stat.exists
 
     - name: Check if Homebrew is installed
       ansible.builtin.stat:
@@ -116,6 +162,7 @@
           - node
           - nuttcp
           - procs
+          - python@3.13
           - ripgrep
           - rust
           - sd
@@ -135,19 +182,29 @@
           - zsh-vi-mode
           - zsh-syntax-highlighting
 
+    - name: Check if venv dir exists
+      ansible.builtin.stat:
+        path: ~/venv
+      register: venv
+
+    - name: Create Python venv
+      block:
+        - name: Create Python venv dir
+          ansible.builtin.file:
+            path: ~/venv
+            state: directory
+
+        - name: Create Python venv
+          ansible.builtin.shell: python3.13 -m venv ~/venv/3.13
+          args:
+            executable: /bin/bash
+          become: false
+          register: python_result
+          failed_when: "'FAILED' in python_result.stderr"
+      when: not venv.stat.exists
+
     - name: Stow dotfiles
       ansible.builtin.shell:
         cmd: ~/.dotfiles/linux/stow/stow.sh
         chdir: ~/.dotfiles/linux/stow
-
-    #    - name: Install Homebrew casks
-    #      community.general.homebrew_cask:
-    #        state: present
-    #        install_options:
-    #          - quiet
-    #        name:
-    #          - keepassxc
-    #          - kitty
-    #          - raycast
-    #          - vivaldi
 

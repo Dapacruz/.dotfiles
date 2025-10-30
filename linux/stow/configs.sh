@@ -2,16 +2,17 @@
 
 
 configs=(
-    "$HOME/.zshrc"
-    "$HOME/.zsh.funcs"
-    "$HOME/.zsh.d"
+    "$HOME/.config/nvim"
     "$HOME/.local/bin"
-    "$HOME/.config/starship.toml"
-    "$HOME/.config/kitty"
-    "$HOME/.config/tmux"
-    "$HOME/.config/lazygit"
+    "$HOME/.zsh.d"
+    "$HOME/.zsh.funcs"
+    "$HOME/.zshrc"
 )
 
 common_configs=(
-    "$HOME/.config/nvim"
+    "$HOME/.config/git"
+    "$HOME/.config/kitty"
+    "$HOME/.config/lazygit"
+    "$HOME/.config/starship.toml"
+    "$HOME/.config/tmux"
 )

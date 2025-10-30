@@ -107,7 +107,6 @@ alias pp='curl http://parrot.live'
 alias python3="python${PYTHON_VERSION}"
 alias python=python3
 alias rg="kitten hyperlinked_grep --smart-case"
-alias rm=trash
 alias sed="sed -E"
 alias t=t.sh
 alias ta='tmux attach || tmux'
