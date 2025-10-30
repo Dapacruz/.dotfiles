@@ -145,20 +145,8 @@
     #        install_options:
     #          - quiet
     #        name:
-    #          - amethyst
-    #          - chromedriver
-    #          - karabiner-elements
     #          - keepassxc
-    #          - keycastr
     #          - kitty
-    #          - maccy
-    #          - neovide
-    #          - powershell
-    #          - rar
     #          - raycast
-    #          - spacelauncher
-    #          - vagrant
-    #          - vagrant-manager
     #          - vivaldi
-    #          - xquartz
 
