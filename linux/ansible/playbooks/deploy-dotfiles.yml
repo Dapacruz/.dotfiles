@@ -104,6 +104,7 @@
           - iperf3
           - jq
           - kubectl
+          - lazygit
           - lsd
           - mtr
           - neovim
