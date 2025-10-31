@@ -161,58 +161,58 @@
         state: present
         install_options: ['cask']
 
-    # - name: Install Homebrew packages
-    #   community.general.homebrew:
-    #     state: present
-    #     install_options:
-    #       - formula
-    #       - quiet
-    #     name:
-    #       - bat
-    #       - bfg
-    #       - cmatrix
-    #       - dust
-    #       - fd
-    #       - font-victor-mono-nerd-font
-    #       - fping
-    #       - fzf
-    #       - gcc
-    #       - go
-    #       - iftop
-    #       - ipcalc
-    #       - iperf3
-    #       - jq
-    #       - kubectl
-    #       - lazygit
-    #       - lsd
-    #       - luarocks
-    #       - mtr
-    #       - neovim
-    #       - netpbm
-    #       - nload
-    #       - nmap
-    #       - node
-    #       - nuttcp
-    #       - procs
-    #       - python@3.13
-    #       - ripgrep
-    #       - rust
-    #       - sd
-    #       - starship
-    #       - stylua
-    #       - tmux
-    #       - tokei
-    #       - tre-command
-    #       - utf8proc
-    #       - uv
-    #       - wget
-    #       - xmlstarlet
-    #       - xq
-    #       - yarn
-    #       - yq
-    #       - zoxide
-    #       - zsh-vi-mode
-    #       - zsh-syntax-highlighting
+    - name: Install Homebrew packages
+      community.general.homebrew:
+        state: present
+        install_options:
+          - formula
+          - quiet
+        name:
+          - bat
+          - bfg
+          - cmatrix
+          - dust
+          - fd
+          - font-victor-mono-nerd-font
+          - fping
+          - fzf
+          - gcc
+          - go
+          - iftop
+          - ipcalc
+          - iperf3
+          - jq
+          - kubectl
+          - lazygit
+          - lsd
+          - luarocks
+          - mtr
+          - neovim
+          - netpbm
+          - nload
+          - nmap
+          - node
+          - nuttcp
+          - procs
+          - python@3.13
+          - ripgrep
+          - rust
+          - sd
+          - starship
+          - stylua
+          - tmux
+          - tokei
+          - tre-command
+          - utf8proc
+          - uv
+          - wget
+          - xmlstarlet
+          - xq
+          - yarn
+          - yq
+          - zoxide
+          - zsh-vi-mode
+          - zsh-syntax-highlighting
 
     - name: Check if venv dir exists
       ansible.builtin.stat:
