@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/usr/bin/env sh
 
 if [ "$1" = "-h" ]; then
     echo ""
@@ -30,7 +30,7 @@ SESSION_NAME=$(echo $FOLDER | tr ' ' '_' | tr '.' '_')
 
 # lookup tmux session name
 SESSION=$(tmux list-sessions | grep $SESSION_NAME | awk '{print $1}')
-SESSION=${SESSION//:/}
+# SESSION=${SESSION//:/}
 
 # if not currently in tmux
 if [ -z "$TMUX" ]; then
