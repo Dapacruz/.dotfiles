@@ -126,8 +126,14 @@
             path: /home/{{ ansible_user_id }}/.zshrc
             line: |
 
-                    eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"
+              eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"
       when: not homebrew.stat.exists
+
+    - name: Install Victor Mono Nerd Font
+      community.general.homebrew:
+        name: font-victor-mono-nerd-font
+        state: present
+        install_options: ['cask']
 
     - name: Install Homebrew packages
       community.general.homebrew:
