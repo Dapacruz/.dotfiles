@@ -248,11 +248,3 @@
         clone: yes
         update: yes
 
-    - name: Install Tmux TPM plugins
-      ansible.builtin.shell: ~/.config/tmux/plugins/tpm/bin/install_plugins
-      args:
-        executable: /bin/bash
-      register: tpm_result
-      failed_when: "'FAILED' in tpm_result.stderr"
-      become: false
-
