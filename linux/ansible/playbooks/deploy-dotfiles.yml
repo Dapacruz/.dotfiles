@@ -176,6 +176,7 @@
           - font-victor-mono-nerd-font
           - fping
           - fzf
+          - httpie
           - gcc
           - go
           - iftop
@@ -230,9 +231,9 @@
           ansible.builtin.shell: python3.13 -m venv ~/venv/3.13
           args:
             executable: /bin/bash
-          become: false
           register: python_result
           failed_when: "'FAILED' in python_result.stderr"
+          become: false
       when: not venv.stat.exists
 
     - name: Stow dotfiles
@@ -246,4 +247,12 @@
         dest: ~/.config/tmux/plugins/tpm
         clone: yes
         update: yes
+
+    - name: Install Tmux TPM plugins
+      ansible.builtin.shell: ~/.config/tmux/plugins/tpm/bin/install_plugins
+      args:
+        executable: /bin/bash
+      register: tpm_result
+      failed_when: "'FAILED' in tpm_result.stderr"
+      become: false
 

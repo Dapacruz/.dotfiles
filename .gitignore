@@ -8,7 +8,7 @@
 **/stow/zsh.d/dot-zsh.d/_podman
 **/stow/zsh.d/dot-zsh.d/_tailscale
 
-**/stow/bin/bin
+**/stow/bin/bin/*
 !**/stow/bin/bin/.keep
 !**/stow/bin/bin/cht.sh
 !**/stow/bin/bin/fzf-bookmarks.sh
