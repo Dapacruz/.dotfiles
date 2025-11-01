@@ -8,3 +8,10 @@
         stash-unapply = !git stash show -p | git apply -R
         amend = commit --amend -C HEAD
         alias = ! git config -l | grep ^alias
+
+        # Creates local branch pr/[#] from the github upstream (if it exists) or origin remote and checks it out
+        pr  = "!f() { git fetch -fu ${2:-$(git remote |grep ^upstream || echo origin)} refs/pull/$1/head:pr/$1 && git checkout pr/$1; }; f"
+        # Removes all pr/* branches from your local repo
+        pr-clean = "!git for-each-ref refs/heads/pr/* --format='%(refname)' | while read ref ; do branch=${ref#refs/heads/} ; git branch -D $branch ; done"
+        # For bitbucket/stash remotes
+        spr  = "!f() { git fetch -fu ${2:-$(git remote |grep ^upstream || echo origin)} refs/pull-requests/$1/from:pr/$1 && git checkout pr/$1; }; f"
