@@ -4,6 +4,14 @@
   gather_facts: true
 
   tasks:
+    - name: Add temporary NOPASSWD sudoers entry
+      lineinfile:
+        path: /etc/sudoers.d/homebrew-temp
+        line: "{{ ansible_user_id }} ALL=(root) NOPASSWD: ALL"
+        create: yes
+        validate: 'visudo -cf %s'
+      become: true
+
     - name: Install Ansible Galaxy community.general collection
       command: ansible-galaxy collection install community.general
       register: result
@@ -282,4 +290,10 @@
         dest: ~/.config/tmux/plugins/tpm
         clone: yes
         update: yes
+
+    - name: Remove temporary NOPASSWD sudoers entry
+      file:
+        path: /etc/sudoers.d/homebrew-temp
+        state: absent
+      become: yes
 
