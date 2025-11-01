@@ -32,27 +32,55 @@
       register: homebrew
 
     - name: Install Homebrew
-      ansible.builtin.shell: ~/.dotfiles/macos/packages/homebrew-install.sh
-      when: not homebrew.stat.exists
-
-    - name: Blend Mac CPU architectures for compatibility
       block:
-        - name: Create Homebrew ARM64 directory
-          ansible.builtin.file:
-            path: /opt/homebrew
-            state: directory
+        - name: Download Homebrew installation script
+          get_url:
+            url: https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh
+            dest: /tmp/install_homebrew.sh
+            mode: '0755'
+          become: false
 
-        - name: Create Homebrew ARM64 symlink
-          ansible.builtin.file:
-            src: /usr/local/bin
-            dest: /opt/homebrew/bin
-            state: link
-      when: ansible_facts.processor.startswith("Intel")
+        - name: Run Homebrew installation script
+          ansible.builtin.shell: CI=1 /tmp/install_homebrew.sh
+          args:
+            executable: /bin/bash
+          become: false
+          register: homebrew_result
+          failed_when: "'FAILED' in homebrew_result.stderr"
+
+        - name: Update .zshrc
+          ansible.builtin.lineinfile:
+            path: /home/{{ ansible_user_id }}/.zshrc
+            line: |
+
+              eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"
+
+        - name: Blend Mac CPU architectures for compatibility
+          block:
+            - name: Create Homebrew ARM64 directory
+              ansible.builtin.file:
+                path: /opt/homebrew
+                state: directory
+
+            - name: Create Homebrew ARM64 symlink
+              ansible.builtin.file:
+                src: /usr/local/bin
+                dest: /opt/homebrew/bin
+                state: link
+          when: ansible_facts.processor.startswith("Intel")
+      when: not homebrew.stat.exists
 
     - name: Update Homebrew
       community.general.homebrew:
         update_homebrew: true
         upgrade_all: true
+
+    - name: Install Homebrew taps
+      community.general.homebrew_tap:
+        state: present
+        name:
+          - koekeishiya/formulae
+          - teamookla/speedtest
 
     - name: Install Homebrew packages
       community.general.homebrew:
@@ -61,127 +89,107 @@
           - formula
           - quiet
         name:
-          - ack
+          - age
           - aha
           - ansible
-          - aom
+          - arping
           - awk
           - bat
           - bfg
-          - boost
+          - btop
+          - certbot
           - cheat
+          - cilium-cli
+          - cmake
           - cmatrix
           - coreutils
           - cowsay
           - cscope
-          - curl
           - dfu-util
           - dust
           - enscript
           - entr
           - fd
+          - felixkratz/formulae/borders
           - ffmpeg
           - ffmpeg@4
           - ffmpegthumbnailer
           - figlet
+          - fluxcd/tap/flux
           - fping
           - fzf
-          - gcc
-          - gdk-pixbuf
+          - gh
           - git
+          - git-delta
           - glances
-          - gmp
           - gnu-sed
-          - gnupg
           - gnuradio
           - go
-          - gobject-introspection
           - gping
           - graphviz
-          - gtk+3
           - guile
           - hackrf
+          - helm
           - highlight
           - hopenpgp-tools
           - htop
+          - httpie
+          - hubble
           - iftop
           - imagemagick
           - ipcalc
           - iperf
           - iperf3
-          - jack
           - jpeg
-          - jpeg-xl
           - jq
-          - json-c
-          - libarchive
-          - libass
-          - libcaca
-          - libevent
-          - libheif
-          - libraw
-          - libtiff
-          - libtool
-          - llvm
+          - k3d
+          - k9s
+          - kubecolor
+          - lazygit
+          - lf
           - lolcat
           - lsd
           - luarocks
+          - mactop
           - massren
           - minikube
           - mtr
           - multitail
-          - neofetch
-          - netpbm
+          - neovim
           - nload
           - nmap
-          - node
           - nuttcp
-          - open-mpi
-          - openblas
-          - openjdk
-          - pango
           - pass
           - php
           - pinentry-mac
           - prettier
           - procs
-          - pygobject3
           - pyqt
-          - python@3.10
-          - python@3.11
-          - python@3.8
-          - python@3.9
           - qemu
           - qpdf
-          - qt
-          - qt@5
           - re2
           - ripgrep
           - rlwrap
           - rust
           - sd
           - sl
+          - sops
           - sphinx-doc
-          - srt
           - ssh-copy-id
           - starship
           - stow
           - stylua
           - swaks
           - switchaudio-osx
+          - talosctl
           - telnet
-          - tesseract
           - the_silver_searcher
           - tmux
           - toilet
           - tokei
           - trash
           - tre-command
-          - tree
-          - uhd
-          - unbound
-          - utf8proc
-          - volk
+          - uv
           - w3m
           - watch
           - wget
@@ -190,21 +198,12 @@
           - yarn
           - ykman
           - ykpers
-          - youtube-dl
           - yq
+          - yt-dlp
           - z
           - zoxide
           - zsh
-          - zsh-vi-mode
-          - zstd
-
-    - name: Install Homebrew package Neovim
-      community.general.homebrew:
-        state: head
-        install_options:
-          - formula
-          - quiet
-        name: neovim
+          - zsh-syntax-highlighting
 
     - name: Install Homebrew casks
       community.general.homebrew_cask:
@@ -212,34 +211,72 @@
         install_options:
           - quiet
         name:
-          - amethyst
-          - chromedriver
+          - aerospace
+          - anythingllm
+          - bartender
+          - bettertouchtool
+          - calibre
+          - cleanshot
+          - container
+          - discord
+          - elgato-stream-deck
+          - folx
+          - font-victor-mono-nerd-font
+          - google-chrome
           - karabiner-elements
           - keepassxc
           - keycastr
           - kitty
+          - lm-studio
           - maccy
-          - neovide
+          - obsidian
+          - ollama
+          - ollama-app
+          - parallels
+          - pixelsnap
+          - postman
           - powershell
+          - rancher
           - rar
+          - raspberry-pi-imager
           - raycast
-          - spacelauncher
+          - stats
+          - swish
           - vagrant
           - vagrant-manager
           - vivaldi
-          - xquartz
+          - vlc
 
-    - name: Install Homebrew taps
-      community.general.homebrew_tap:
-        state: present
-        name:
-          - homebrew/bundle
-          - homebrew/services
-          - koekeishiya/formulae
-          - teamookla/speedtest
+    - name: Check if Python venv dir exists
+      ansible.builtin.stat:
+        path: ~/venv
+      register: venv
+
+    - name: Create Python venv
+      block:
+        - name: Create Python venv dir
+          ansible.builtin.file:
+            path: ~/venv
+            state: directory
+
+        - name: Create Python venv
+          ansible.builtin.shell: python3.13 -m venv ~/venv/3.13
+          args:
+            executable: /bin/bash
+          register: python_result
+          failed_when: "'FAILED' in python_result.stderr"
+          become: false
+      when: not venv.stat.exists
 
     - name: Stow dotfiles
       ansible.builtin.shell:
         cmd: ~/.dotfiles/macos/stow/stow.sh
         chdir: ~/.dotfiles/macos/stow
+
+    - name: Clone Tmux TPM repository
+      ansible.builtin.git:
+        repo: https://github.com/tmux-plugins/tpm
+        dest: ~/.config/tmux/plugins/tpm
+        clone: yes
+        update: yes
 

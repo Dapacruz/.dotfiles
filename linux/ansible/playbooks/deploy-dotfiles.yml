@@ -155,6 +155,11 @@
               eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"
       when: not homebrew.stat.exists
 
+    - name: Update Homebrew
+      community.general.homebrew:
+        update_homebrew: true
+        upgrade_all: true
+
     - name: Install Victor Mono Nerd Font
       community.general.homebrew:
         name: font-victor-mono-nerd-font
@@ -215,7 +220,7 @@
           - zsh-vi-mode
           - zsh-syntax-highlighting
 
-    - name: Check if venv dir exists
+    - name: Check if Python venv dir exists
       ansible.builtin.stat:
         path: ~/venv
       register: venv
