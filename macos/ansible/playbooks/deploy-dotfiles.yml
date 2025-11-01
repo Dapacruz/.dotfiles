@@ -79,7 +79,11 @@
       community.general.homebrew_tap:
         state: present
         name:
+          - felixkratz/formulae
+          - fluxcd/tap
+          - jesseduffield/lazygit
           - koekeishiya/formulae
+          - nikitabobko/tap
           - teamookla/speedtest
 
     - name: Install Homebrew packages
@@ -232,7 +236,6 @@
           - obsidian
           - ollama
           - ollama-app
-          - parallels
           - pixelsnap
           - postman
           - powershell
