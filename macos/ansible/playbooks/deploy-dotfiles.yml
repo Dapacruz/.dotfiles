@@ -4,14 +4,6 @@
   gather_facts: true
 
   tasks:
-    - name: Add temporary NOPASSWD sudoers entry
-      lineinfile:
-        path: /etc/sudoers.d/homebrew-temp
-        line: "{{ ansible_user_id }} ALL=(root) NOPASSWD: ALL"
-        create: yes
-        validate: 'visudo -cf %s'
-      become: true
-
     - name: Install Ansible Galaxy community.general collection
       command: ansible-galaxy collection install community.general
       register: result
@@ -46,13 +38,11 @@
             url: https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh
             dest: /tmp/install_homebrew.sh
             mode: '0755'
-          become: false
 
         - name: Run Homebrew installation script
           ansible.builtin.shell: CI=1 /tmp/install_homebrew.sh
           args:
             executable: /bin/bash
-          become: false
           register: homebrew_result
           failed_when: "'FAILED' in homebrew_result.stderr"
 
@@ -234,6 +224,7 @@
           - elgato-stream-deck
           - folx
           - font-victor-mono-nerd-font
+          - ghostty
           - google-chrome
           - karabiner-elements
           - keepassxc
@@ -276,8 +267,39 @@
             executable: /bin/bash
           register: python_result
           failed_when: "'FAILED' in python_result.stderr"
-          become: false
       when: not venv.stat.exists
+
+    - name: Create .local directory
+      file:
+        path: /Users/{{ ansible_user_id }}/.local
+        state: directory
+        owner: "{{ ansible_user_id }}"
+        group: staff
+        mode: '0755'
+
+    - name: Create .cargo directory
+      file:
+        path: /Users/{{ ansible_user_id }}/.cargo
+        state: directory
+        owner: "{{ ansible_user_id }}"
+        group: staff
+        mode: '0755'
+
+    - name: Create .cargo/env file
+      file:
+        path: /Users/{{ ansible_user_id }}/.cargo/env
+        state: touch
+        owner: "{{ ansible_user_id }}"
+        group: staff
+        mode: '0644'
+
+    - name: Create .config directory
+      file:
+        path: /Users/{{ ansible_user_id }}/.config
+        state: directory
+        owner: "{{ ansible_user_id }}"
+        group: staff
+        mode: '0755'
 
     - name: Stow dotfiles
       ansible.builtin.shell:
@@ -290,10 +312,4 @@
         dest: ~/.config/tmux/plugins/tpm
         clone: yes
         update: yes
-
-    - name: Remove temporary NOPASSWD sudoers entry
-      file:
-        path: /etc/sudoers.d/homebrew-temp
-        state: absent
-      become: yes
 
