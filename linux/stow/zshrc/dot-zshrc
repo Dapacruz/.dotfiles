@@ -17,7 +17,6 @@ export PATH
 export DISPLAY=:0
 export EDITOR=/home/linuxbrew/.linuxbrew/bin/nvim
 export VISUAL=/home/linuxbrew/.linuxbrew/bin/nvim
-export GOOS=darwin
 export GOOGLE_APPLICATION_CREDENTIALS=~/PyPi-42f44041fd99.json
 export XDG_CONFIG_HOME="$HOME/.config"
 export HISTCONTROL=ignorespace
