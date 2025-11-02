@@ -1,5 +1,5 @@
 return {
-    "epwalsh/obsidian.nvim",
+    "obsidian-nvim/obsidian.nvim",
     version = "*",  -- recommended, use latest release instead of latest commit
     lazy = false,
     ft = "markdown",
@@ -22,6 +22,9 @@ return {
                 path = "~/Obsidian/Personal",
             },
         },
-        disable_frontmatter = true,
+        legacy_commands = false,
+        frontmatter = {
+            enabled = false,
+        }
     }
 }
