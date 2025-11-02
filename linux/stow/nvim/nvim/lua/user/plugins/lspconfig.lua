@@ -15,6 +15,16 @@ return {
             })
         end,
     },
+    {
+        "mason-org/mason-lspconfig.nvim",
+        opts = {
+            ensure_installed = { "vtsls", "cssls", "html", "gopls", "jsonls", "yamlls", "lua_ls", "jedi_language_server", "vimls", "bashls", "ansiblels" },
+        },
+        dependencies = {
+            { "mason-org/mason.nvim", opts = {} },
+            "neovim/nvim-lspconfig",
+        },
+    },
     config = function()
         require "user.lsp.configs"
         require("user.lsp.handlers").setup()
