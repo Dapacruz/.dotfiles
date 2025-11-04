@@ -12,6 +12,7 @@ return {
         require("dapui").setup()
         require("nvim-dap-virtual-text").setup()
         require('dap-go').setup()
+        require('dap-python').setup('/usr/local/bin/python3.10')
 
         local dap, dapui = require("dap"), require("dapui")
         dap.listeners.after.event_initialized["dapui_config"] = function()

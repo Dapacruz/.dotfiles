@@ -25,7 +25,7 @@ vim.opt.mouse = "a" -- On OSX press ALT and click mouse and backspace
 vim.opt.number = true -- Show line numbers
 vim.opt.relativenumber = true
 vim.opt.scrolloff = 8
-vim.opt.shell = "/home/linuxbrew/.linuxbrew/bin/zsh"
+vim.opt.shell = "/opt/homebrew/bin/zsh"
 vim.opt.shiftround = true
 vim.opt.shiftwidth = 4
 vim.opt.shortmess:append("c") -- Don't pass messages to |ins-completion-menu|
