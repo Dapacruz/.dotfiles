@@ -23,3 +23,5 @@
 !**/stow/bin/bin/tmux-cht-languages.txt
 !**/stow/bin/bin/tmux-cht.sh
 !**/stow/bin/bin/vidthumb
+
+common/stow/nvim/nvim/lua/user/plugins/obsidian.lua
