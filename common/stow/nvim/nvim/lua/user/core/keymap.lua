@@ -84,10 +84,10 @@ keymap("n", "<C-d>", "<C-d>zz", tabl_ext('force', opts, { desc = "Half page down
 keymap("n", "<C-u>", "<C-u>zz", tabl_ext('force', opts, { desc = "Half page up and center" }))
 
 -- Resize with arrows
-keymap("n", "<M-k>", "<Cmd>resize +2<CR>", tabl_ext('force', opts, { desc = "Resize window height" }))
-keymap("n", "<M-j>", "<Cmd>resize -2<CR>", tabl_ext('force', opts, { desc = "Resize window height" }))
-keymap("n", "<M-h>", "<Cmd>vertical resize -2<CR>", tabl_ext('force', opts, { desc = "Resize window width" }))
-keymap("n", "<M-l>", "<Cmd>vertical resize +2<CR>", tabl_ext('force', opts, { desc = "Resize window width" }))
+keymap("n", "<S-k>", "<Cmd>resize +2<CR>", tabl_ext('force', opts, { desc = "Resize window height" }))
+keymap("n", "<S-j>", "<Cmd>resize -2<CR>", tabl_ext('force', opts, { desc = "Resize window height" }))
+keymap("n", "<S-h>", "<Cmd>vertical resize -2<CR>", tabl_ext('force', opts, { desc = "Resize window width" }))
+keymap("n", "<S-l>", "<Cmd>vertical resize +2<CR>", tabl_ext('force', opts, { desc = "Resize window width" }))
 
 -- Buffer management
 keymap("n", "<leader>bd", "<Cmd>bd<CR>", tabl_ext('force', opts, { desc = "Delete buffer" }))
