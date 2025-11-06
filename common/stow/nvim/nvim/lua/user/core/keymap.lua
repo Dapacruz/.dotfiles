@@ -86,8 +86,8 @@ keymap("n", "<C-u>", "<C-u>zz", tabl_ext('force', opts, { desc = "Half page up a
 -- Resize with arrows
 keymap("n", "<Up>", "<Cmd>resize +2<CR>", tabl_ext('force', opts, { desc = "Resize window height" }))
 keymap("n", "<Down>", "<Cmd>resize -2<CR>", tabl_ext('force', opts, { desc = "Resize window height" }))
-keymap("n", "<Left>", "<Cmd>vertical resize -2<CR>", tabl_ext('force', opts, { desc = "Resize window width" }))
-keymap("n", "<Right>", "<Cmd>vertical resize +2<CR>", tabl_ext('force', opts, { desc = "Resize window width" }))
+keymap("n", "<Left>", "<Cmd>vertical resize +2<CR>", tabl_ext('force', opts, { desc = "Resize window width" }))
+keymap("n", "<Right>", "<Cmd>vertical resize -2<CR>", tabl_ext('force', opts, { desc = "Resize window width" }))
 
 -- Buffer management
 keymap("n", "<leader>bd", "<Cmd>bd<CR>", tabl_ext('force', opts, { desc = "Delete buffer" }))
