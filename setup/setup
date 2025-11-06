@@ -1,0 +1,8 @@
+#!/usr/bin/env bash
+
+sudo apt update
+sudo apt install -y ansible stow
+
+cd ~/dotfiles/devcontainer/ansible
+ansible-playbook playbooks/deploy-dotfiles.yml
+

@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 
 STOW_DIR="$(cd "$(dirname "$0")" && pwd)"
-COMMON_STOW_DIR="$HOME/.dotfiles/common/stow"
+COMMON_STOW_DIR="$HOME/dotfiles/common/stow"
 
 source configs.sh
 
