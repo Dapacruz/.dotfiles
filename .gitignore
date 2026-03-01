@@ -19,6 +19,7 @@
 !**/stow/bin/bin/open-screenshot-view.sh
 !**/stow/bin/bin/pass.sh
 !**/stow/bin/bin/scanport
+!**/stow/bin/bin/securecrt.sh
 !**/stow/bin/bin/t.sh
 !**/stow/bin/bin/tmux-cht-languages.txt
 !**/stow/bin/bin/tmux-cht.sh
