@@ -1,5 +1,4 @@
 # .dotfiles
-My Dotfiles
 
 ### Bootstrap macOS
 ```bash
@@ -9,4 +8,9 @@ My Dotfiles
 ### Bootstrap Linux
 ```bash
 /bin/bash -c "$(wget -O- https://raw.githubusercontent.com/Dapacruz/.dotfiles/master/linux/bootstrap.sh)"
+```
+
+### Bootstrap DevPod
+```bash
+devpod up . --dotfiles https://github.com/Dapacruz/.dotfiles.git --ide none
 ```
