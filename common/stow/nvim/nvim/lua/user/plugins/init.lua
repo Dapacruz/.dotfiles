@@ -12,7 +12,6 @@ return {
     "justinmk/vim-sneak",
     "stefandtw/quickfix-reflector.vim",
     "wellle/targets.vim",
-    "christoomey/vim-tmux-navigator",
     "mg979/vim-visual-multi",
     "szw/vim-maximizer",
     "Glench/Vim-Jinja2-Syntax",
