@@ -12,5 +12,5 @@
 
 ### Bootstrap DevPod
 ```bash
-devpod up . --dotfiles https://github.com/Dapacruz/.dotfiles.git --ide none
+devpod up . --dotfiles https://github.com/Dapacruz/.dotfiles.git --provider kubernetes --ide none
 ```
