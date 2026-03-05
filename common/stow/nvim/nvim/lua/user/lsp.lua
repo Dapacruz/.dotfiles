@@ -13,7 +13,7 @@ vim.api.nvim_create_autocmd("LspAttach", {
     keymap.set("n", "gd", "<Cmd>lua vim.lsp.buf.definition()<CR>", opts("LSP: Go to definition"))
     keymap.set("n", "gD", "<Cmd>lua vim.lsp.buf.declaration()<CR>", opts("LSP: Go to declaration"))
     keymap.set("n", "gI", "<Cmd>lua vim.lsp.buf.implementation()<CR>", opts("LSP: Go to implementation"))
-    keymap.set("n", "<C-k>", "<Cmd>lua vim.lsp.buf.signature_help()<CR>", opts("LSP: Signature help"))
+    keymap.set("n", "<M-k>", "<Cmd>lua vim.lsp.buf.signature_help()<CR>", opts("LSP: Signature help"))
     keymap.set("n", "gr", "<Cmd>lua vim.lsp.buf.references()<CR>", opts("LSP: Get all references"))
     keymap.set("n", "<leader>rn", "<Cmd>lua vim.lsp.buf.rename()<CR>", opts("LSP: Rename symbol"))
     keymap.set("n", "<leader>ca", "<Cmd>lua vim.lsp.buf.code_action()<CR>", opts("LSP: Code action"))

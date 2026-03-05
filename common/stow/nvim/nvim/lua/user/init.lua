@@ -21,6 +21,8 @@ autocmd('TextYankPost', {
 vim.filetype.add({
     extension = {
         tmpl = "html",
+        tf = "terraform",
+        tfvars = "terraform-vars",
     },
     pattern = {
         [".+/playbooks/.+%.ya?ml"] = "yaml.ansible",
