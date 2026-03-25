@@ -5,6 +5,7 @@ PATH="${HOME}/go/bin:${PATH}"
 PATH="${HOME}/.cargo/bin:${PATH}"
 # Homebrew
 eval "$(/opt/homebrew/bin/brew shellenv)"
+PATH="/opt/homebrew/opt/grep/libexec/gnubin:${PATH}"
 # Python
 PYTHON_VERSION="3.13"
 PATH="${HOME}/venv/3.12/bin:${PATH}"
@@ -78,38 +79,47 @@ alias fwscrt="panos-cli panorama get firewalls --not-tag staging,disable-ansible
 alias fwssh="panos-cli panorama get firewalls --not-tag staging,disable-ansible --terse | fzf | xargs -I {} tmux neww -n {} ssh -J ${ADMIN}@$JUMPHOST ${ADMIN}@{}"
 alias fwweb="panos-cli panorama get firewalls --not-tag staging,disable-ansible --terse | fzf | xargs -I {} open https://{}.${DOMAIN}"
 alias getip='ifconfig | egrep -v "\s+(options|ether|inet6)" | egrep -A1 "^(en0|en10)"; echo --; ifconfig | egrep -A1 "^(utun3)"; echo --; echo -n "Internet IP Address: "; curl ipecho.net/plain; echo'
-alias grep='egrep --color'
+alias gorepl=yaegi
+alias grep='grep -P --color'
 alias icat='kitten icat'
+alias 'k get events'='kubecolor events'
+alias 'kubectl get events'='kubecolor events'
 alias k=kubecolor
 alias kc="kubecolor config get-contexts | grep -v ^CURRENT | awk '{print \$2}' | fzf | xargs kubecolor config use-context"
-alias kga='kubecolor get all'
 alias kgA='kubecolor get all -A'
+alias kgP='kubecolor get pods -A'
+alias kga='kubecolor get all'
 alias kgc='kubecolor config get-contexts'
+alias kghR='kubecolor get helmrepositories.source.toolkit.fluxcd.io'
+alias kghc='kubecolor get helmcharts.source.toolkit.fluxcd.io'
+alias kghr='kubecolor get helmreleases.helm.toolkit.fluxcd.io'
+alias kgn='kubecolor get nodes -o wide'
 alias kgp='kubecolor get pods'
 alias kn="kubecolor get ns | grep -v ^NAME | awk '{print \$1}' | fzf | xargs kubecolor config set-context --current --namespace"
+alias kubectl=kubecolor
+alias l='lsd --group-directories-first --hyperlink=always -la'
 alias lf=lfcd
 alias lg=lazygit
-alias l='lsd --group-directories-first --hyperlink=always -la'
 alias ll='lsd --group-directories-first --hyperlink=always -l'
 alias ls='lsd --group-directories-first --hyperlink=always'
+alias mactop='sudo mactop'
 alias mkenv='eval $(minikube -p minikube docker-env)'
 alias mkstart='minikube start --driver=qemu && eval $(minikube -p minikube docker-env)'
 alias mkstop='minikube stop'
 alias mtr='sudo mtr'
-# alias pip3.12="${HOME}/venv/3.12/bin/pip"
-# alias pip3.13="${HOME}/venv/3.13/bin/pip"
 alias pip3="python${PYTHON_VERSION} -m pip"
 alias pip=pip3
 alias pp='curl http://parrot.live'
-# alias python3.12="${HOME}/venv/3.12/bin/python"
-# alias python3.13="${HOME}/venv/3.13/bin/python"
 alias python3="python${PYTHON_VERSION}"
 alias python=python3
-alias rg="kitten hyperlinked_grep --smart-case"
+alias rg='kitten hyperlinked_grep --smart-case'
 alias rm=trash
-alias sed="sed -E"
+alias rm=trash
+alias sed='sed -E'
 alias t=t.sh
 alias ta='tmux attach || tmux'
+alias tc='talosctl'
+alias tf='terraform'
 alias tn='tmux new -s $(pwd | sed -E '\''s/.*\/\.?//g'\'') || tmux a -t $(pwd | sed -E '\''s/.*\/\.?//g'\'')'
 alias tree='tre --color=always'
 alias ts='tmux a -t $(tmux list-sessions | fzf | sed -E '\''s/([^:]+).*/\1/'\'')'
@@ -177,10 +187,9 @@ eval "$(zoxide init zsh)"
 
 
 # Node Version Manager
-export NVM_DIR="${HOME}/.nvm"
-[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"
-[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"
-
+export NVM_DIR="$HOME/.nvm"
+[ -s "/opt/homebrew/opt/nvm/nvm.sh" ] && \. "/opt/homebrew/opt/nvm/nvm.sh"  # This loads nvm
+[ -s "/opt/homebrew/opt/nvm/etc/bash_completion.d/nvm" ] && \. "/opt/homebrew/opt/nvm/etc/bash_completion.d/nvm"  # This loads nvm bash_completion
 
 # Needed to trust Ansible Galaxy API certificate
 # https://stackoverflow.com/a/57795811
@@ -194,7 +203,7 @@ eval "$(uv generate-shell-completion zsh)"
 
 
 # fzf settings
-export FZF_DEFAULT_COMMAND="\rg -uu --files --hidden -H --glob='!**/.git/' 2> /dev/null"
+export FZF_DEFAULT_COMMAND="fd --strip-cwd-prefix --hidden --follow --exclude .git"
 export FZF_CTRL_T_COMMAND="$FZF_DEFAULT_COMMAND"
 export FZF_CTRL_T_OPTS="
     --preview='bat --style=numbers --color=always --line-range :500 {}'
@@ -258,7 +267,7 @@ if [[ -z "$DISPLAY" ]]; then
 fi
 
 _fzf_compgen_path() {
-  fd --hidden --follow --exclude ".git" . "$1"
+  fd --type f --hidden --follow --exclude ".git" . "$1"
 }
 
 # Use fd to generate the list for directory completion
