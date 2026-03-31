@@ -4,6 +4,8 @@ return {
         "nvim-lua/plenary.nvim",
         "nvim-telescope/telescope-symbols.nvim",
         "nvim-lua/popup.nvim",
+        "cappyzawa/telescope-terraform.nvim",
+        "ANGkeith/telescope-terraform-doc.nvim",
         {
             "nvim-telescope/telescope-fzf-native.nvim",
             build = "cmake -S. -Bbuild -DCMAKE_BUILD_TYPE=Release && cmake --build build --config Release && cmake --install build --prefix build"
@@ -12,11 +14,20 @@ return {
     config = function()
         local status_ok, telescope = pcall(require, "telescope")
         if not status_ok then
+            vim.notify("Telescope failed to load", vim.log.levels.ERROR)
             return
         end
 
-        local actions = require "telescope.actions"
+        local telescopeConfig = require("telescope.config")
+        -- LuaJIT / Lua 5.1 + 5.2+ compatible
+        ---@diagnostic disable-next-line: deprecated
+        table.unpack = table.unpack or unpack
+        local vimgrep_arguments = { table.unpack(telescopeConfig.values.vimgrep_arguments) }
+        table.insert(vimgrep_arguments, "--hidden")
+        table.insert(vimgrep_arguments, "--glob")
+        table.insert(vimgrep_arguments, "!**/.git/*")
 
+        local actions = require("telescope.actions")
         telescope.setup {
             defaults = {
                 prompt_prefix = " ",
@@ -25,6 +36,7 @@ return {
                 file_ignore_patterns = {
                     ".git/",
                 },
+                vimgrep_arguments = vimgrep_arguments,
                 mappings = {
                     i = {
                         ["<C-j>"] = actions.cycle_history_next,
@@ -91,15 +103,15 @@ return {
                 },
             },
             pickers = {
-                -- Default configuration for builtin pickers goes here:
-                -- picker_name = {
-                --   picker_config_key = value,
-                --   ...
-                -- }
-                -- Now the picker_config_key will be applied every time you call this
-                -- builtin picker
                 find_files = {
                     hidden = true,
+                    find_command = {
+                        "rg",
+                        "--files",
+                        "--hidden",
+                        "--glob",
+                        "!**/.git/*",
+                    },
                 },
             },
             extensions = {
@@ -113,10 +125,11 @@ return {
             },
         }
 
+        telescope.load_extension("fzf")
+        telescope.load_extension("terraform_doc")
+        telescope.load_extension("terraform")
 
-        require('telescope').load_extension('fzf')
-
-        local builtin = require "telescope.builtin"
+        local builtin = require("telescope.builtin")
         vim.keymap.set("n", "<leader>/", function()
             builtin.current_buffer_fuzzy_find(require("telescope.themes").get_dropdown {
                 winblend = 10,

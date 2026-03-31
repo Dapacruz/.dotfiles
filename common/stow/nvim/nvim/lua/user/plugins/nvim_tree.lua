@@ -20,7 +20,8 @@ return {
                 group_empty = false,
             },
             filters = {
-                dotfiles = true,
+                dotfiles = false,
+                git_ignored = true,
             },
         })
         vim.keymap.set("n", "<leader>e", "<Cmd>NvimTreeToggle<CR>", { desc = "NvimTree: Toggle" })
