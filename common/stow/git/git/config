@@ -1,17 +1,31 @@
 [user]
-        name = David Cruz
-        email = deepness.disclose707@mailer.me
+	name = David Cruz
+	email = deepness.disclose707@mailer.me
 [alias]
-        last = log -1
-        glog = log --graph --oneline --decorate --all
-        visual = !gitk
-        stash-unapply = !git stash show -p | git apply -R
-        amend = commit --amend -C HEAD
-        alias = ! git config -l | grep ^alias
+	last = log -1
+	glog = log --graph --oneline --decorate --all
+	visual = !gitk
+	stash-unapply = !git stash show -p | git apply -R
+	amend = commit --amend -C HEAD
+	config-user = !git config --file ~/.config/git/config
+	alias = ! git config -l | grep ^alias
 
-        # Creates local branch pr/[#] from the github upstream (if it exists) or origin remote and checks it out
-        pr  = "!f() { git fetch -fu ${2:-$(git remote |grep ^upstream || echo origin)} refs/pull/$1/head:pr/$1 && git checkout pr/$1; }; f"
-        # Removes all pr/* branches from your local repo
-        pr-clean = "!git for-each-ref refs/heads/pr/* --format='%(refname)' | while read ref ; do branch=${ref#refs/heads/} ; git branch -D $branch ; done"
-        # For bitbucket/stash remotes
-        spr  = "!f() { git fetch -fu ${2:-$(git remote |grep ^upstream || echo origin)} refs/pull-requests/$1/from:pr/$1 && git checkout pr/$1; }; f"
+	# Creates local branch pr/[#] from the github upstream (if it exists) or origin remote and checks it out
+	pr  = "!f() { git fetch -fu ${2:-$(git remote |grep ^upstream || echo origin)} refs/pull/$1/head:pr/$1 && git checkout pr/$1; }; f"
+
+	# Removes all pr/* branches from your local repo
+	pr-clean = "!git for-each-ref refs/heads/pr/* --format='%(refname)' | while read ref ; do branch=${ref#refs/heads/} ; git branch -D $branch ; done"
+
+	# For bitbucket/stash remotes
+	spr  = "!f() { git fetch -fu ${2:-$(git remote |grep ^upstream || echo origin)} refs/pull-requests/$1/from:pr/$1 && git checkout pr/$1; }; f"
+
+	# Delete all locally merged branches
+	cleanup-local = "!f() { \\\n  primary=$(git symbolic-ref --short refs/remotes/origin/HEAD 2>/dev/null | sed \"s#^origin/##\"); \\\n  [ -z \"$primary\" ] && primary=main; \\\n  git checkout \"$primary\" && git pull && \\\n  git branch --merged \\\n    | grep -Ev \"(^\\\\*|$primary|develop)\" \\\n    | xargs -n 1 -r git branch -d; \\\n}; f"
+
+	# Delete local branches whose content matches the default branch
+	cleanup-squashed = "!f() { \\\n  primary=$(git symbolic-ref --quiet --short refs/remotes/origin/HEAD 2>/dev/null | sed \"s#^origin/##\"); \\\n  [ -z \"$primary\" ] && primary=main; \\\n  git switch \"$primary\" && \\\n  git pull --ff-only && \\\n  for branch in $(git for-each-ref --format=\"%(refname:short)\" refs/heads/ | grep -v \"^$primary$\"); do \\\n    if git diff --quiet \"$branch\" \"$primary\"; then \\\n      echo \"Deleting $branch (no diff vs $primary)\"; \\\n      git branch -D \"$branch\"; \\\n    else \\\n      echo \"Keeping $branch (has differences)\"; \\\n    fi; \\\n  done; \\\n}; f"
+
+[pager]
+	branch = false
+[init]
+	defaultBranch = main
