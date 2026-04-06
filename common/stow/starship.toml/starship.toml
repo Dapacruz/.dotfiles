@@ -35,7 +35,7 @@ style = "bold blue"
 read_only = " "
 truncation_length = 4
 truncate_to_repo = false
-format = "[ ](#4A83E7)$path[$read_only]($read_only_style) "
+format = "[ ](#4A83E7)$path[$read_only]($read_only_style) "
 
 [character]
 success_symbol = "[❯](purple)"
