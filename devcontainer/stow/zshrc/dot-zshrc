@@ -65,6 +65,8 @@ source /home/linuxbrew/.linuxbrew/share/zsh-syntax-highlighting/zsh-syntax-highl
 # Aliases
 alias bfg='/home/linuxbrew/.linuxbrew/bin/bfg'
 alias cat='bat'
+alias cc='cz commit'
+alias cca='cz commit --all'
 alias cmatrix='cmatrix -ab'
 alias dig='dig +search'
 alias digb='dig +search +noall +answer'
