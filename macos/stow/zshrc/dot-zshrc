@@ -66,6 +66,8 @@ source $ZSH/oh-my-zsh.sh
 # Aliases
 alias bfg='/opt/homebrew/bin/bfg'
 alias cat='bat'
+alias cc='cz commit'
+alias cca='cz commit --all'
 alias cmatrix='cmatrix -ab'
 alias dig='dig +search'
 alias digb='dig +search +noall +answer'
