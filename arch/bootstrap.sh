@@ -6,6 +6,7 @@ echo $sudo_pass > become_pass.txt
 echo $sudo_pass | sudo -S pacman -Syq --needed --noconfirm ansible curl git stow
 
 echo "Executing Ansible playbook ..."
+rm -fr ~/.ansible/pull/$HOSTNAME
 ansible-pull --become-password-file become_pass.txt -i $HOSTNAME, --limit=localhost,$HOSTNAME -U https://github.com/Dapacruz/.dotfiles arch/ansible/playbooks/deploy-dotfiles.yml
 
 rm become_pass.txt

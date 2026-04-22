@@ -32,7 +32,7 @@
 
     - name: Set default shell to Zsh
       user:
-        name: "{{ ansible_user_id }}"
+        name: "{{ ansible_facts['user_id'] }}"
         shell: /home/linuxbrew/.linuxbrew/bin/zsh
       become: true
 
@@ -64,6 +64,24 @@
 
     - name: Install Homebrew
       block:
+        - name: Create Homebrew parent directory
+          ansible.builtin.file:
+            path: /home/linuxbrew
+            state: directory
+            owner: "{{ ansible_user_id }}"
+            group: "{{ ansible_user_id }}"
+            mode: '0755'
+          become: true
+
+        - name: Create Homebrew install directory
+          ansible.builtin.file:
+            path: /home/linuxbrew/.linuxbrew
+            state: directory
+            owner: "{{ ansible_user_id }}"
+            group: "{{ ansible_user_id }}"
+            mode: '0755'
+          become: true
+
         - name: Download Homebrew installation script
           get_url:
             url: https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh
@@ -71,17 +89,29 @@
             mode: '0755'
           become: false
 
+        # - name: Run Homebrew installation script
+        #   ansible.builtin.shell: CI=1 /tmp/install_homebrew.sh
+        #   args:
+        #     executable: /bin/bash
+        #   become: false
+        #   register: homebrew_result
+        #   failed_when: "'FAILED' in homebrew_result.stderr"
+
         - name: Run Homebrew installation script
-          ansible.builtin.shell: CI=1 /tmp/install_homebrew.sh
+          ansible.builtin.shell: NONINTERACTIVE=1 /tmp/install_homebrew.sh
           args:
             executable: /bin/bash
+            creates: /home/linuxbrew/.linuxbrew/bin/brew
           become: false
           register: homebrew_result
-          failed_when: "'FAILED' in homebrew_result.stderr"
+
+        - name: Show Homebrew output
+          ansible.builtin.debug:
+            var: homebrew_result
 
         - name: Update .zshrc
           ansible.builtin.lineinfile:
-            path: /home/{{ ansible_user_id }}/.zshrc
+            path: "{{ ansible_facts['user_dir'] }}/.zshrc"
             line: |
 
               eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"
@@ -102,7 +132,6 @@
           - bat
           - bfg
           - cmatrix
-          - devpod
           - dust
           - fd
           - fping
@@ -123,7 +152,6 @@
           - netpbm
           - nload
           - nmap
-          - node
           - nuttcp
           - procs
           - python@3.13
