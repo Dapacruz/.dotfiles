@@ -204,3 +204,11 @@
         clone: yes
         update: yes
 
+    - name: Install Node LTS via nvm
+      ansible.builtin.shell: |
+        source /usr/share/nvm/init-nvm.sh
+        nvm install --lts
+        nvm alias default 'lts/*'
+      args:
+        executable: /bin/bash
+
