@@ -1,0 +1,2 @@
+output=~/"${1}".$(date +%s).enc
+gpg --encrypt --armor --output ${output} -r 0x07E05FB6FBAE43EE "${1}" && echo "${1} -> ${output}"

@@ -1,0 +1,179 @@
+---
+- name: Deploy .dotfiles on Arch Linux
+
+  tasks:
+    - name: Install Ansible Galaxy community.general collection
+      command: ansible-galaxy collection install community.general
+      register: result
+      changed_when: "'Nothing to do.' not in result.stdout"
+
+    - name: Install Pacman packages
+      community.general.pacman:
+        name:
+          - base-devel
+          - curl
+          - keepassxc
+          - kitty
+          - ttf-victor-mono-nerd
+          - vivaldi
+          - zsh
+        state: present
+        update_cache: yes
+      become: true
+
+    - name: Clone .dotfiles repository
+      ansible.builtin.git:
+        repo: https://github.com/Dapacruz/.dotfiles.git
+        dest: ~/.dotfiles
+        clone: yes
+        update: no
+
+    - name: Set default shell to Zsh
+      user:
+        name: "{{ ansible_user_id }}"
+        shell: /home/linuxbrew/.linuxbrew/bin/zsh
+      become: true
+
+    - name: Check if Oh My Zsh is installed
+      ansible.builtin.stat:
+        path: ~/.oh-my-zsh
+      register: ohmyzsh
+
+    - name: Install Oh My Zsh
+      block:
+        - name: Download Oh My Zsh installation script
+          get_url:
+            url: https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh
+            dest: /tmp/install_ohmyzsh.sh
+            mode: '0755'
+          become: false
+
+        - name: Run Oh My Zsh installation script
+          command: sh /tmp/install_ohmyzsh.sh --unattended
+          become: false
+          register: ohmyzsh_result
+          failed_when: "'FAILED' in ohmyzsh_result.stderr"
+      when: not ohmyzsh.stat.exists
+
+    - name: Check if Homebrew is installed
+      ansible.builtin.stat:
+        path: /home/linuxbrew/.linuxbrew/bin/brew
+      register: homebrew
+
+    - name: Install Homebrew
+      block:
+        - name: Download Homebrew installation script
+          get_url:
+            url: https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh
+            dest: /tmp/install_homebrew.sh
+            mode: '0755'
+          become: false
+
+        - name: Run Homebrew installation script
+          ansible.builtin.shell: CI=1 /tmp/install_homebrew.sh
+          args:
+            executable: /bin/bash
+          become: false
+          register: homebrew_result
+          failed_when: "'FAILED' in homebrew_result.stderr"
+
+        - name: Update .zshrc
+          ansible.builtin.lineinfile:
+            path: /home/{{ ansible_user_id }}/.zshrc
+            line: |
+
+              eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"
+      when: not homebrew.stat.exists
+
+    - name: Update Homebrew
+      community.general.homebrew:
+        update_homebrew: true
+        upgrade_all: true
+
+    - name: Install Homebrew packages
+      community.general.homebrew:
+        state: present
+        install_options:
+          - formula
+          - quiet
+        name:
+          - bat
+          - bfg
+          - cmatrix
+          - devpod
+          - dust
+          - fd
+          - fping
+          - fzf
+          - httpie
+          - gcc
+          - go
+          - iftop
+          - ipcalc
+          - iperf3
+          - jq
+          - kubectl
+          - lazygit
+          - lsd
+          - luarocks
+          - mtr
+          - neovim
+          - netpbm
+          - nload
+          - nmap
+          - node
+          - nuttcp
+          - procs
+          - python@3.13
+          - ripgrep
+          - rust
+          - sd
+          - starship
+          - stylua
+          - tmux
+          - tokei
+          - tre-command
+          - utf8proc
+          - uv
+          - wget
+          - xmlstarlet
+          - xq
+          - yarn
+          - yq
+          - zoxide
+          - zsh-vi-mode
+          - zsh-syntax-highlighting
+
+    - name: Check if Python venv dir exists
+      ansible.builtin.stat:
+        path: ~/venv
+      register: venv
+
+    - name: Create Python venv
+      block:
+        - name: Create Python venv dir
+          ansible.builtin.file:
+            path: ~/venv
+            state: directory
+
+        - name: Create Python venv
+          ansible.builtin.shell: python3.13 -m venv ~/venv/3.13
+          args:
+            executable: /bin/bash
+          register: python_result
+          failed_when: "'FAILED' in python_result.stderr"
+          become: false
+      when: not venv.stat.exists
+
+    - name: Stow dotfiles
+      ansible.builtin.shell:
+        cmd: ~/.dotfiles/arch/stow/stow.sh
+        chdir: ~/.dotfiles/arch/stow
+
+    - name: Clone Tmux TPM repository
+      ansible.builtin.git:
+        repo: https://github.com/tmux-plugins/tpm
+        dest: ~/.config/tmux/plugins/tpm
+        clone: yes
+        update: yes
+
