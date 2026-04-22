@@ -12,9 +12,10 @@
       community.general.pacman:
         name:
           - base-devel
-          - curl
+          - file
           - keepassxc
           - kitty
+          - procps-ng
           - ttf-victor-mono-nerd
           - vivaldi
           - zsh
