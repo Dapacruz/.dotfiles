@@ -1,5 +1,5 @@
 ---
-- name: Deploy .dotfiles on Linux
+- name: Deploy .dotfiles on Ubuntu Linux
   hosts: localhost
   gather_facts: true
 
@@ -243,8 +243,8 @@
 
     - name: Stow dotfiles
       ansible.builtin.shell:
-        cmd: ~/.dotfiles/linux/stow/stow.sh
-        chdir: ~/.dotfiles/linux/stow
+        cmd: ~/.dotfiles/ubuntu/stow/stow.sh
+        chdir: ~/.dotfiles/ubuntu/stow
 
     - name: Clone Tmux TPM repository
       ansible.builtin.git:
