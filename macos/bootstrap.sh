@@ -1,7 +1,12 @@
 #!/usr/bin/env bash
 
 read -s -p "sudo password: " sudo_pass && echo
-echo $sudo_pass > become_pass.txt
+
+# Ensure the password file is cleaned up even on error/interrupt
+trap 'rm -f become_pass.txt' EXIT
+
+# Create with restrictive perms (0600)
+(umask 077 && printf '%s\n' "$sudo_pass" > become_pass.txt)
 
 echo $sudo_pass | sudo -S sh -c "echo '${USER} ALL=(root) NOPASSWD: ALL' > /etc/sudoers.d/homebrew-temp"
 
@@ -21,7 +26,6 @@ fi
 echo "Executing Ansible playbook ..."
 ansible-pull --become-password-file become_pass.txt -i $HOSTNAME, --limit=localhost,$HOSTNAME -U https://github.com/Dapacruz/.dotfiles macos/ansible/playbooks/deploy-dotfiles.yml
 
-echo "Removing become_pass.txt and /etc/sudoers.d/homebrew-temp files ..."
-rm become_pass.txt
-echo $sudo_pass | sudo -S rm /etc/sudoers.d/homebrew-temp
+echo "Removing /etc/sudoers.d/homebrew-temp file ..."
+echo $sudo_pass | sudo -S rm -f /etc/sudoers.d/homebrew-temp
 
