@@ -175,8 +175,8 @@ export ANSIBLE_NOCOWS=1
 
 
 # Slack webhook for notifications
-slackit() {
-    http -q $WEBHOOK_WORK <<< "{\"text\":\"$1\"}"
+notify() {
+    http -q $WEBHOOK_WORK <<< "{\"content\":\"$1\"}"
 }
 
 
