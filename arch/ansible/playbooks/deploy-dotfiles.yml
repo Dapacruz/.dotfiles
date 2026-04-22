@@ -30,12 +30,6 @@
         clone: yes
         update: no
 
-    - name: Set default shell to Zsh
-      user:
-        name: "{{ ansible_facts['user_id'] }}"
-        shell: /home/linuxbrew/.linuxbrew/bin/zsh
-      become: true
-
     - name: Check if Oh My Zsh is installed
       ansible.builtin.stat:
         path: ~/.oh-my-zsh
@@ -89,14 +83,6 @@
             mode: '0755'
           become: false
 
-        # - name: Run Homebrew installation script
-        #   ansible.builtin.shell: CI=1 /tmp/install_homebrew.sh
-        #   args:
-        #     executable: /bin/bash
-        #   become: false
-        #   register: homebrew_result
-        #   failed_when: "'FAILED' in homebrew_result.stderr"
-
         - name: Run Homebrew installation script
           ansible.builtin.shell: NONINTERACTIVE=1 /tmp/install_homebrew.sh
           args:
@@ -105,10 +91,6 @@
           become: false
           register: homebrew_result
 
-        - name: Show Homebrew output
-          ansible.builtin.debug:
-            var: homebrew_result
-
         - name: Update .zshrc
           ansible.builtin.lineinfile:
             path: "{{ ansible_facts['user_dir'] }}/.zshrc"
@@ -116,6 +98,20 @@
 
               eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"
       when: not homebrew.stat.exists
+
+    - name: Add Homebrew zsh to /etc/shells if missing
+      ansible.builtin.lineinfile:
+        path: /etc/shells
+        line: /home/linuxbrew/.linuxbrew/bin/zsh
+        state: present
+        create: no
+      become: true
+
+    - name: Set default shell to Zsh
+      user:
+        name: "{{ ansible_facts['user_id'] }}"
+        shell: /home/linuxbrew/.linuxbrew/bin/zsh
+      become: true
 
     - name: Update Homebrew
       community.general.homebrew:
