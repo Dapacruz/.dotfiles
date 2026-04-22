@@ -161,7 +161,7 @@ This installs Ansible, `curl`, `git`, and `stow` via APT, then runs the Ansible 
 ### Bootstrap Arch Linux
 
 ```bash
-/bin/bash -c "$(wget -O- https://raw.githubusercontent.com/Dapacruz/.dotfiles/master/arch/bootstrap.sh)"
+/bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Dapacruz/.dotfiles/master/arch/bootstrap.sh)"
 ```
 
 This installs Ansible, `curl`, `git`, and `stow` via pacman, then runs the Ansible playbook.
