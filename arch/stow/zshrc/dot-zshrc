@@ -270,15 +270,10 @@ source <(fzf --zsh)
 # Make "kubecolor" borrow the same completion logic as "kubectl"
 compdef kubecolor=kubectl
 
-
-### MANAGED BY RANCHER DESKTOP START (DO NOT EDIT)
-export PATH="/Users/dacruz/.rd/bin:$PATH"
-### MANAGED BY RANCHER DESKTOP END (DO NOT EDIT)
+# Initialize Node Version Manager
+source /usr/share/nvm/init-nvm.sh
 
 source $HOME/.zshrc.local
 
 export WORDCHARS='*?_-.[]~=&;!#$%^(){}<>|'
 
-# Added by LM Studio CLI (lms)
-export PATH="$PATH:/Users/dacruz/.lmstudio/bin"
-# End of LM Studio CLI section
