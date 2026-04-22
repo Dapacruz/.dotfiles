@@ -10,7 +10,8 @@ Personal dotfiles for macOS, Linux, and DevContainer/DevPod environments. Uses [
 - [Prerequisites](#prerequisites)
 - [Bootstrap](#bootstrap)
   - [macOS](#bootstrap-macos)
-  - [Linux](#bootstrap-linux)
+  - [Ubuntu Linux](#bootstrap-ubuntu-linux)
+  - [Arch Linux](#bootstrap-arch-linux)
   - [DevPod / DevContainer](#bootstrap-devpod--devcontainer)
 - [Post-Installation](#post-installation)
 - [Customization](#customization)
@@ -47,9 +48,13 @@ Running the bootstrap script for your platform will:
 │   ├── ansible/playbooks/  # Ansible playbook for DevContainer
 │   ├── stow/               # DevContainer-specific configs
 │   └── bootstrap.sh
-├── linux/
-│   ├── ansible/playbooks/  # Ansible playbook for Linux
-│   ├── stow/               # Linux-specific configs
+├── ubuntu/
+│   ├── ansible/playbooks/  # Ansible playbook for Ubuntu Linux
+│   ├── stow/               # Ubuntu-specific configs
+│   └── bootstrap.sh
+├── arch/
+│   ├── ansible/playbooks/  # Ansible playbook for Arch Linux
+│   ├── stow/               # Arch-specific configs
 │   └── bootstrap.sh
 ├── macos/
 │   ├── ansible/playbooks/  # Ansible playbook for macOS
@@ -92,9 +97,9 @@ Running the bootstrap script for your platform will:
 
 AeroSpace, AnythingLLM, Bartender, BetterTouchTool, CleanShot, DevPod, Ghostty, Google Chrome, Karabiner-Elements, KeePassXC, Kitty, LM Studio, Maccy, Obsidian, Ollama, Postman, Rancher Desktop, Raycast, Stats, Swish, Vagrant, Vivaldi, VLC, and more.
 
-### Linux / DevContainer Applications
+### Ubuntu Linux / Arch Linux / DevContainer Applications
 
-Vivaldi, KeePassXC, Kitty terminal (Linux bootstrap only), and a curated set of Homebrew formulae mirroring the macOS setup.
+Vivaldi, KeePassXC, Kitty terminal (Ubuntu/Arch bootstrap only), and a curated set of Homebrew formulae mirroring the macOS setup.
 
 ### Key CLI Tools (all platforms)
 
@@ -112,9 +117,17 @@ Vivaldi, KeePassXC, Kitty terminal (Linux bootstrap only), and a curated set of 
 
 > Homebrew and Ansible are installed automatically by the bootstrap script.
 
-### Linux
+### Ubuntu Linux
 
-- Debian/Ubuntu-based distribution
+- Ubuntu-based distribution
+- `sudo` privileges
+- Internet access
+
+> Ansible, `curl`, `git`, and `stow` are installed automatically.
+
+### Arch Linux
+
+- Arch Linux distribution
 - `sudo` privileges
 - Internet access
 
@@ -137,13 +150,21 @@ Vivaldi, KeePassXC, Kitty terminal (Linux bootstrap only), and a curated set of 
 
 You will be prompted for your sudo password. The password is temporarily written to `become_pass.txt` (deleted automatically at the end) and used by Ansible's become mechanism.
 
-### Bootstrap Linux
+### Bootstrap Ubuntu Linux
 
 ```bash
-/bin/bash -c "$(wget -O- https://raw.githubusercontent.com/Dapacruz/.dotfiles/master/linux/bootstrap.sh)"
+/bin/bash -c "$(wget -O- https://raw.githubusercontent.com/Dapacruz/.dotfiles/master/ubuntu/bootstrap.sh)"
 ```
 
 This installs Ansible, `curl`, `git`, and `stow` via APT, then runs the Ansible playbook.
+
+### Bootstrap Arch Linux
+
+```bash
+/bin/bash -c "$(wget -O- https://raw.githubusercontent.com/Dapacruz/.dotfiles/master/arch/bootstrap.sh)"
+```
+
+This installs Ansible, `curl`, `git`, and `stow` via pacman, then runs the Ansible playbook.
 
 ### Bootstrap DevPod / DevContainer
 
@@ -180,7 +201,8 @@ export PATH="$HOME/projects/bin:$PATH"
 Each platform's `stow/configs.sh` defines which paths are managed. Edit the relevant file to add or remove entries:
 
 - macOS: `macos/stow/configs.sh`
-- Linux: `linux/stow/configs.sh`
+- Ubuntu Linux: `ubuntu/stow/configs.sh`
+- Arch Linux: `arch/stow/configs.sh`
 - DevContainer: `devcontainer/stow/configs.sh`
 
 ### Re-stowing After Changes
@@ -189,13 +211,13 @@ Use the provided helper scripts from the platform's `stow/` directory:
 
 ```bash
 # Re-stow all configs
-~/.dotfiles/macos/stow/restow.sh
+~/.dotfiles/macos/stow/restow.sh      # or ubuntu/ or arch/ or devcontainer/
 
 # Remove all symlinks
-~/.dotfiles/macos/stow/unstow.sh
+~/.dotfiles/macos/stow/unstow.sh      # or ubuntu/ or arch/ or devcontainer/
 
 # Create/update all symlinks
-~/.dotfiles/macos/stow/stow.sh
+~/.dotfiles/macos/stow/stow.sh        # or ubuntu/ or arch/ or devcontainer/
 ```
 
 ---
@@ -207,7 +229,7 @@ Pull the latest changes and re-stow:
 ```bash
 cd ~/.dotfiles
 git pull
-~/.dotfiles/macos/stow/restow.sh   # or linux/ or devcontainer/
+~/.dotfiles/macos/stow/restow.sh   # or ubuntu/ or arch/ or devcontainer/
 ```
 
 To re-run the full Ansible playbook (e.g., to install newly added packages):
@@ -218,8 +240,13 @@ ansible-pull -i $HOSTNAME, --limit=localhost,$HOSTNAME \
   -U https://github.com/Dapacruz/.dotfiles \
   macos/ansible/playbooks/deploy-dotfiles.yml
 
-# Linux
+# Ubuntu Linux
 ansible-pull -i $HOSTNAME, --limit=localhost,$HOSTNAME \
   -U https://github.com/Dapacruz/.dotfiles \
-  linux/ansible/playbooks/deploy-dotfiles.yml
+  ubuntu/ansible/playbooks/deploy-dotfiles.yml
+
+# Arch Linux
+ansible-pull -i $HOSTNAME, --limit=localhost,$HOSTNAME \
+  -U https://github.com/Dapacruz/.dotfiles \
+  arch/ansible/playbooks/deploy-dotfiles.yml
 ```
