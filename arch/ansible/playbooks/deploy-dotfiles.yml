@@ -1,5 +1,6 @@
 ---
 - name: Deploy .dotfiles on Arch Linux
+  hosts: all
 
   tasks:
     - name: Install Ansible Galaxy community.general collection
