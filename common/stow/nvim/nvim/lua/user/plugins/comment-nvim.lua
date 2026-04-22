@@ -12,6 +12,32 @@ return {
             sticky = true,
             ---Lines to be ignored while (un)comment
             ignore = '^$',
+            -- ignore = {
+            --     -- For C/Java/JS-style
+            --     c   = "^%s*//",
+            --     cpp = "^%s*//",
+            --     java= "^%s*//",
+            --     -- For Lua
+            --     lua = "^%s*%-%-",
+            --     -- For Python
+            --     python = "^%s*#",
+            -- },
+            -- ignore = function()
+            --     local ft = vim.bo.filetype
+
+            --     if ft == "lua" then
+            --         return "^$|^%s*%-%-"
+            --     elseif ft == "python" or ft == "sh" then
+            --         return "^$|^%s*#"
+            --     elseif ft == "terraform" or ft == "terraform-vars" then
+            --         return "^$|^%s*#"
+            --     elseif ft == "c" or ft == "cpp" or ft == "java" then
+            --         return "^$|^%s*//"
+            --     end
+
+            --     -- default: only empty lines
+            --     return "^$"
+            -- end,
             ---LHS of toggle mappings in NORMAL mode
             toggler = {
                 ---Line-comment toggle keymap

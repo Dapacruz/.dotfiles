@@ -9,8 +9,6 @@ vim.opt.encoding = "utf-8"
 vim.opt.errorbells = false
 vim.opt.expandtab = true
 vim.opt.fo:remove("t") -- Don't automatically wrap text when typing
-vim.opt.foldlevel = 99
-vim.opt.foldmethod = "indent" -- Enable folding
 vim.opt.guicursor = "a:ver1-blinkon100,n:block-blinkon100"
 vim.opt.guifont = { "VictorMono Nerd Font:h13" }
 vim.opt.hidden = true -- When on a buffer becomes hidden when it is abandoned

@@ -18,6 +18,14 @@ autocmd('TextYankPost', {
     end,
 })
 
+-- Disable automatic continuation of comments on newline
+vim.api.nvim_create_autocmd("FileType", {
+  pattern = "*",
+  callback = function()
+    vim.opt_local.formatoptions:remove({ "c", "r", "o" })
+  end,
+})
+
 vim.filetype.add({
     extension = {
         tmpl = "html",
