@@ -52,20 +52,12 @@
             chdir: /tmp/yay
       when: yay_check.rc != 0
 
-    # - name: Install AUR packages
-    #   kewlfft.aur.aur:
-    #     use: yay
-    #     name:
-    #       - devpod-bin
-    #     state: present
-    #   environment:
-    #     PATH: "/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin"
-    #     PKG_CONFIG_PATH: "/usr/lib/pkgconfig:/usr/share/pkgconfig"
-    #     VIRTUAL_ENV: ""
-    #     HOMEBREW_PREFIX: ""
-    #     HOMEBREW_CELLAR: ""
-    #     HOMEBREW_REPOSITORY: ""
-    #     LD_LIBRARY_PATH: ""
+    - name: Install AUR packages
+      kewlfft.aur.aur:
+        use: yay
+        name:
+          - rustdesk-bin
+        state: present
 
     - name: Clone .dotfiles repository
       ansible.builtin.git:
