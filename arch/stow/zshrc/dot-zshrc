@@ -108,7 +108,7 @@ alias python=python3
 alias rg="kitten hyperlinked_grep --smart-case"
 alias sed="sed -E"
 alias t=t.sh
-alias ta='tmux attach || tmux'
+alias ta="tmux new-session -A -s '*home'"
 alias tn='tmux new -s $(pwd | sed -E '\''s/.*\/\.?//g'\'') || tmux a -t $(pwd | sed -E '\''s/.*\/\.?//g'\'')'
 alias tree='tre --color=always'
 alias ts='tmux a -t $(tmux list-sessions | fzf | sed -E '\''s/([^:]+).*/\1/'\'')'
@@ -272,6 +272,14 @@ compdef kubecolor=kubectl
 
 # Initialize Node Version Manager
 source /usr/share/nvm/init-nvm.sh
+
+# Auto-start tmux only in a local Kitty terminal, not over SSH
+if [ -z "$TMUX" ] \
+   && [ "$TERM" = "xterm-kitty" ] \
+   && [ -z "$SSH_TTY" ] \
+   && [ -z "$SSH_CONNECTION" ]; then
+  tmux new-session -A -s '*home'
+fi
 
 source $HOME/.zshrc.local
 
