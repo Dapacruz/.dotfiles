@@ -19,9 +19,11 @@
           - base-devel
           - docker
           - file
+          - gnome-keyring
           - go
           - keepassxc
           - kitty
+          - libsecret
           - nvm
           - procps-ng
           - ttf-victor-mono-nerd
@@ -176,7 +178,6 @@
           - fzf
           - httpie
           - gcc
-          - go
           - iftop
           - ipcalc
           - iperf3
@@ -269,12 +270,71 @@
             state: started
           become: yes
 
-    - name: Install devpod CLI
-      ansible.builtin.get_url:
-        url: https://github.com/loft-sh/devpod/releases/latest/download/devpod-linux-amd64
-        dest: /usr/local/bin/devpod
-        mode: "0755"
-        owner: root
-        group: root
-      become: yes
+    - name: Set up DevPod
+      block:
+        - name: Install devpod CLI
+          ansible.builtin.get_url:
+            url: https://github.com/loft-sh/devpod/releases/latest/download/devpod-linux-amd64
+            dest: /usr/local/bin/devpod
+            mode: "0755"
+            owner: root
+            group: root
+          become: yes
+
+        - name: Add devpod completion to ~/.zshrc.local
+          ansible.builtin.lineinfile:
+            path: "{{ ansible_facts['env']['HOME'] }}/.zshrc.local"
+            line: "command -v devpod >/dev/null && source <(devpod completion zsh)"
+            create: yes
+
+        - name: Set devpod default IDE to none
+          ansible.builtin.command: devpod ide use none
+          register: devpod_ide
+          changed_when: "'Successfully' in devpod_ide.stdout or 'set' in devpod_ide.stdout"
+
+        - name: Check existing devpod providers
+          ansible.builtin.command: devpod provider list --output json
+          register: devpod_providers
+          changed_when: false
+          failed_when: false
+
+        - name: Add docker provider to devpod
+          ansible.builtin.command: devpod provider add docker
+          when: "'docker' not in (devpod_providers.stdout | default(''))"
+
+    - name: Set up gnome-keyring
+      block:
+        - name: Enable gnome-keyring PAM auth
+          ansible.builtin.lineinfile:
+            path: /etc/pam.d/login
+            line: "auth       optional     pam_gnome_keyring.so"
+            insertafter: "^auth.*"
+          become: yes
+
+        - name: Enable gnome-keyring PAM session
+          ansible.builtin.lineinfile:
+            path: /etc/pam.d/login
+            line: "session    optional     pam_gnome_keyring.so auto_start"
+            insertafter: "^session.*"
+          become: yes
+
+    - name: Set up credential management
+      block:
+        - name: Check if git-credential-libsecret is already built
+          ansible.builtin.stat:
+            path: /usr/share/git/credential/libsecret/git-credential-libsecret
+          register: libsecret_helper
+
+        - name: Build git-credential-libsecret helper
+          ansible.builtin.command:
+            cmd: make
+            chdir: /usr/share/git/credential/libsecret
+          become: yes
+          when: not libsecret_helper.stat.exists
+
+        - name: Configure git to use libsecret credential helper
+          community.general.git_config:
+            name: credential.helper
+            scope: global
+            value: /usr/share/git/credential/libsecret/git-credential-libsecret
 
