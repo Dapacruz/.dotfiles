@@ -3,12 +3,23 @@
   hosts: all
 
   tasks:
+    - name: Allow passwordless pacman for wheel group
+      ansible.builtin.copy:
+        content: "%wheel ALL=(ALL) NOPASSWD: /usr/bin/pacman\n"
+        dest: /etc/sudoers.d/10-pacman-nopasswd
+        owner: root
+        group: root
+        mode: "0440"
+        validate: /usr/sbin/visudo -csf %s
+      become: yes
+
     - name: Install Pacman packages
       community.general.pacman:
         name:
           - base-devel
           - docker
           - file
+          - go
           - keepassxc
           - kitty
           - nvm
@@ -19,6 +30,12 @@
         state: present
         update_cache: yes
       become: true
+
+    - name: Check if yay is already installed
+      ansible.builtin.command: which yay
+      register: yay_check
+      failed_when: false
+      changed_when: false
 
     - name: Download and install yay package manager
       block:
@@ -37,8 +54,16 @@
       kewlfft.aur.aur:
         use: yay
         name:
-          - devpod
+          - devpod-bin
         state: present
+      environment:
+        PATH: "/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin"
+        PKG_CONFIG_PATH: "/usr/lib/pkgconfig:/usr/share/pkgconfig"
+        VIRTUAL_ENV: ""
+        HOMEBREW_PREFIX: ""
+        HOMEBREW_CELLAR: ""
+        HOMEBREW_REPOSITORY: ""
+        LD_LIBRARY_PATH: ""
 
     - name: Clone .dotfiles repository
       ansible.builtin.git:
@@ -243,10 +268,4 @@
             enabled: yes
             state: started
           become: yes
-
-        - name: Check if yay is already installed
-          ansible.builtin.command: which yay
-          register: yay_check
-          failed_when: false
-          changed_when: false
 
