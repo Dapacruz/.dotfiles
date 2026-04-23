@@ -66,6 +66,7 @@ source /home/linuxbrew/.linuxbrew/share/zsh-syntax-highlighting/zsh-syntax-highl
 alias bfg='/home/linuxbrew/.linuxbrew/bin/bfg'
 alias cat='bat'
 alias cmatrix='cmatrix -ab'
+alias devpod=devpod-cli
 alias dig='dig +search'
 alias digb='dig +search +noall +answer'
 alias fd='fd --hyperlink=always'
