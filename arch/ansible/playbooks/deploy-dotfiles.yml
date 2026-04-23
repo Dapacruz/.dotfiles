@@ -3,15 +3,11 @@
   hosts: all
 
   tasks:
-    - name: Install Ansible Galaxy community.general collection
-      command: ansible-galaxy collection install community.general
-      register: result
-      changed_when: "'Nothing to do.' not in result.stdout"
-
     - name: Install Pacman packages
       community.general.pacman:
         name:
           - base-devel
+          - docker
           - file
           - keepassxc
           - kitty
@@ -23,6 +19,26 @@
         state: present
         update_cache: yes
       become: true
+
+    - name: Download and install yay package manager
+      block:
+        - name: Clone yay from AUR
+          ansible.builtin.git:
+            repo: https://aur.archlinux.org/yay.git
+            dest: /tmp/yay
+
+        - name: Build and install yay
+          ansible.builtin.command:
+            cmd: makepkg -si --noconfirm
+            chdir: /tmp/yay
+      when: yay_check.rc != 0
+
+    - name: Install AUR packages
+      kewlfft.aur.aur:
+        use: yay
+        name:
+          - devpod
+        state: present
 
     - name: Clone .dotfiles repository
       ansible.builtin.git:
@@ -211,4 +227,26 @@
         nvm alias default 'lts/*'
       args:
         executable: /bin/bash
+
+    - name: Add user to docker group
+      ansible.builtin.user:
+        name: "{{ ansible_facts['user_id'] }}"
+        groups: docker
+        append: yes
+      become: yes
+
+    - name: Set up Docker
+      block:
+        - name: Enable and start Docker service
+          ansible.builtin.systemd:
+            name: docker
+            enabled: yes
+            state: started
+          become: yes
+
+        - name: Check if yay is already installed
+          ansible.builtin.command: which yay
+          register: yay_check
+          failed_when: false
+          changed_when: false
 
