@@ -10,6 +10,9 @@ trap 'rm -f become_pass.txt' EXIT
 
 echo $sudo_pass | sudo -S pacman -Syq --needed --noconfirm ansible curl git stow
 
+echo "Installing Ansible collections ..."
+ansible-galaxy collection install --upgrade community.general kewlfft.aur
+
 echo "Executing Ansible playbook ..."
 rm -fr ~/.ansible/pull/$HOSTNAME
 ansible-pull --become-password-file become_pass.txt -i $HOSTNAME, --limit=localhost,$HOSTNAME -U https://github.com/Dapacruz/.dotfiles arch/ansible/playbooks/deploy-dotfiles.yml
