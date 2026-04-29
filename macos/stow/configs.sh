@@ -3,6 +3,7 @@
 configs=(
     "$HOME/.config/cheat"
     "$HOME/.config/karabiner"
+    "$HOME/.config/kitty"
     "$HOME/.config/lf"
     "$HOME/.config/neofetch"
     "$HOME/.config/raycast"
@@ -14,7 +15,6 @@ configs=(
 
 common_configs=(
     "$HOME/.config/git"
-    "$HOME/.config/kitty"
     "$HOME/.config/lazygit"
     "$HOME/.config/nvim"
     "$HOME/.config/starship.toml"
