@@ -88,3 +88,27 @@ autocmd({ "BufRead" }, {
     command = [[call setpos(".", getpos("'\""))]],
 })
 
+-- Sync yanks to the local clipboard over SSH using OSC 52.
+-- When inside tmux, the sequence is wrapped in a DCS passthrough
+-- so it survives tmux's interception and reaches the terminal.
+local function osc52_copy(text)
+  local encoded = vim.base64.encode(text)
+  local seq = "\x1b]52;c;" .. encoded .. "\x07"
+  if os.getenv("TMUX") then
+    seq = "\x1bPtmux;\x1b" .. seq .. "\x1b\\"
+  end
+  io.stdout:write(seq)
+  io.stdout:flush()
+end
+
+autocmd({ "TextYankPost" }, {
+  callback = function()
+    local event = vim.v.event
+    if event.operator == "y" then
+      local regcontents = event.regcontents --[[@as string[] ]]
+      osc52_copy(table.concat(regcontents, "\n"))
+      vim.fn.setreg("+", regcontents, event.regtype)
+    end
+  end,
+})
+

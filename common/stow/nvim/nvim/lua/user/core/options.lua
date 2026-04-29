@@ -1,6 +1,6 @@
 vim.opt.backup = false
 vim.opt.bs = "2" -- Make backspace behave like normal again
-vim.opt.clipboard:append("unnamedplus")
+-- vim.opt.clipboard:append("unnamedplus")
 vim.opt.cmdheight = 1 --  Give more space for displaying messages
 vim.opt.cursorcolumn = false
 vim.opt.cursorline = false -- Cursor highlighting
@@ -23,7 +23,6 @@ vim.opt.mouse = "a" -- On OSX press ALT and click mouse and backspace
 vim.opt.number = true -- Show line numbers
 vim.opt.relativenumber = true
 vim.opt.scrolloff = 8
-vim.opt.shell = "/opt/homebrew/bin/zsh"
 vim.opt.shiftround = true
 vim.opt.shiftwidth = 4
 vim.opt.shortmess:append("c") -- Don't pass messages to |ins-completion-menu|
@@ -46,6 +45,12 @@ vim.opt.updatetime = 50 -- Having longer updatetime (default is 4000 ms = 4 s) l
 vim.opt.wildmode = "longest:full,full"
 vim.opt.wrap = false
 vim.opt.laststatus = 3
+
+if vim.fn.has("mac") == 1 then
+    vim.opt.shell = "/opt/homebrew/bin/zsh"
+else
+    vim.opt.shell = "/home/linuxbrew/.linuxbrew/bin/zsh"
+end
 
 -- Enable vim-visual-multi mouse mappings
 vim.g.VM_mouse_mappings = 1
