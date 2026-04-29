@@ -1,10 +1,16 @@
 #!/usr/bin/env bash
 
-
 configs=(
+    "$HOME/.config/btop"
+    "$HOME/.config/hypr"
+    "$HOME/.config/kanata"
+    "$HOME/.config/kanshi"
     "$HOME/.config/kitty"
-    "$HOME/.local/bin"
     "$HOME/.config/starship.toml"
+    "$HOME/.config/systemd"
+    "$HOME/.config/waybar"
+    "$HOME/.config/wofi"
+    "$HOME/.local/bin"
     "$HOME/.zsh.d"
     "$HOME/.zsh.funcs"
     "$HOME/.zshrc"

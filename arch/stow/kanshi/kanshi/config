@@ -1,0 +1,12 @@
+# Laptop only
+profile laptop {
+	output eDP-1 enable mode 1920x1080@60Hz position 0,0
+}
+
+# Docked: two externals, laptop off
+profile docked {
+	output eDP-1 disable
+	output "ViewSonic Corporation VP3881 V2W205200098" enable mode 3840x1600@60Hz position 0,0
+	output "ViewSonic Corporation VP2768a W8U204500763" enable mode 2560x1440@60Hz position 3840,0 transform 90
+}
+

@@ -1,0 +1,13 @@
+(defcfg
+  process-unmapped-keys yes
+)
+
+(defsrc
+  rmet ralt ret
+)
+
+(deflayer base
+  (tap-hold-press 200 200 rmet (multi lsft lctl lalt lmet))
+  (tap-hold-press 200 200 ralt (multi lsft lctl lalt))
+  (tap-hold-press 200 200 ret lctl)
+)
