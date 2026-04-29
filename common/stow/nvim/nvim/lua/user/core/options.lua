@@ -1,9 +1,9 @@
 vim.opt.backup = false
 vim.opt.bs = "2" -- Make backspace behave like normal again
--- vim.opt.clipboard:append("unnamedplus")
+vim.opt.clipboard:append("unnamedplus")
 vim.opt.cmdheight = 1 --  Give more space for displaying messages
 vim.opt.cursorcolumn = false
-vim.opt.cursorline = false -- Cursor highlighting
+vim.opt.cursorline = true -- Cursor highlighting
 vim.opt.diffopt:append("vertical") -- Always use vertical windows for diffsplit,
 vim.opt.encoding = "utf-8"
 vim.opt.errorbells = false

@@ -89,26 +89,29 @@ autocmd({ "BufRead" }, {
 })
 
 -- Sync yanks to the local clipboard over SSH using OSC 52.
--- When inside tmux, the sequence is wrapped in a DCS passthrough
--- so it survives tmux's interception and reaches the terminal.
-local function osc52_copy(text)
-  local encoded = vim.base64.encode(text)
-  local seq = "\x1b]52;c;" .. encoded .. "\x07"
-  if os.getenv("TMUX") then
-    seq = "\x1bPtmux;\x1b" .. seq .. "\x1b\\"
-  end
-  io.stdout:write(seq)
-  io.stdout:flush()
+-- In tmux, the sequence is wrapped in a DCS passthrough to reach the terminal.
+-- Locally, clipboard sync is handled by vim.opt.clipboard = "unnamedplus".
+local function is_ssh()
+    return os.getenv("SSH_CONNECTION") ~= nil
 end
 
-autocmd({ "TextYankPost" }, {
-  callback = function()
-    local event = vim.v.event
-    if event.operator == "y" then
-      local regcontents = event.regcontents --[[@as string[] ]]
-      osc52_copy(table.concat(regcontents, "\n"))
-      vim.fn.setreg("+", regcontents, event.regtype)
+local function osc52_copy(text)
+    local encoded = vim.base64.encode(text)
+    local seq = "\x1b]52;c;" .. encoded .. "\x07"
+    if os.getenv("TMUX") then
+        seq = "\x1bPtmux;\x1b" .. seq .. "\x1b\\"
     end
-  end,
+    io.stdout:write(seq)
+    io.stdout:flush()
+end
+
+vim.api.nvim_create_autocmd({ "TextYankPost" }, {
+    callback = function()
+        local event = vim.v.event
+        if is_ssh() then
+            local regcontents = event.regcontents --[[@as string[] ]]
+            osc52_copy(table.concat(regcontents, "\n"))
+        end
+    end,
 })
 

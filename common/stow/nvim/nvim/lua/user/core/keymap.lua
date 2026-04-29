@@ -125,10 +125,6 @@ keymap("v", "<S-j>", ":m '>+1<CR>gv=gv", tabl_ext('force', opts, { desc = "Move 
 -- No clobber paste
 keymap("v", "p", '"_dP', tabl_ext('force', opts, { desc = "No clobber paste" }))
 
--- Sync yanks to system clipboard (+) and OSC52 (for SSH/tmux support)
-vim.keymap.set("n", "p", '"+p', { desc = "Paste from system clipboard" })
-vim.keymap.set("n", "P", '"+P', { desc = "Paste from system clipboard (above)" })
-
 -- Quickfix window toggle
 keymap("n", "<leader>qt", "empty(filter(getwininfo(), 'v:val.quickfix')) ? ':copen<CR>' : ':cclose<CR>'", tabl_ext('force', expr_opts, { desc = "Toggle quickfix" }))
 keymap("n", "<leader>lt", "empty(filter(getwininfo(), 'v:val.loclist')) ? ':lopen<CR>' : ':lclose<CR>'", tabl_ext('force', expr_opts, { desc = "Toggle location list" }))
