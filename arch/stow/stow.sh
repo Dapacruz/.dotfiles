@@ -7,7 +7,7 @@ ZSHRC_LOCAL="$HOME/.zshrc.local"
 if [ ! -f $ZSHRC_LOCAL ]
 then
     echo "Copying dot-zshrc.local template to ${ZSHRC_LOCAL} ..."
-    cp dot-zshrc.local $ZSHRC_LOCAL
+    cp zshrc.local/dot-zshrc.local $ZSHRC_LOCAL
 fi
 
 source configs.sh
