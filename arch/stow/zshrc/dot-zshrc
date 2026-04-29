@@ -6,9 +6,9 @@ PATH="${HOME}/.cargo/bin:${PATH}"
 # Homebrew
 eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"
 # Python
-PYTHON_VERSION="3.13"
-PATH="${HOME}/venv/3.12/bin:${PATH}"
+PYTHON_VERSION="3.14"
 PATH="${HOME}/venv/3.13/bin:${PATH}"
+PATH="${HOME}/venv/3.14/bin:${PATH}"
 PATH="${HOME}/.local/bin:${PATH}"
 export PATH
 
@@ -17,12 +17,15 @@ export PATH
 export DISPLAY=:0
 export EDITOR=/home/linuxbrew/.linuxbrew/bin/nvim
 export VISUAL=/home/linuxbrew/.linuxbrew/bin/nvim
+export LANG=en_US.UTF-8
 export GOOGLE_APPLICATION_CREDENTIALS=~/PyPi-42f44041fd99.json
 export XDG_CONFIG_HOME="$HOME/.config"
 export HISTCONTROL=ignorespace
 export HISTSIZE=100000
 export SAVEHIST=100000
 export VI_MODE_SET_CURSOR=true
+# Use system pkg-config over Homebrew's to resolve pacman-managed libraries
+export PKG_CONFIG=/usr/bin/pkg-config
 
 
 # # Zsh options
@@ -101,8 +104,6 @@ alias mtr='sudo mtr'
 alias pip3="python${PYTHON_VERSION} -m pip"
 alias pip=pip3
 alias pp='curl http://parrot.live'
-# alias python3.12="${HOME}/venv/3.12/bin/python"
-# alias python3.13="${HOME}/venv/3.13/bin/python"
 alias python3="python${PYTHON_VERSION}"
 alias python=python3
 alias rg="kitten hyperlinked_grep --smart-case"
@@ -260,6 +261,7 @@ _fzf_compgen_path() {
   fd --hidden --follow --exclude ".git" . "$1"
 }
 
+
 # Use fd to generate the list for directory completion
 _fzf_compgen_dir() {
   fd --type d --hidden --follow --exclude ".git" . "$1"
@@ -267,11 +269,14 @@ _fzf_compgen_dir() {
 
 source <(fzf --zsh)
 
+
 # Make "kubecolor" borrow the same completion logic as "kubectl"
 compdef kubecolor=kubectl
 
+
 # Initialize Node Version Manager
 source /usr/share/nvm/init-nvm.sh
+
 
 # Auto-start tmux only in a local Kitty terminal, not over SSH
 if [ -z "$TMUX" ] \
@@ -280,6 +285,13 @@ if [ -z "$TMUX" ] \
    && [ -z "$SSH_CONNECTION" ]; then
   tmux new-session -A -s '*home'
 fi
+
+
+# Fastfetch SSH exception
+if [[ -n "$SSH_CONNECTION" ]]; then
+  alias fastfetch='fastfetch 2>/dev/null'
+fi
+
 
 source $HOME/.zshrc.local
 
