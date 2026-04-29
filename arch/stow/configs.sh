@@ -2,7 +2,9 @@
 
 
 configs=(
+    "$HOME/.config/kitty"
     "$HOME/.local/bin"
+    "$HOME/.config/starship.toml"
     "$HOME/.zsh.d"
     "$HOME/.zsh.funcs"
     "$HOME/.zshrc"
@@ -10,9 +12,7 @@ configs=(
 
 common_configs=(
     "$HOME/.config/git"
-    "$HOME/.config/kitty"
     "$HOME/.config/lazygit"
     "$HOME/.config/nvim"
-    "$HOME/.config/starship.toml"
     "$HOME/.config/tmux"
 )
