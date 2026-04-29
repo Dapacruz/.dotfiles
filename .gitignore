@@ -1,4 +1,5 @@
 **/.DS_Store
+**/*.log
 **/Brewfile.lock.json
 **/packer_compiled.lua
 **/stow/cheat/cheat/cheatsheets/community
