@@ -1,0 +1,21 @@
+{
+  "title": "Disable sysdiagnose hotkey",
+  "rules": [
+    {
+      "description": "Disable ⌃⌥⌘⇧. (sysdiagnose trigger)",
+      "manipulators": [
+        {
+          "type": "basic",
+          "from": {
+            "key_code": "period",
+            "modifiers": {
+              "mandatory": ["control", "option", "command", "shift"],
+              "optional": []
+            }
+          },
+          "to": []
+        }
+      ]
+    }
+  ]
+}
