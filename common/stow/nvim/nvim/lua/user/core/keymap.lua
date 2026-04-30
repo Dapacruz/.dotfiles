@@ -17,6 +17,9 @@ keymap("", "<Space>", "<Nop>", opts)
 vim.g.mapleader = " "
 vim.g.maplocalleader = " "
 
+-- Return cursor after indenting
+keymap('n', '=ap', 'mz=ap`z', tabl_ext('force', opts, { desc = "Indent paragraph (return cursor)" }))
+
 -- Turn off search highlight
 keymap('n', '<Esc>', '<Cmd>nohlsearch<CR>', tabl_ext('force', opts, { desc = "Turn off search highlight" }))
 

@@ -23,6 +23,7 @@ return {
         ---@diagnostic disable-next-line: deprecated
         table.unpack = table.unpack or unpack
         local vimgrep_arguments = { table.unpack(telescopeConfig.values.vimgrep_arguments) }
+        table.insert(vimgrep_arguments, "-L")
         table.insert(vimgrep_arguments, "--hidden")
         table.insert(vimgrep_arguments, "--glob")
         table.insert(vimgrep_arguments, "!**/.git/*")
@@ -105,6 +106,7 @@ return {
             pickers = {
                 find_files = {
                     hidden = true,
+                    follow = true,
                     find_command = {
                         "rg",
                         "--files",

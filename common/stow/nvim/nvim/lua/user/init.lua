@@ -88,6 +88,16 @@ autocmd({ "BufRead" }, {
     command = [[call setpos(".", getpos("'\""))]],
 })
 
+-- Disable LSP diagnostics for noisy non-standard CSS configs (Waybar, etc.)
+vim.api.nvim_create_autocmd("BufEnter", {
+    pattern = {
+        "*/waybar/style.css",
+    },
+    callback = function(args)
+        vim.diagnostic.enable(false, { bufnr = args.buf })
+    end,
+})
+
 -- Sync yanks to the local clipboard over SSH using OSC 52.
 -- In tmux, the sequence is wrapped in a DCS passthrough to reach the terminal.
 -- Locally, clipboard sync is handled by vim.opt.clipboard = "unnamedplus".
