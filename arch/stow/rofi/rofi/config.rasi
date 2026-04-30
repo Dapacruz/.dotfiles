@@ -1,0 +1,72 @@
+configuration {
+    kb-row-up:        "Up,Control+k";
+    kb-row-down:      "Down,Control+j";
+    kb-accept-entry:  "Return,KP_Enter";
+    kb-remove-to-eol: "";
+    selected-normal-background:  #202020F0;
+    selected-normal-foreground:  #fff4e0;
+}
+
+/* Global defaults */
+* {
+    background:                #000000F0;
+    background-color:          #000000F0;
+    foreground:                #d5d4d3;
+
+    normal-background:         #000000F0;
+    normal-foreground:         #d5d4d3;
+
+    selected-normal-background:#303030Ff;
+    selected-normal-foreground:#fff4e0;
+
+    alternate-normal-background:#000000F0;
+    alternate-normal-foreground:#d5d4d3;
+
+    border-color:              #d5d4d3;
+}
+
+/* Window */
+window {
+    background-color: @background;
+    border:           1px;
+    border-radius:    6px;
+}
+
+/* List items */
+element {
+    padding:          4px 8px;
+    background-color: @normal-background;
+    text-color:       @normal-foreground;
+}
+
+element-selected {
+    background-color: @selected-normal-background;
+    text-color:       @selected-normal-foreground;
+}
+
+/* Required to avoid stale colors with newer rofi */
+element-text {
+    background-color: inherit;
+    text-color:       inherit;
+}
+
+element-text-selected {
+    background-color: inherit;
+    text-color:       inherit;
+}
+
+/* Input area */
+entry {
+    background-color: @background;
+    text-color:       @foreground;
+}
+
+prompt {
+    text-color:       @foreground;
+}
+
+/* List container */
+listview {
+    border:           0;
+    spacing:          3px;
+}

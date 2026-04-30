@@ -1,0 +1,48 @@
+configuration {
+  kb-row-up:        "Up,Control+k";
+  kb-row-down:      "Down,Control+j";
+  kb-accept-entry:  "Return,KP_Enter";
+  kb-remove-to-eol: "";
+  selected-normal-background:  #202020F0;
+  selected-normal-foreground:  #fff4e0;
+}
+
+@theme "Arc-Dark"
+
+* {
+  font: "VictorMono Nerd Font 11";
+  background:       #000000D5;
+  background-color: #000000D5;
+  foreground:       #f4e9d8;
+}
+
+window {
+  border: 1px;
+  border-radius: 6px;
+  background-color: #000000D5;
+}
+
+element {
+  padding: 4px 8px;
+  background-color: #00000000;
+}
+
+element-selected {
+  background-color: #f9e2af;
+  text-color:       #fff4e0;
+  }
+
+element-text-selected {
+  text-color:       #fff4e0;
+}
+
+element-text {
+  background-color: inherit;
+  text-color:       inherit;
+}
+
+listview {
+  border: 0;
+  spacing: 3px;
+}
+
